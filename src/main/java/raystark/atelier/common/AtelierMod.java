@@ -1,4 +1,4 @@
-package raystark.atelier;
+package raystark.atelier.common;
 
 import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.Mod;
