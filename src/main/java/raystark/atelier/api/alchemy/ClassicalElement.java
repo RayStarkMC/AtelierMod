@@ -1,26 +1,12 @@
 package raystark.atelier.api.alchemy;
 
 /**
- * 錬金術で用いられる属性値の種類の列挙
+ * 錬金術で用いられる属性値の種類の列挙<p/>
+ * 属性は火・水・風・土の4種類
  */
 public enum ClassicalElement {
-    /**
-     * 火属性
-     */
     FIRE,
-
-    /**
-     * 水属性
-     */
     WATER,
-
-    /**
-     * 風属性
-     */
     AIR,
-
-    /**
-     * 土属性
-     */
     EARTH
 }
