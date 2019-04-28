@@ -3,7 +3,7 @@ package raystark.atelier.api.alchemy;
 /**
  * 品質値を持つものを表すインターフェース.<p/>
  *
- * 品質値は完成品の性能に影響を与える場合がある.
+ * 品質値は完成品の{@link IEffect 効果}に影響を与える場合がある.
  */
 public interface Quality {
     /**
