@@ -22,5 +22,5 @@ public enum ClassicalElement {
     /**
      * 土属性
      */
-    EARTH,
+    EARTH
 }
