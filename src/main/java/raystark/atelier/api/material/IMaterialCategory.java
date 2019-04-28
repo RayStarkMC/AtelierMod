@@ -5,4 +5,10 @@ package raystark.atelier.api.material;
  */
 public interface IMaterialCategory {
     //他Modがカテゴリ追加する可能性を考慮してインターフェースを定義
+
+    /**
+     * カテゴリに対応する鉱石辞書名を返す.
+     * @return カテゴリの鉱石辞書名
+     */
+    String getOreDictName();
 }
