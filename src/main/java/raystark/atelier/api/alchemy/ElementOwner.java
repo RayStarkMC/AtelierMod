@@ -1,4 +1,4 @@
-package raystark.atelier.api.material;
+package raystark.atelier.api.alchemy;
 
 /**
  * 属性値を持つものを表すインターフェース.<p/>

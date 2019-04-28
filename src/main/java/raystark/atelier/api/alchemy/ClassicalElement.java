@@ -1,4 +1,4 @@
-package raystark.atelier.api.material;
+package raystark.atelier.api.alchemy;
 
 /**
  * 錬金術で用いられる属性値の種類の列挙
