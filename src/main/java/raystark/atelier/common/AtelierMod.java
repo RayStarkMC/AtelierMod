@@ -6,7 +6,6 @@ import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import raystark.atelier.api.material.ElementOwner;
 
 @Mod(modid = AtelierMod.MODID, version = AtelierMod.VERSION)
 public class AtelierMod {
@@ -15,7 +14,7 @@ public class AtelierMod {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        ElementOwner owner;
+
     }
 
     @EventHandler
