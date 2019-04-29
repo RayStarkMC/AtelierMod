@@ -1,5 +1,7 @@
 package raystark.atelier.api.alchemy;
 
+import raystark.atelier.api.effect.IEffect;
+
 /**
  * 品質値を持つものを表すインターフェース.<p/>
  *

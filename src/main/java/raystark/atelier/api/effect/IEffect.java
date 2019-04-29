@@ -1,4 +1,7 @@
-package raystark.atelier.api.alchemy;
+package raystark.atelier.api.effect;
+
+import raystark.atelier.api.alchemy.IPotentialAbility;
+import raystark.atelier.api.alchemy.Quality;
 
 /**
  * 錬金術製品の効果を表すインターフェース.<p/>

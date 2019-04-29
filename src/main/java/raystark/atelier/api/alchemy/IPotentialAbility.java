@@ -1,5 +1,7 @@
 package raystark.atelier.api.alchemy;
 
+import raystark.atelier.api.effect.IEffect;
+
 /**
  * 錬金術製品につく潜在能力を表すインターフェース。<p/>
  *

@@ -11,13 +11,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
-import raystark.atelier.api.alchemy.IEffect;
+import raystark.atelier.api.effect.IEffect;
 import raystark.atelier.api.alchemy.IPotentialAbility;
 import raystark.atelier.common.util.NBTType;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 錬金術によって作られたピッケルのサンプル
@@ -81,13 +79,17 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
     @Override
     public List<IEffect> getEffectList(ItemStack itemStack) {
-        List<IEffect> list = new ArrayList<>();
 
+        // if(!(itemStack.getItem() instanceof IAlchemicalProduct)) return C;
+
+        List<IEffect> list = new ArrayList<>();
+            // TODO インターフェース実装
         return null;
     }
 
     @Override
     public List<IPotentialAbility> getPotentialAbilityList(ItemStack itemStack) {
+            // TODO インターフェース実装
         return null;
     }
 
