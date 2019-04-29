@@ -110,7 +110,23 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
     @Override
     public List<IPotentialAbility> getPotentialAbilityList(ItemStack itemStack) {
-            // TODO インターフェース実装
+        if (itemStack == null || !isAlchemicalProduct(itemStack)) {
+            @SuppressWarnings("unchecked") List<IPotentialAbility> list = Collections.EMPTY_LIST;
+            return list;
+        }
+
+        NBTTagList tagList = itemStack.getTagCompound().getCompoundTag("ModAtelier").getTagList("PotentialAbility", NBTType.STRING.getID());
+        if (tagList == null) {
+            @SuppressWarnings("unchecked") List<IPotentialAbility> list = Collections.EMPTY_LIST;
+            return list;
+        }
+        // TODO 潜在能力実装
+
+        //List<IPotentialAbility> abilityList = new ArrayList<>();
+        //for(int i=0; i<tagList.tagCount() ;i++)
+        //    effectList.add(PotentialAbilities.getPotentialAbility(tagList.getStringTagAt(i)));
+
+        //return abilityList;
         return null;
     }
 
