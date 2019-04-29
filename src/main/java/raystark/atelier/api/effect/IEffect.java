@@ -3,11 +3,6 @@ package raystark.atelier.api.effect;
 import raystark.atelier.api.alchemy.IPotentialAbility;
 import raystark.atelier.api.alchemy.Quality;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 /**
  * 錬金術製品の効果を表すインターフェース.<p/>
  *

@@ -91,6 +91,7 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
     @Override
     public List<IEffect> getEffectList(ItemStack itemStack) {
 
+
         // if(!(itemStack.getItem() instanceof IAlchemicalProduct)) return C;
 
         List<IEffect> list = new ArrayList<>();

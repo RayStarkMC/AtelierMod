@@ -4,13 +4,15 @@ import raystark.atelier.common.effect.EffectDiamondMiningLevel;
 import raystark.atelier.common.effect.EffectIronMiningLevel;
 import raystark.atelier.common.effect.EffectStoneMiningLevel;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 効果一覧を表すライブラリクラス
+ *
+ * 効果はMapに保存されており、getEffectsを通じて取得することが出来る。
+ */
 public final class Effects {
-    private static final Effects INSTANCE = new Effects();
     private static final Map<String, IEffect> EFFECTS = new HashMap<>();
 
     public static final IEffect STONE_MINING_LEVEL = new EffectStoneMiningLevel();
@@ -25,11 +27,24 @@ public final class Effects {
         registerEffect(DIAMOND_MINING_LEVEL);
     }
 
-    public static void registerEffect(IEffect effect) {
-        EFFECTS.put(effect.getName(), effect);
+    /**
+     * ライブラリにエフェクトを登録します。
+     *
+     * @param effect 登録するエフェクト
+     * @return 以前に登録されていたエフェクトがあった場合かつその時に限りtrue
+     */
+    public static boolean registerEffect(IEffect effect) {
+        IEffect lastValue = EFFECTS.put(effect.getName(), effect);
+        return lastValue == null;
     }
 
+    /**
+     * 引数で渡された文字列を名前に持つエフェクトを返します。
+     *
+     * @param effectName
+     * @return 名前に対応するエフェクト、又は存在しなければnull
+     */
     public static IEffect getEffects(String effectName) {
-        return EFFECTS.get(effectName);
+        return EFFECTS.getOrDefault(effectName, null);
     }
 }
