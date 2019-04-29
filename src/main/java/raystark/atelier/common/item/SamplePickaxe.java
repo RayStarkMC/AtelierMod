@@ -17,7 +17,6 @@ import raystark.atelier.api.effect.Effects;
 import raystark.atelier.api.effect.IEffect;
 import raystark.atelier.api.alchemy.IPotentialAbility;
 import raystark.atelier.api.effect.IEffectMiningLevel;
-import raystark.atelier.common.effect.EffectStoneMiningLevel;
 import raystark.atelier.common.util.NBTType;
 
 import java.util.*;
@@ -37,7 +36,7 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
     @Override
     public void getSubItems(Item item, CreativeTabs p_150895_2_, List list) {
         //listはItemStackを格納しているためこのキャストは正しい
-        @SuppressWarnings("unchecked") List<ItemStack> subItems = (List<ItemStack>)list;
+        @SuppressWarnings("unchecked") List<ItemStack> subItems = list;
         NBTTagCompound tagCompound = new NBTTagCompound();
         NBTTagCompound tagAtelier = new NBTTagCompound();
 
@@ -72,7 +71,7 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
         // listは文字列を格納したListであるためこのキャストは正しい
-        @SuppressWarnings("unchecked") List<String> toolTipList = (List<String>)list;
+        @SuppressWarnings("unchecked") List<String> toolTipList = list;
         if(!GuiScreen.isShiftKeyDown()) return;
 
         NBTTagCompound tagAtelier = itemStack.getTagCompound().getCompoundTag("ModAtelier");
@@ -90,6 +89,10 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
     @Override
     public List<IEffect> getEffectList(ItemStack itemStack) {
+        if(itemStack == null || !isAlchemicalProduct(itemStack)) {
+            @SuppressWarnings("unchecked") List<IEffect> list = Collections.EMPTY_LIST;
+            return list;
+        }
 
 
         // if(!(itemStack.getItem() instanceof IAlchemicalProduct)) return C;
@@ -103,6 +106,10 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
     public List<IPotentialAbility> getPotentialAbilityList(ItemStack itemStack) {
             // TODO インターフェース実装
         return null;
+    }
+
+    private boolean isAlchemicalProduct(ItemStack stack) {
+        return stack.getItem() instanceof IAlchemicalProduct;
     }
 
     @Override
