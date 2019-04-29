@@ -10,9 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.effect.Effects;
 import raystark.atelier.api.effect.IEffect;
 import raystark.atelier.api.alchemy.IPotentialAbility;
+import raystark.atelier.api.effect.IEffectMiningLevel;
+import raystark.atelier.common.effect.EffectStoneMiningLevel;
 import raystark.atelier.common.util.NBTType;
 
 import java.util.*;
@@ -44,18 +49,24 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
         tagAtelier.setTag("Effect", tagEffectList);
         tagAtelier.setTag("PotentialAbility", tagPotentialAbilityList);
 
+        NBTTagCompound[] tagCompounds = new NBTTagCompound[3];
+        for(int i=0; i<tagCompounds.length; i++)
+            tagCompounds[i] = (NBTTagCompound)tagCompound.copy();
 
-        tagEffectList.appendTag(new NBTTagString("TestEffect1"));
-        tagEffectList.appendTag(new NBTTagString("TestEffect2"));
+        addEffect(tagCompounds[0], Effects.STONE_MINING_LEVEL);
+        addEffect(tagCompounds[1], Effects.IRON_MINING_LEVEL);
+        addEffect(tagCompounds[2], Effects.DIAMOND_MINING_LEVEL);
 
-        tagPotentialAbilityList.appendTag(new NBTTagString("testPotential1"));
-        tagPotentialAbilityList.appendTag(new NBTTagString("testPotential2"));
+        ItemStack[] stack = new ItemStack[tagCompounds.length];
+        for(int i=0; i<stack.length; i++) {
+            stack[i] = new ItemStack(this, 1, 0);
+            stack[i].setTagCompound(tagCompounds[i]);
+            subItems.add(stack[i]);
+        }
+    }
 
-
-        ItemStack stack = new ItemStack(this, 1, 0);
-        stack.setTagCompound(tagCompound);
-
-        subItems.add(stack);
+    private void addEffect(NBTTagCompound tag, IEffect effect) {
+        tag.getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
     }
 
     @Override
@@ -66,12 +77,12 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
         NBTTagCompound tagAtelier = itemStack.getTagCompound().getCompoundTag("ModAtelier");
 
-        toolTipList.add("[Effects]");
+        toolTipList.add(EnumChatFormatting.RED + "[Effects]");
         NBTTagList effectList = tagAtelier.getTagList("Effect", NBTType.STRING.getID());
         for(int i=0;i < effectList.tagCount();i++)
-            toolTipList.add(effectList.getStringTagAt(i));
+            toolTipList.add(Effects.getEffects(effectList.getStringTagAt(i)).getToolTipText());
 
-        toolTipList.add("[PotentialAbilities]");
+        toolTipList.add(EnumChatFormatting.LIGHT_PURPLE + "[PotentialAbilities]");
         NBTTagList potentialList = tagAtelier.getTagList("PotentialAbility", NBTType.STRING.getID());
         for(int i=0; i < potentialList.tagCount(); i++)
             toolTipList.add(potentialList.getStringTagAt(i));
@@ -95,8 +106,6 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
     @Override
     public int getHarvestLevel(ItemStack stack, String toolClass) {
-        System.out.println("[test]getHarvestLevel" + toolClass);
-
         if(stack == null || !(stack.getItem() instanceof SamplePickaxe)) {
             return -1;
         }
@@ -110,25 +119,21 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
         }
 
         NBTTagList list = stack.getTagCompound().getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID());
-        for(int i=0; i < list.tagCount(); i++)
-            if (list.getStringTagAt(i).equals("TestEffect1"))
-                return 2;
+        for(int i=0; i < list.tagCount(); i++) {
+            IEffect effect = Effects.getEffects(list.getStringTagAt(i));
+            if(effect instanceof IEffectMiningLevel)
+                return ((IEffectMiningLevel)effect).getMiningLevel();
+        }
         return -1;
     }
 
     @Override
     public float getDigSpeed(ItemStack itemstack, Block block, int metadata) {
-        if(!itemstack.hasTagCompound())
-            return 1.0f;
+        return 8.0f;
+    }
 
-        if(!Objects.equals(block.getHarvestTool(metadata), "pickaxe"))
-            return 1.0f;
-
-        NBTTagList list = itemstack.getTagCompound().getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID());
-        for(int i=0; i < list.tagCount(); i++)
-            if (list.getStringTagAt(i).equals("TestEffect2"))
-                return 5.0f;
-
-        return super.getDigSpeed(itemstack, block, metadata);
+    @Override
+    public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_) {
+        return super.onItemRightClick(p_77659_1_, p_77659_2_, p_77659_3_);
     }
 }

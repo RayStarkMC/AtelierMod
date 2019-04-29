@@ -3,6 +3,11 @@ package raystark.atelier.api.effect;
 import raystark.atelier.api.alchemy.IPotentialAbility;
 import raystark.atelier.api.alchemy.Quality;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * 錬金術製品の効果を表すインターフェース.<p/>
  *
@@ -12,10 +17,17 @@ import raystark.atelier.api.alchemy.Quality;
  */
 public interface IEffect {
     /**
-     * 効果名を返す。
+     * 効果名を返す。<p/>
+     * 効果名はNBTタグのキーに利用される。
      * @return 効果名
      */
-    String gatName();
+    String getName();
+
+    /**
+     * 調合時に表示される効果の分類名を返す。
+     * @return 効果の分類名
+     */
+    String getNameOnAlchemy();
 
     /**
      * ツールチップ上で表示される効果名を返す。
