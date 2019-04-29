@@ -22,3 +22,36 @@
 上述の効果に対して、その性能の基準となる値。ツールチップ上では正の整数で表現され、大きければ大きいほど効果が強力になる。  
 材料に用いた素材と調合時に用いたスキルによって製品の品質が決定される。  
 効果によっては品質の影響を受けないものがある。
+
+## 仕様
+* そのアイテムの持つ効果、潜在能力、品質はNBTに保存される。  
+* そのアイテムがもつ効果、潜在能力はShiftダウンでツールチップ上に表示される。  
+ex.  
+[効果]  
+石を掘る  
+きれいに掘る  
+[潜在能力]  
+採掘速度が早くなる  
+* 効果に対して品質の補正が掛かりアイテムの主な性能を決定する。
+* 主な動作が決定した後、更に潜在能力の補正を受けて全ての性能が決まる。
+
+## 実装
+
+### 効果と潜在能力、品質の保存
+アイテムがクラフトされた時(及びクリエタブに登録されるとき)にNBTTagCompoundを付与。  
+付与されたTagに対してキー"modAtelier"でTagCompoundを付与。  
+modAtelierに対して効果、潜在能力を保存。  
+//TODO どうやって保存しよう？
+
+NBT構造
+* NBTTagCompound
+    * NBTTagCompound("ModAtelier")
+        * NBTTagList("Effect") : String
+            * Effect1
+            * Effect2
+            * ...
+        * NBTTagList("PotentialAbility") : String
+            * Ability1
+            * Ability2
+            * ...
+        * NBTTagInteger("Quality")
