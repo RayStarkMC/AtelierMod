@@ -10,4 +10,5 @@
 
 
 // TODO 実装方法記述  
+// TODO まずはItemで実装  
 // TODO ITileEntity触ってみる
