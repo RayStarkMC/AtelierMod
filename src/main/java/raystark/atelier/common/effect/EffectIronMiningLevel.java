@@ -3,7 +3,7 @@ package raystark.atelier.common.effect;
 import raystark.atelier.api.effect.AbstractEffectMiningLevel;
 import raystark.atelier.api.effect.IEffectMiningLevel;
 
-public class EffectIronMiningLevel extends AbstractEffectMiningLevel implements IEffectMiningLevel {
+public final class EffectIronMiningLevel extends AbstractEffectMiningLevel implements IEffectMiningLevel {
 
     @Override
     public int getMiningLevel() {
