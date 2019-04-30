@@ -22,6 +22,7 @@ import raystark.atelier.api.item.ToolClasses;
 import raystark.atelier.common.util.NBTType;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 錬金術によって作られたピッケルのサンプル
@@ -71,25 +72,22 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
     }
 
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
+    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean isDebugMode) {
         if(!GuiScreen.isShiftKeyDown()) return;
-        NBTTagCompound tagAtelier = itemStack.getTagCompound().getCompoundTag("ModAtelier");
 
         // listは文字列を格納したListであるためこのキャストは正しい
         @SuppressWarnings("unchecked") List<String> toolTipList = list;
+        List<String> effectList = getEffectList(itemStack).stream()
+                .map(IEffect::getToolTipText)
+                .collect(Collectors.toList());
+        List<String> abilityList = getPotentialAbilityList(itemStack).stream()
+                .map(IPotentialAbility::getToolTipText)
+                .collect(Collectors.toList());
 
-        toolTipList.add(EnumChatFormatting.RED + "[Effects]");
-
-        NBTTagList effectList = tagAtelier.getTagList("Effect", NBTType.STRING.getID());
-        for(int i=0;i < effectList.tagCount();i++)
-            Effects.getEffects(effectList.getStringTagAt(i)).ifPresent(e -> toolTipList.add(e.getToolTipText()));
-
-        toolTipList.add(EnumChatFormatting.LIGHT_PURPLE + "[PotentialAbilities]");
-
-        NBTTagList potentialList = tagAtelier.getTagList("PotentialAbility", NBTType.STRING.getID());
-        for(int i=0; i < potentialList.tagCount(); i++)
-            toolTipList.add(potentialList.getStringTagAt(i));
-            //Potentials.getPotential(potentialList.getStringTagAt(i)).ifPresent(e -> toolTipList.add(e.getToolTipText()));
+        toolTipList.add(EnumChatFormatting.AQUA + "[Effects]");
+        toolTipList.addAll(effectList);
+        toolTipList.add(EnumChatFormatting.AQUA + "[PotentialAbility]");
+        toolTipList.addAll(abilityList);
     }
 
     @Override
@@ -124,16 +122,11 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
     @Override
     public List<IPotentialAbility> getPotentialAbilityList(ItemStack itemStack) {
-        if (itemStack == null || !isAlchemicalProduct(itemStack)) {
+        if(!hasEffectOrPotentialList(itemStack)) {
             @SuppressWarnings("unchecked") List<IPotentialAbility> list = Collections.EMPTY_LIST;
             return list;
         }
 
-        NBTTagList tagList = itemStack.getTagCompound().getCompoundTag("ModAtelier").getTagList("PotentialAbility", NBTType.STRING.getID());
-        if (tagList == null) {
-            @SuppressWarnings("unchecked") List<IPotentialAbility> list = Collections.EMPTY_LIST;
-            return list;
-        }
         // TODO 潜在能力実装
 
         //List<IPotentialAbility> abilityList = new ArrayList<>();
@@ -141,7 +134,9 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
         //    effectList.add(PotentialAbilities.getPotentialAbility(tagList.getStringTagAt(i)));
 
         //return abilityList;
-        return null;
+
+        @SuppressWarnings("unchecked") List<IPotentialAbility> list = Collections.EMPTY_LIST;
+        return list;
     }
 
     private boolean isAlchemicalProduct(ItemStack stack) {
