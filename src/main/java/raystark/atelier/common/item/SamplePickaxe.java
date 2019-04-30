@@ -17,6 +17,7 @@ import raystark.atelier.api.effect.Effects;
 import raystark.atelier.api.effect.IEffect;
 import raystark.atelier.api.alchemy.IPotentialAbility;
 import raystark.atelier.api.effect.IEffectMiningLevel;
+import raystark.atelier.api.item.ToolClasses;
 import raystark.atelier.common.util.NBTType;
 
 import java.util.*;
@@ -142,7 +143,7 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
             return -1;
         }
 
-        if(!Objects.equals(toolClass, "pickaxe")) {
+        if(!Objects.equals(toolClass, ToolClasses.PICKAXE.value())) {
             return -1;
         }
 
@@ -160,7 +161,7 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
     @Override
     public float getDigSpeed(ItemStack itemstack, Block block, int metadata) {
-        return 8.0f;
+        return block.getHarvestTool(metadata).equals(ToolClasses.PICKAXE.value()) ? 8.0f : 1.0f;
     }
 
     @Override

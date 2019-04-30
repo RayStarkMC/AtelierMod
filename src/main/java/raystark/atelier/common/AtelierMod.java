@@ -11,6 +11,7 @@ import raystark.atelier.api.effect.Effects;
 import raystark.atelier.common.effect.EffectDiamondMiningLevel;
 import raystark.atelier.common.effect.EffectIronMiningLevel;
 import raystark.atelier.common.effect.EffectStoneMiningLevel;
+import raystark.atelier.common.item.AtelierItems;
 import raystark.atelier.common.item.SamplePickaxe;
 
 @Mod(modid = AtelierMod.MODID, version = AtelierMod.VERSION)
@@ -20,7 +21,7 @@ public class AtelierMod {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        SamplePickaxe samplePickaxe = new SamplePickaxe();
+        AtelierItems.init();
     }
 
     @EventHandler
