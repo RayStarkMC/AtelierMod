@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.alchemy.Quality;
 import raystark.atelier.api.effect.Effects;
 import raystark.atelier.api.effect.IEffect;
 import raystark.atelier.api.alchemy.IPotentialAbility;
@@ -36,37 +37,37 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
     @Override
     public void getSubItems(Item item, CreativeTabs p_150895_2_, List list) {
+        IEffect[] effects = new IEffect[]{
+                Effects.STONE_MINING_LEVEL,
+                Effects.IRON_MINING_LEVEL,
+                Effects.DIAMOND_MINING_LEVEL
+        };
+
         //listはItemStackを格納しているためこのキャストは正しい
         @SuppressWarnings("unchecked") List<ItemStack> subItems = list;
-        NBTTagCompound tagCompound = new NBTTagCompound();
-        NBTTagCompound tagAtelier = new NBTTagCompound();
 
-        tagCompound.setTag("ModAtelier", tagAtelier);
-
-        NBTTagList tagEffectList = new NBTTagList();
-        NBTTagList tagPotentialAbilityList = new NBTTagList();
-
-        tagAtelier.setTag("Effect", tagEffectList);
-        tagAtelier.setTag("PotentialAbility", tagPotentialAbilityList);
-
-        NBTTagCompound[] tagCompounds = new NBTTagCompound[3];
-        for(int i=0; i<tagCompounds.length; i++)
-            tagCompounds[i] = (NBTTagCompound)tagCompound.copy();
-
-        addEffect(tagCompounds[0], Effects.STONE_MINING_LEVEL);
-        addEffect(tagCompounds[1], Effects.IRON_MINING_LEVEL);
-        addEffect(tagCompounds[2], Effects.DIAMOND_MINING_LEVEL);
-
-        ItemStack[] stack = new ItemStack[tagCompounds.length];
-        for(int i=0; i<stack.length; i++) {
-            stack[i] = new ItemStack(this, 1, 0);
-            stack[i].setTagCompound(tagCompounds[i]);
-            subItems.add(stack[i]);
-        }
+        for (IEffect effect : effects)
+            subItems.add(addEffect(applyDefaultTag(new ItemStack(item, 1, 0)), effect));
     }
 
-    private void addEffect(NBTTagCompound tag, IEffect effect) {
-        tag.getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
+    //テスト用ヘルパメソッド アイテムスタックに指定した効果を追加
+    private static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
+        itemStack.getTagCompound().getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
+        return itemStack;
+    }
+
+    //テスト用ヘルパメソッド アイテムスタックにModデフォルトのタグを付与
+    private static ItemStack applyDefaultTag(ItemStack stack) {
+        NBTTagCompound tagAtelier = new NBTTagCompound();
+        tagAtelier.setInteger("Quality", Quality.MIN_VALUE);
+        tagAtelier.setTag("Effect", new NBTTagList());
+        tagAtelier.setTag("Ability", new NBTTagList());
+
+        NBTTagCompound tagCompound = new NBTTagCompound();
+        tagCompound.setTag("ModAtelier", tagAtelier);
+
+        stack.setTagCompound(tagCompound);
+        return stack;
     }
 
     @Override
@@ -92,17 +93,27 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
     }
 
     @Override
+    public int getQuality(ItemStack stack) {
+        return 0;
+    }
+
+
+    //テスト用ヘルパメソッド
+    private static boolean hasEffectOrPotentialList(ItemStack itemStack) {
+        return itemStack != null
+                && itemStack.getItem() instanceof IAlchemicalProduct
+                && itemStack.hasTagCompound()
+                && itemStack.getTagCompound().hasKey("ModAtelier");
+    }
+
+    @Override
     public List<IEffect> getEffectList(ItemStack itemStack) {
-        if (itemStack == null || !isAlchemicalProduct(itemStack)) {
+        if(!hasEffectOrPotentialList(itemStack)) {
             @SuppressWarnings("unchecked") List<IEffect> list = Collections.EMPTY_LIST;
             return list;
         }
 
         NBTTagList tagList = itemStack.getTagCompound().getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID());
-        if (tagList == null) {
-            @SuppressWarnings("unchecked") List<IEffect> list = Collections.EMPTY_LIST;
-            return list;
-        }
 
         List<IEffect> effectList = new ArrayList<>();
         for(int i=0; i<tagList.tagCount() ;i++)

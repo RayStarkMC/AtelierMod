@@ -1,5 +1,6 @@
 package raystark.atelier.api.alchemy;
 
+import net.minecraft.item.ItemStack;
 import raystark.atelier.api.effect.IEffect;
 
 /**
@@ -15,7 +16,8 @@ public interface Quality {
 
     /**
      * 品質値を返す
+     * @param itemStack アイテムスタック
      * @return 品質値
      */
-    int getQuality();
+    int getQuality(ItemStack itemStack);
 }
