@@ -29,6 +29,34 @@ import java.util.stream.Collectors;
  */
 public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
+    //テスト用ヘルパメソッド nullチェック等
+    private static boolean hasAtelierTag(ItemStack itemStack) {
+        return itemStack != null
+                && itemStack.getItem() instanceof IAlchemicalProduct
+                && itemStack.hasTagCompound()
+                && itemStack.getTagCompound().hasKey("ModAtelier");
+    }
+
+    //テスト用ヘルパメソッド アイテムにエフェクトを付与
+    private static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
+        itemStack.getTagCompound().getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
+        return itemStack;
+    }
+
+    //テスト用ヘルパメソッド アイテムにデフォルトのタグを付与
+    private static ItemStack applyDefaultTag(ItemStack stack) {
+        NBTTagCompound tagAtelier = new NBTTagCompound();
+        tagAtelier.setInteger("Quality", Quality.MIN_VALUE);
+        tagAtelier.setTag("Effect", new NBTTagList());
+        tagAtelier.setTag("Ability", new NBTTagList());
+
+        NBTTagCompound tagCompound = new NBTTagCompound();
+        tagCompound.setTag("ModAtelier", tagAtelier);
+
+        stack.setTagCompound(tagCompound);
+        return stack;
+    }
+
     public SamplePickaxe() {
         setCreativeTab(CreativeTabs.tabTools);
         setUnlocalizedName("samplePickaxe");
@@ -51,32 +79,13 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
             subItems.add(addEffect(applyDefaultTag(new ItemStack(item, 1, 0)), effect));
     }
 
-    //テスト用ヘルパメソッド アイテムスタックに指定した効果を追加
-    private static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
-        itemStack.getTagCompound().getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
-        return itemStack;
-    }
-
-    //テスト用ヘルパメソッド アイテムスタックにModデフォルトのタグを付与
-    private static ItemStack applyDefaultTag(ItemStack stack) {
-        NBTTagCompound tagAtelier = new NBTTagCompound();
-        tagAtelier.setInteger("Quality", Quality.MIN_VALUE);
-        tagAtelier.setTag("Effect", new NBTTagList());
-        tagAtelier.setTag("Ability", new NBTTagList());
-
-        NBTTagCompound tagCompound = new NBTTagCompound();
-        tagCompound.setTag("ModAtelier", tagAtelier);
-
-        stack.setTagCompound(tagCompound);
-        return stack;
-    }
-
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean isDebugMode) {
         if(!GuiScreen.isShiftKeyDown()) return;
 
         // listは文字列を格納したListであるためこのキャストは正しい
         @SuppressWarnings("unchecked") List<String> toolTipList = list;
+        String quality = String.valueOf(getQuality(itemStack));
         List<String> effectList = getEffectList(itemStack).stream()
                 .map(IEffect::getToolTipText)
                 .collect(Collectors.toList());
@@ -84,6 +93,8 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
                 .map(IPotentialAbility::getToolTipText)
                 .collect(Collectors.toList());
 
+        toolTipList.add(EnumChatFormatting.AQUA + "[Quality]");
+        toolTipList.add(quality);
         toolTipList.add(EnumChatFormatting.AQUA + "[Effects]");
         toolTipList.addAll(effectList);
         toolTipList.add(EnumChatFormatting.AQUA + "[PotentialAbility]");
@@ -91,22 +102,14 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
     }
 
     @Override
-    public int getQuality(ItemStack stack) {
-        return 0;
+    public int getQuality(ItemStack itemStack) {
+        return hasAtelierTag(itemStack) ? itemStack.getTagCompound().getCompoundTag("ModAtelier").getInteger("Quality") : Quality.MIN_VALUE;
     }
 
-
-    //テスト用ヘルパメソッド
-    private static boolean hasEffectOrPotentialList(ItemStack itemStack) {
-        return itemStack != null
-                && itemStack.getItem() instanceof IAlchemicalProduct
-                && itemStack.hasTagCompound()
-                && itemStack.getTagCompound().hasKey("ModAtelier");
-    }
 
     @Override
     public List<IEffect> getEffectList(ItemStack itemStack) {
-        if(!hasEffectOrPotentialList(itemStack)) {
+        if(!hasAtelierTag(itemStack)) {
             @SuppressWarnings("unchecked") List<IEffect> list = Collections.EMPTY_LIST;
             return list;
         }
@@ -122,7 +125,7 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
     @Override
     public List<IPotentialAbility> getPotentialAbilityList(ItemStack itemStack) {
-        if(!hasEffectOrPotentialList(itemStack)) {
+        if(!hasAtelierTag(itemStack)) {
             @SuppressWarnings("unchecked") List<IPotentialAbility> list = Collections.EMPTY_LIST;
             return list;
         }
@@ -137,10 +140,6 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
         @SuppressWarnings("unchecked") List<IPotentialAbility> list = Collections.EMPTY_LIST;
         return list;
-    }
-
-    private boolean isAlchemicalProduct(ItemStack stack) {
-        return stack.getItem() instanceof IAlchemicalProduct;
     }
 
     @Override
