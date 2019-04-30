@@ -1,6 +1,7 @@
 package raystark.atelier.api.alchemy;
 
 import net.minecraft.item.ItemStack;
+import raystark.atelier.api.potential.IPotentialAbility;
 
 import java.util.List;
 

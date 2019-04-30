@@ -1,6 +1,6 @@
 package raystark.atelier.api.effect;
 
-import raystark.atelier.api.alchemy.IPotentialAbility;
+import raystark.atelier.api.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.Quality;
 
 /**

@@ -1,6 +1,5 @@
 package raystark.atelier.common.effect;
 
-import raystark.atelier.api.effect.AbstractEffectMiningLevel;
 import raystark.atelier.api.effect.IEffectMiningLevel;
 
 public final class EffectIronMiningLevel extends AbstractEffectMiningLevel implements IEffectMiningLevel {

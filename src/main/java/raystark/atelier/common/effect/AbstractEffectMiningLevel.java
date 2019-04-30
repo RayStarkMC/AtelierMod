@@ -1,4 +1,6 @@
-package raystark.atelier.api.effect;
+package raystark.atelier.common.effect;
+
+import raystark.atelier.api.effect.IEffectMiningLevel;
 
 /**
  * IEffectMiningLevelの骨格実装

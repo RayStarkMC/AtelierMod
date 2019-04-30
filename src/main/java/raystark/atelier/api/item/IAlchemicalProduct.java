@@ -1,6 +1,10 @@
-package raystark.atelier.api.alchemy;
+package raystark.atelier.api.item;
 
 import net.minecraft.item.ItemStack;
+import raystark.atelier.api.alchemy.EffectOwner;
+import raystark.atelier.api.potential.IPotentialAbility;
+import raystark.atelier.api.alchemy.PotentialAbilityOwner;
+import raystark.atelier.api.alchemy.Quality;
 import raystark.atelier.api.effect.IEffect;
 
 import java.util.List;
@@ -8,7 +12,7 @@ import java.util.List;
 /**
  * 錬金術によって作られた製品を表すインターフェース。
  */
-public interface IAlchemicalProduct extends Quality, EffectOwner, PotentialAbilityOwner{
+public interface IAlchemicalProduct extends Quality, EffectOwner, PotentialAbilityOwner {
 
     /**
      * このアイテムの品質値を返す。<p/>

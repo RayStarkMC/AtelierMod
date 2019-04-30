@@ -1,4 +1,4 @@
-package raystark.atelier.common.util;
+package raystark.atelier.api.util;
 
 /**
  * NBTの型とidの対応の列挙

@@ -1,4 +1,4 @@
-package raystark.atelier.api.alchemy;
+package raystark.atelier.api.potential;
 
 import raystark.atelier.api.effect.IEffect;
 

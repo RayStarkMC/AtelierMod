@@ -12,14 +12,15 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.item.IAlchemicalProduct;
 import raystark.atelier.api.alchemy.Quality;
-import raystark.atelier.api.effect.Effects;
+import raystark.atelier.common.effect.Effects;
 import raystark.atelier.api.effect.IEffect;
-import raystark.atelier.api.alchemy.IPotentialAbility;
+import raystark.atelier.api.potential.IPotentialAbility;
 import raystark.atelier.api.effect.IEffectMiningLevel;
 import raystark.atelier.api.item.ToolClasses;
-import raystark.atelier.common.util.NBTType;
+import raystark.atelier.common.potential.Potentials;
+import raystark.atelier.api.util.NBTType;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -114,9 +115,9 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
             return list;
         }
 
-        NBTTagList tagList = itemStack.getTagCompound().getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID());
-
         List<IEffect> effectList = new ArrayList<>();
+
+        NBTTagList tagList = itemStack.getTagCompound().getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID());
         for(int i=0; i<tagList.tagCount() ;i++)
             Effects.getEffects(tagList.getStringTagAt(i)).ifPresent(effectList::add); //effectList.add(Effects.getEffects(tagList.getStringTagAt(i)));
 
@@ -130,16 +131,12 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
             return list;
         }
 
-        // TODO 潜在能力実装
+        List<IPotentialAbility> abilityList = new ArrayList<>();
 
-        //List<IPotentialAbility> abilityList = new ArrayList<>();
-        //for(int i=0; i<tagList.tagCount() ;i++)
-        //    effectList.add(PotentialAbilities.getPotentialAbility(tagList.getStringTagAt(i)));
-
-        //return abilityList;
-
-        @SuppressWarnings("unchecked") List<IPotentialAbility> list = Collections.EMPTY_LIST;
-        return list;
+        NBTTagList tagList = itemStack.getTagCompound().getCompoundTag("ModAtelier").getTagList("Potential", NBTType.STRING.getID());
+        for(int i=0; i<tagList.tagCount() ;i++)
+            Potentials.getPotential(tagList.getStringTagAt(i)).ifPresent(abilityList::add);
+        return abilityList;
     }
 
     @Override

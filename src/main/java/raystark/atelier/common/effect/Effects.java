@@ -1,8 +1,6 @@
-package raystark.atelier.api.effect;
+package raystark.atelier.common.effect;
 
-import raystark.atelier.common.effect.EffectDiamondMiningLevel;
-import raystark.atelier.common.effect.EffectIronMiningLevel;
-import raystark.atelier.common.effect.EffectStoneMiningLevel;
+import raystark.atelier.api.effect.IEffect;
 
 import java.util.HashMap;
 import java.util.Map;
