@@ -1,5 +1,8 @@
 package raystark.atelier.api.effect;
 
+/**
+ * アイテムに採掘レベルを与える効果
+ */
 public interface IEffectMiningLevel extends IEffect {
     /**
      * この効果の採掘レベル

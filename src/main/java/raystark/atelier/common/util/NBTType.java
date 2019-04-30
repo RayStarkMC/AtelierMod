@@ -4,22 +4,22 @@ package raystark.atelier.common.util;
  * NBTの型とidの対応の列挙
  */
 public enum NBTType {
-    END(0),
-    BYTE(1),
-    SHORT(2),
-    INT(3),
-    LONG(4),
-    FLOAT(5),
-    DOUBLE(6),
-    BYTE_ARRAY(7),
-    STRING(8),
-    LIST(9),
-    COMPOUND(10),
-    INT_ARRAY(11);
+    END((byte)0),
+    BYTE((byte)1),
+    SHORT((byte)2),
+    INT((byte)3),
+    LONG((byte)4),
+    FLOAT((byte)5),
+    DOUBLE((byte)6),
+    BYTE_ARRAY((byte)7),
+    STRING((byte)8),
+    LIST((byte)9),
+    COMPOUND((byte)10),
+    INT_ARRAY((byte)11);
 
-    private int id;
+    private byte id;
 
-    NBTType(int id)  {
+    NBTType(byte id)  {
         this.id = id;
     }
 
@@ -27,7 +27,8 @@ public enum NBTType {
      * この型に対応するidを返す
      * @return id
      */
-    public int getID() {
+    public byte getID() {
+        byte i = 0;
         return id;
     }
 }

@@ -1,6 +1,9 @@
 package raystark.atelier.api.effect;
 
-public abstract class AbstractEffectMiningLevel extends AbstractEffect implements IEffectMiningLevel {
+/**
+ * IEffectMiningLevelの骨格実装
+ */
+public abstract class AbstractEffectMiningLevel implements IEffectMiningLevel {
 
     protected AbstractEffectMiningLevel(){}
 

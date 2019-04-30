@@ -76,16 +76,18 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
         // listは文字列を格納したListであるためこのキャストは正しい
         @SuppressWarnings("unchecked") List<String> toolTipList = list;
 
-
         toolTipList.add(EnumChatFormatting.RED + "[Effects]");
+
         NBTTagList effectList = tagAtelier.getTagList("Effect", NBTType.STRING.getID());
         for(int i=0;i < effectList.tagCount();i++)
-            toolTipList.add(Effects.getEffects(effectList.getStringTagAt(i)).getToolTipText());
+            Effects.getEffects(effectList.getStringTagAt(i)).ifPresent(e -> toolTipList.add(e.getToolTipText()));
 
         toolTipList.add(EnumChatFormatting.LIGHT_PURPLE + "[PotentialAbilities]");
+
         NBTTagList potentialList = tagAtelier.getTagList("PotentialAbility", NBTType.STRING.getID());
         for(int i=0; i < potentialList.tagCount(); i++)
             toolTipList.add(potentialList.getStringTagAt(i));
+            //Potentials.getPotential(potentialList.getStringTagAt(i)).ifPresent(e -> toolTipList.add(e.getToolTipText()));
     }
 
     @Override
@@ -103,7 +105,7 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
 
         List<IEffect> effectList = new ArrayList<>();
         for(int i=0; i<tagList.tagCount() ;i++)
-            effectList.add(Effects.getEffects(tagList.getStringTagAt(i)));
+            Effects.getEffects(tagList.getStringTagAt(i)).ifPresent(effectList::add); //effectList.add(Effects.getEffects(tagList.getStringTagAt(i)));
 
         return effectList;
     }
@@ -140,7 +142,7 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
             return -1;
         }
 
-        if(toolClass == null) {
+        if(!Objects.equals(toolClass, "pickaxe")) {
             return -1;
         }
 
@@ -148,13 +150,12 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct {
             return -1;
         }
 
-        NBTTagList list = stack.getTagCompound().getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID());
-        for(int i=0; i < list.tagCount(); i++) {
-            IEffect effect = Effects.getEffects(list.getStringTagAt(i));
-            if(effect instanceof IEffectMiningLevel)
-                return ((IEffectMiningLevel)effect).getMiningLevel();
-        }
-        return -1;
+        List<IEffect> effectList = this.getEffectList(stack);
+        return effectList.stream()
+                .filter(e -> e instanceof IEffectMiningLevel)
+                .findFirst()
+                .map(e -> ((IEffectMiningLevel) e).getMiningLevel())
+                .orElse(-1);
     }
 
     @Override

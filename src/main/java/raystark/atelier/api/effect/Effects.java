@@ -6,6 +6,7 @@ import raystark.atelier.common.effect.EffectStoneMiningLevel;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * 効果一覧を表すライブラリクラス
@@ -44,7 +45,7 @@ public final class Effects {
      * @param effectName
      * @return 名前に対応するエフェクト、又は存在しなければnull
      */
-    public static IEffect getEffects(String effectName) {
-        return EFFECTS.getOrDefault(effectName, null);
+    public static Optional<IEffect> getEffects(String effectName) {
+        return Optional.ofNullable(EFFECTS.get(effectName));
     }
 }
