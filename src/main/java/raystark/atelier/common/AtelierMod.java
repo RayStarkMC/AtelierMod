@@ -6,6 +6,7 @@ import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import raystark.atelier.common.block.AtelierBlocks;
 import raystark.atelier.common.effect.Effects;
 import raystark.atelier.common.item.AtelierItems;
 import raystark.atelier.common.potential.Potentials;
@@ -18,6 +19,7 @@ public class AtelierMod {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         AtelierItems.init();
+        AtelierBlocks.init();
     }
 
     @EventHandler
