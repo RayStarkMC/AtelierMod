@@ -4,11 +4,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.Quality;
 import raystark.atelier.api.effect.IEffect;
 import raystark.atelier.api.item.IAlchemicalProduct;
@@ -110,5 +114,25 @@ public class SampleBlock extends Block implements IAlchemicalProduct{
         for(int i=0; i<tagList.tagCount() ;i++)
             Potentials.getPotential(tagList.getStringTagAt(i)).ifPresent(abilityList::add);
         return abilityList;
+    }
+
+    @Override
+    public void harvestBlock(World world, EntityPlayer p_149636_2_, int p_149636_3_, int p_149636_4_, int p_149636_5_, int p_149636_6_) {
+        /*if(!world.isRemote)*/System.out.println("harvestBlock");
+        super.harvestBlock(world, p_149636_2_, p_149636_3_, p_149636_4_, p_149636_5_, p_149636_6_);
+    }
+
+    @Override
+    public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer p_149681_6_) {
+        if(!world.isRemote) {
+            System.out.println("onBlockHarvested");
+            world.spawnEntityInWorld(new EntityItem(world, x+.5, y+.5, z+.5, new ItemStack(Blocks.dirt, 1, meta)));
+        }
+        super.onBlockHarvested(world, x, y, z, meta, p_149681_6_);
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
     }
 }

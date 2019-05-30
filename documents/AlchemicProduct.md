@@ -51,6 +51,8 @@ ex.
 ## 実装
 
 ### 能力の保存
+
+#### アイテムの場合
 アイテムがクラフトされた時(及びクリエタブに登録されるとき)にNBTTagCompoundを付与。  
 付与されたTagに対してキー"modAtelier"でTagCompoundを付与。  
 modAtelierに対して効果、潜在能力をNBTTagListで保存。  
@@ -67,6 +69,10 @@ NBT構造 NBTBase("キー")
             * Ability1
             * Ability2
             * ...
+            
+#### ブロックの場合
+ブロックがクラフトされたときにItemBlockにNBTTagCompoundを付与。
+設置時にTileEntityにデータを移行する。
 
 ### 能力の適用
 アイテムやブロックの性能の内効果に対応するメソッドをOverrideする。  

@@ -1,5 +1,6 @@
 package raystark.atelier.api.alchemy;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import raystark.atelier.api.effect.IEffect;
 

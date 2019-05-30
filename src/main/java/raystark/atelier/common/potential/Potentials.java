@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public final class Potentials {
+public final class  Potentials {
     private static final Map<String, IPotentialAbility> POTENTIALS = new HashMap<>();
 
     private Potentials() {}
