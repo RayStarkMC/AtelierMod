@@ -23,23 +23,25 @@ import raystark.atelier.api.alchemy.effect.Effects;
 
 import java.util.List;
 
+import static raystark.atelier.api.util.NBTTagNames.*;
+
 public class SampleBlock extends Block implements IAlchemicalProduct<TileEntity>{
 
     //テスト用ヘルパメソッド アイテムにエフェクトを付与
     private static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
-        itemStack.getTagCompound().getCompoundTag("ModAtelier").getTagList("Effect", NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
+        itemStack.getTagCompound().getCompoundTag(TAG_MOD.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
         return itemStack;
     }
 
     //テスト用ヘルパメソッド アイテムにデフォルトのタグを付与
     private static ItemStack applyDefaultTag(ItemStack stack) {
         NBTTagCompound tagAtelier = new NBTTagCompound();
-        tagAtelier.setInteger("Quality", Quality.MIN_VALUE);
-        tagAtelier.setTag("Effect", new NBTTagList());
-        tagAtelier.setTag("Ability", new NBTTagList());
+        tagAtelier.setInteger(TAG_QUALITY.name(), Quality.MIN_VALUE);
+        tagAtelier.setTag(TAG_EFFECT.name(), new NBTTagList());
+        tagAtelier.setTag(TAG_POTENTIAL.name(), new NBTTagList());
 
         NBTTagCompound tagCompound = new NBTTagCompound();
-        tagCompound.setTag("ModAtelier", tagAtelier);
+        tagCompound.setTag(TAG_MOD.name(), tagAtelier);
 
         stack.setTagCompound(tagCompound);
         return stack;
