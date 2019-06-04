@@ -1,4 +1,4 @@
-package raystark.atelier.api.alchemy;
+package raystark.atelier.api.alchemy.status;
 
 
 import net.minecraft.item.Item;

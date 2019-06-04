@@ -1,6 +1,4 @@
-package raystark.atelier.common.potential;
-
-import raystark.atelier.api.potential.IPotentialAbility;
+package raystark.atelier.api.alchemy.potential;
 
 import java.util.HashMap;
 import java.util.Map;

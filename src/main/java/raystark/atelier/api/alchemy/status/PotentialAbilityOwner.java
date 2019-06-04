@@ -1,7 +1,6 @@
-package raystark.atelier.api.alchemy;
+package raystark.atelier.api.alchemy.status;
 
-import net.minecraft.item.ItemStack;
-import raystark.atelier.api.potential.IPotentialAbility;
+import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 
 import java.util.List;
 
@@ -11,8 +10,7 @@ import java.util.List;
 public interface PotentialAbilityOwner {
     /**
      * このアイテムに付与された潜在能力一覧
-     * @param stackAlchemy アイテムスタック
      * @return 潜在能力のリスト
      */
-    List<IPotentialAbility> getPotentialAbilityList(ItemStack stackAlchemy);
+    List<IPotentialAbility> getPotentialAbilityList();
 }

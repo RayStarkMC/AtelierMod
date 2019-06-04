@@ -1,4 +1,4 @@
-package raystark.atelier.api.effect;
+package raystark.atelier.api.alchemy.effect;
 
 /**
  * アイテムに採掘レベルを与える効果

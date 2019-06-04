@@ -1,6 +1,6 @@
-package raystark.atelier.api.potential;
+package raystark.atelier.api.alchemy.potential;
 
-import raystark.atelier.api.effect.IEffect;
+import raystark.atelier.api.alchemy.effect.IEffect;
 
 /**
  * 錬金術製品につく潜在能力を表すインターフェース。<p/>

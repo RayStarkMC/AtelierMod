@@ -1,8 +1,7 @@
-package raystark.atelier.api.alchemy;
+package raystark.atelier.api.alchemy.status;
 
 
-import net.minecraft.item.ItemStack;
-import raystark.atelier.api.effect.IEffect;
+import raystark.atelier.api.alchemy.effect.IEffect;
 
 import java.util.List;
 
@@ -12,8 +11,7 @@ import java.util.List;
 public interface EffectOwner {
     /**
      * このアイテムに付与された効果一覧
-     * @param stackAlchemy アイテムスタック
      * @return 効果のリスト
      */
-    List<IEffect> getEffectList(ItemStack stackAlchemy);
+    List<IEffect> getEffectList();
 }

@@ -1,6 +1,6 @@
 package raystark.atelier.common.effect;
 
-import raystark.atelier.api.effect.IEffectMiningLevel;
+import raystark.atelier.api.alchemy.effect.IEffectMiningLevel;
 
 /**
  * IEffectMiningLevelの骨格実装

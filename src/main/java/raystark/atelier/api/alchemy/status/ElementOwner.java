@@ -1,4 +1,4 @@
-package raystark.atelier.api.alchemy;
+package raystark.atelier.api.alchemy.status;
 
 /**
  * 属性値を持つものを表すインターフェース.<p/>

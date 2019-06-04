@@ -2,15 +2,13 @@ package raystark.atelier.common;
 
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import raystark.atelier.common.block.AtelierBlocks;
-import raystark.atelier.common.effect.Effects;
+import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.common.item.AtelierItems;
-import raystark.atelier.common.potential.Potentials;
+import raystark.atelier.api.alchemy.potential.Potentials;
 
 @Mod(modid = AtelierMod.MODID, version = AtelierMod.VERSION)
 public class AtelierMod {

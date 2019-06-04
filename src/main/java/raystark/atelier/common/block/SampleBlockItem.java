@@ -4,14 +4,15 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import raystark.atelier.api.alchemy.Quality;
-import raystark.atelier.api.effect.IEffect;
-import raystark.atelier.api.item.IAlchemicalProduct;
-import raystark.atelier.api.potential.IPotentialAbility;
+import raystark.atelier.api.alchemy.status.IProductStatus;
+import raystark.atelier.api.alchemy.status.Quality;
+import raystark.atelier.api.alchemy.effect.IEffect;
+import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 
 import java.util.List;
 
-public class SampleBlockItem extends ItemBlock implements IAlchemicalProduct {
+public class SampleBlockItem extends ItemBlock implements IAlchemicalProduct<ItemStack> {
 
     public SampleBlockItem(Block p_i45328_1_) {
         super(p_i45328_1_);
@@ -22,20 +23,10 @@ public class SampleBlockItem extends ItemBlock implements IAlchemicalProduct {
         list.add("SampleBlock");
     }
 
-    @Override
-    public int getQuality(ItemStack itemStack) {
-        return isBlockAlchemicalProduct(field_150939_a) ? ((IAlchemicalProduct)field_150939_a).getQuality(itemStack) : Quality.MIN_VALUE;
-    }
-
-    @Override
-    public List<IEffect> getEffectList(ItemStack stackAlchemy) {
-        return ((IAlchemicalProduct)field_150939_a).getEffectList(stackAlchemy);
-    }
-
-    @Override
-    public List<IPotentialAbility> getPotentialAbilityList(ItemStack stackAlchemy) {
-        return ((IAlchemicalProduct)field_150939_a).getPotentialAbilityList(stackAlchemy);
-    }
-
     private boolean isBlockAlchemicalProduct(Block block) { return block instanceof IAlchemicalProduct;}
+
+    @Override
+    public IProductStatus getStatus(ItemStack dataSource) {
+        return null;
+    }
 }

@@ -1,4 +1,4 @@
-package raystark.atelier.api.alchemy;
+package raystark.atelier.api.alchemy.status;
 
 /**
  * 錬金術で用いられる属性値の種類の列挙<p/>
