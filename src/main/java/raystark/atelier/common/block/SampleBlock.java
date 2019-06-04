@@ -50,7 +50,7 @@ public class SampleBlock extends Block implements IAlchemicalProduct<TileEntity>
     public SampleBlock(Material p_i45394_1_) {
         super(p_i45394_1_);
         setBlockName("SampleBlock");
-        GameRegistry.registerBlock(this, SampleBlockItem.class, getUnlocalizedName());
+        GameRegistry.registerBlock(this, SampleItemBlock.class, getUnlocalizedName());
         setCreativeTab(CreativeTabs.tabTools);
     }
 
