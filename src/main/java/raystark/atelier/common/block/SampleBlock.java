@@ -2,6 +2,7 @@ package raystark.atelier.common.block;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
@@ -18,30 +19,32 @@ import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.api.alchemy.status.Quality;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.tile.AbstractTileProduct;
 import raystark.atelier.api.util.NBTType;
 import raystark.atelier.api.alchemy.effect.Effects;
+import raystark.atelier.common.block.tile.SampleTileProduct;
 
 import java.util.List;
 
 import static raystark.atelier.api.util.NBTTagNames.*;
 
-public class SampleBlock extends Block implements IAlchemicalProduct<TileEntity>{
+public class SampleBlock extends Block implements ITileEntityProvider, IAlchemicalProduct<AbstractTileProduct>{
 
     //テスト用ヘルパメソッド アイテムにエフェクトを付与
     private static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
-        itemStack.getTagCompound().getCompoundTag(TAG_MOD.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
+        itemStack.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
         return itemStack;
     }
 
     //テスト用ヘルパメソッド アイテムにデフォルトのタグを付与
     private static ItemStack applyDefaultTag(ItemStack stack) {
         NBTTagCompound tagAtelier = new NBTTagCompound();
-        tagAtelier.setInteger(TAG_QUALITY.name(), Quality.MIN_VALUE);
+        tagAtelier.setInteger(TAG_QUALITY.name(), 10);
         tagAtelier.setTag(TAG_EFFECT.name(), new NBTTagList());
         tagAtelier.setTag(TAG_POTENTIAL.name(), new NBTTagList());
 
         NBTTagCompound tagCompound = new NBTTagCompound();
-        tagCompound.setTag(TAG_MOD.name(), tagAtelier);
+        tagCompound.setTag(TAG_ATELIER.name(), tagAtelier);
 
         stack.setTagCompound(tagCompound);
         return stack;
@@ -76,14 +79,12 @@ public class SampleBlock extends Block implements IAlchemicalProduct<TileEntity>
 
     @Override
     public void harvestBlock(World world, EntityPlayer p_149636_2_, int p_149636_3_, int p_149636_4_, int p_149636_5_, int p_149636_6_) {
-        /*if(!world.isRemote)*/System.out.println("harvestBlock");
         super.harvestBlock(world, p_149636_2_, p_149636_3_, p_149636_4_, p_149636_5_, p_149636_6_);
     }
 
     @Override
     public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer p_149681_6_) {
         if(!world.isRemote) {
-            System.out.println("onBlockHarvested");
             world.spawnEntityInWorld(new EntityItem(world, x+.5, y+.5, z+.5, new ItemStack(Blocks.dirt, 1, meta)));
         }
         super.onBlockHarvested(world, x, y, z, meta, p_149681_6_);
@@ -95,7 +96,12 @@ public class SampleBlock extends Block implements IAlchemicalProduct<TileEntity>
     }
 
     @Override
-    public IProductStatus getStatus(TileEntity dataSource) {
-        return null;
+    public IProductStatus getStatus(AbstractTileProduct dataSource) {
+        return dataSource.getStatus();
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+        return new SampleTileProduct();
     }
 }

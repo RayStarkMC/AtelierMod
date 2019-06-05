@@ -5,8 +5,11 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+import raystark.atelier.api.tile.AbstractTileProduct;
 import raystark.atelier.common.block.AtelierBlocks;
 import raystark.atelier.api.alchemy.effect.Effects;
+import raystark.atelier.common.block.tile.SampleTileProduct;
 import raystark.atelier.common.item.AtelierItems;
 import raystark.atelier.api.alchemy.potential.Potentials;
 
@@ -19,6 +22,8 @@ public class AtelierMod {
     public void preInit(FMLPreInitializationEvent event) {
         AtelierItems.init();
         AtelierBlocks.init();
+
+        GameRegistry.registerTileEntity(SampleTileProduct.class, "testID");
     }
 
     @EventHandler

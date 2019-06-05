@@ -27,7 +27,7 @@ public class ItemProductStatus extends ProductStatus<ItemStack> {
     public int getQuality() {
         if(!isQualityChecked) {
             isQualityChecked = true;
-            quality = hasSourceAtelierTag() ? dataSource.getTagCompound().getCompoundTag(TAG_MOD.name()).getInteger(TAG_QUALITY.name()) : Quality.MIN_VALUE;
+            quality = hasSourceAtelierTag() ? dataSource.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getInteger(TAG_QUALITY.name()) : Quality.MIN_VALUE;
         }
         return quality;
     }
@@ -41,7 +41,7 @@ public class ItemProductStatus extends ProductStatus<ItemStack> {
             } else {
                 effectList = new ArrayList<>();
 
-                NBTTagList tagList = dataSource.getTagCompound().getCompoundTag(TAG_MOD.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID());
+                NBTTagList tagList = dataSource.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID());
                 for (int i = 0; i < tagList.tagCount(); i++)
                     Effects.getEffects(tagList.getStringTagAt(i)).ifPresent(effectList::add); //effectList.add(Effects.getEffects(tagList.getStringTagAt(i)));
             }
@@ -58,7 +58,7 @@ public class ItemProductStatus extends ProductStatus<ItemStack> {
             } else {
                 potentialAbilityList = new ArrayList<>();
 
-                NBTTagList tagList = dataSource.getTagCompound().getCompoundTag(TAG_MOD.name()).getTagList(TAG_POTENTIAL.name(), NBTType.STRING.getID());
+                NBTTagList tagList = dataSource.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_POTENTIAL.name(), NBTType.STRING.getID());
                 for(int i=0; i<tagList.tagCount() ;i++)
                     Potentials.getPotential(tagList.getStringTagAt(i)).ifPresent(potentialAbilityList::add);
             }
@@ -70,6 +70,6 @@ public class ItemProductStatus extends ProductStatus<ItemStack> {
     private boolean hasSourceAtelierTag() {
         return dataSource.getItem() instanceof IAlchemicalProduct
                 && dataSource.hasTagCompound()
-                && dataSource.getTagCompound().hasKey(TAG_MOD.name());
+                && dataSource.getTagCompound().hasKey(TAG_ATELIER.name());
     }
 }

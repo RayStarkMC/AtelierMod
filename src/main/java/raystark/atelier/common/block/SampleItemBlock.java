@@ -5,13 +5,15 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.api.alchemy.status.ItemProductStatus;
-import raystark.atelier.api.alchemy.status.Quality;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
+import raystark.atelier.common.block.tile.SampleTileProduct;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,5 +51,14 @@ public class SampleItemBlock extends ItemBlock implements IAlchemicalProduct<Ite
     @Override
     public IProductStatus getStatus(ItemStack dataSource) {
         return new ItemProductStatus(dataSource);
+    }
+
+    @Override
+    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
+        boolean ret = super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
+        if(!ret) return false;
+
+        ((SampleTileProduct)world.getTileEntity(x, y, z)).getStatus().readFromNBT(stack.getTagCompound());
+        return true;
     }
 }

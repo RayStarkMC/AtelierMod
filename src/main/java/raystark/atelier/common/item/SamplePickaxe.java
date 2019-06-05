@@ -35,7 +35,7 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct<ItemStack>
 
     //テスト用ヘルパメソッド アイテムにエフェクトを付与
     private static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
-        itemStack.getTagCompound().getCompoundTag(TAG_MOD.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
+        itemStack.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
         return itemStack;
     }
 
@@ -47,7 +47,7 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct<ItemStack>
         tagAtelier.setTag(TAG_POTENTIAL.name(), new NBTTagList());
 
         NBTTagCompound tagCompound = new NBTTagCompound();
-        tagCompound.setTag(TAG_MOD.name(), tagAtelier);
+        tagCompound.setTag(TAG_ATELIER.name(), tagAtelier);
 
         stack.setTagCompound(tagCompound);
         return stack;
