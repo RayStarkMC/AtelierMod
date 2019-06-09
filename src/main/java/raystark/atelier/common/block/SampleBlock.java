@@ -16,7 +16,6 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.status.IProductStatus;
-import raystark.atelier.api.alchemy.status.Quality;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
 import raystark.atelier.api.tile.AbstractTileProduct;
@@ -25,7 +24,6 @@ import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static raystark.atelier.api.util.NBTTagNames.*;
@@ -99,8 +97,7 @@ public class SampleBlock extends Block implements ITileEntityProvider, IAlchemic
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        @SuppressWarnings("unchecked") ArrayList<ItemStack> ret = (ArrayList<ItemStack>) Collections.EMPTY_LIST;
-        return ret;
+        return new ArrayList<>();
     }
 
     @Override

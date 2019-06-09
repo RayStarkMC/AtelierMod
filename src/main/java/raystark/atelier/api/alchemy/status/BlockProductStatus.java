@@ -2,6 +2,7 @@ package raystark.atelier.api.alchemy.status;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
@@ -55,8 +56,18 @@ public class BlockProductStatus extends ProductStatus<AbstractTileProduct> {
 
     public void writeToNBT(NBTTagCompound tagCompound) {
         NBTTagCompound tagAtelier = new NBTTagCompound();
-        tagAtelier.setInteger(TAG_QUALITY.name(), Quality.MIN_VALUE);
+
+        tagAtelier.setInteger(TAG_QUALITY.name(), quality);
+
+        NBTTagList tagEffectList = new NBTTagList();
+        for(IEffect effect : effectList)
+            tagEffectList.appendTag(new NBTTagString(effect.getName()));
         tagAtelier.setTag(TAG_EFFECT.name(), new NBTTagList());
+
+
+        NBTTagList tagPotentialList = new NBTTagList();
+        for(IPotentialAbility ability : potentialAbilityList)
+            tagPotentialList.appendTag(new NBTTagString(ability.getName()));
         tagAtelier.setTag(TAG_POTENTIAL.name(), new NBTTagList());
 
         tagCompound.setTag(TAG_ATELIER.name(), tagAtelier);
