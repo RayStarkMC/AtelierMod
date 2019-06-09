@@ -24,6 +24,8 @@ import raystark.atelier.api.util.NBTType;
 import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static raystark.atelier.api.util.NBTTagNames.*;
@@ -91,8 +93,14 @@ public class SampleBlock extends Block implements ITileEntityProvider, IAlchemic
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
+    protected boolean canSilkHarvest() {
         return false;
+    }
+
+    @Override
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+        @SuppressWarnings("unchecked") ArrayList<ItemStack> ret = (ArrayList<ItemStack>) Collections.EMPTY_LIST;
+        return ret;
     }
 
     @Override

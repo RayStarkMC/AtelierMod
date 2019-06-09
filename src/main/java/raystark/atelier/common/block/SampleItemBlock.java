@@ -58,7 +58,7 @@ public class SampleItemBlock extends ItemBlock implements IAlchemicalProduct<Ite
         boolean ret = super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
         if(!ret) return false;
 
-        ((SampleTileProduct)world.getTileEntity(x, y, z)).getStatus().readFromNBT(stack.getTagCompound());
+        ((SampleTileProduct)world.getTileEntity(x, y, z)).readStatus(stack.getTagCompound());
         return true;
     }
 }
