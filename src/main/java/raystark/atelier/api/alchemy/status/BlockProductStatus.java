@@ -62,13 +62,13 @@ public class BlockProductStatus extends ProductStatus<AbstractTileProduct> {
         NBTTagList tagEffectList = new NBTTagList();
         for(IEffect effect : effectList)
             tagEffectList.appendTag(new NBTTagString(effect.getName()));
-        tagAtelier.setTag(TAG_EFFECT.name(), new NBTTagList());
+        tagAtelier.setTag(TAG_EFFECT.name(), tagEffectList);
 
 
         NBTTagList tagPotentialList = new NBTTagList();
         for(IPotentialAbility ability : potentialAbilityList)
             tagPotentialList.appendTag(new NBTTagString(ability.getName()));
-        tagAtelier.setTag(TAG_POTENTIAL.name(), new NBTTagList());
+        tagAtelier.setTag(TAG_POTENTIAL.name(), tagPotentialList);
 
         tagCompound.setTag(TAG_ATELIER.name(), tagAtelier);
     }

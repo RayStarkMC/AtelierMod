@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +14,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import raystark.atelier.api.alchemy.status.BlockProductStatus;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
@@ -85,7 +85,14 @@ public class SampleBlock extends Block implements ITileEntityProvider, IAlchemic
     @Override
     public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer p_149681_6_) {
         if(!world.isRemote) {
-            world.spawnEntityInWorld(new EntityItem(world, x+.5, y+.5, z+.5, new ItemStack(Blocks.dirt, 1, meta)));
+            AbstractTileProduct te = (AbstractTileProduct) world.getTileEntity(x, y, z);
+            ItemStack stack = new ItemStack(this, 1, meta);
+
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            ((BlockProductStatus)te.getStatus()).writeToNBT(tagCompound);
+            stack.setTagCompound(tagCompound);
+
+            world.spawnEntityInWorld(new EntityItem(world, x+.5, y+.5, z+.5, stack));
         }
         super.onBlockHarvested(world, x, y, z, meta, p_149681_6_);
     }
