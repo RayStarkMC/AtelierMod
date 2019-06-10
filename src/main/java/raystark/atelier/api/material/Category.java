@@ -20,7 +20,6 @@ public enum Category implements IMaterialCategory {
         return oreDictName;
     }
 
-
     // TODO どんなカテゴリを実装しよう？
     // TODO 鉱石辞書名の命名規則の定義
-    }
+}
