@@ -1,6 +1,5 @@
 package raystark.atelier.common.item;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,7 +20,6 @@ import raystark.atelier.api.alchemy.effect.IEffectMiningLevel;
 import raystark.atelier.api.util.ItemUtil;
 import raystark.atelier.api.util.ToolClasses;
 import raystark.atelier.api.util.NBTType;
-import raystark.atelier.common.AtelierMod;
 
 import java.util.*;
 
@@ -30,34 +28,10 @@ import static raystark.atelier.api.util.NBTTagNames.*;
 /**
  * 錬金術によって作られたピッケルのサンプル
  */
-public class SamplePickaxe extends Item implements IAlchemicalProduct<ItemStack> {
+public class SamplePickaxe extends ItemProductBase implements IAlchemicalProduct<ItemStack> {
 
-    //テスト用ヘルパメソッド アイテムにエフェクトを付与
-    private static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
-        itemStack.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
-        return itemStack;
-    }
-
-    //テスト用ヘルパメソッド アイテムにデフォルトのタグを付与
-    private static ItemStack applyDefaultTag(ItemStack stack) {
-        NBTTagCompound tagAtelier = new NBTTagCompound();
-        tagAtelier.setInteger(TAG_QUALITY.name(), Quality.MIN_VALUE);
-        tagAtelier.setTag(TAG_EFFECT.name(), new NBTTagList());
-        tagAtelier.setTag(TAG_POTENTIAL.name(), new NBTTagList());
-
-        NBTTagCompound tagCompound = new NBTTagCompound();
-        tagCompound.setTag(TAG_ATELIER.name(), tagAtelier);
-
-        stack.setTagCompound(tagCompound);
-        return stack;
-    }
-
-    public SamplePickaxe() {
-        setUnlocalizedName(AtelierMod.MODID + ".samplePickaxe");
-        GameRegistry.registerItem(this, "samplePickaxe");
-        setCreativeTab(CreativeTabs.tabTools);
-        setMaxStackSize(1);
-        setTextureName(AtelierMod.DOMAIN + ":samplePickaxe");
+    public SamplePickaxe(String itemName, int stackSize) {
+        super(itemName, stackSize);
     }
 
     @Override
@@ -75,11 +49,6 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct<ItemStack>
             subItems.add(addEffect(applyDefaultTag(new ItemStack(item, 1, 0)), effect));
 
         subItems.add(applyDefaultTag(new ItemStack(item, 1, 100)));
-    }
-
-    @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean isDebugMode) {
-        ItemUtil.addProductInformation(itemStack, entityPlayer, list, isDebugMode);
     }
 
     @Override
@@ -120,9 +89,4 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct<ItemStack>
         return Objects.equals(block.getHarvestTool(metadata), ToolClasses.PICKAXE.value()) ? 8.0f : 1.0f;
     }
 
-
-    @Override
-    public IProductStatus getStatus(ItemStack dataSource) {
-        return new ItemProductStatus(dataSource);
-    }
 }

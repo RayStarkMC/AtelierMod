@@ -1,2 +1,5 @@
+#CREATIVE_TAB
+itemGroup.AtelierMod=Atelier Mod
+
 #ITEMS
-item.AtelierMod.samplePickaxe.name=Sample
+item.AtelierMod.SamplePickaxe.name=Sample

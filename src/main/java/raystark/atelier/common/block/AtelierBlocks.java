@@ -8,6 +8,6 @@ public class AtelierBlocks {
     private AtelierBlocks() {}
 
     public static void init() {
-        sampleBlock = new SampleBlock(Material.clay);
+        sampleBlock = new SampleBlock(Material.clay, "SampleBlock");
     }
 }

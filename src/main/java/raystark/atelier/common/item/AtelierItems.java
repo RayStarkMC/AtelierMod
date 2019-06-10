@@ -6,6 +6,6 @@ public class AtelierItems {
     private AtelierItems() {}
 
     public static void init() {
-        samplePickaxe = new SamplePickaxe();
+        samplePickaxe = new SamplePickaxe("SamplePickaxe", 1);
     }
 }

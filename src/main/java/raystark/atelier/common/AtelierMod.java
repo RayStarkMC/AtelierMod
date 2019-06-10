@@ -6,6 +6,8 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import raystark.atelier.api.tile.AbstractTileProduct;
 import raystark.atelier.common.block.AtelierBlocks;
 import raystark.atelier.api.alchemy.effect.Effects;
@@ -16,8 +18,15 @@ import raystark.atelier.api.alchemy.potential.Potentials;
 @Mod(modid = AtelierMod.MODID, version = AtelierMod.VERSION)
 public class AtelierMod {
     public static final String MODID = "AtelierMod";
-    public static final String DOMAIN = MODID.toLowerCase();
+    public static final String DOMAIN_NAME = MODID.toLowerCase();
     public static final String VERSION = "0.1a";
+
+    public static final CreativeTabs TAB_ATELIER = new CreativeTabs(MODID) {
+        @Override
+        public Item getTabIconItem() {
+            return AtelierItems.samplePickaxe;
+        }
+    };
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
