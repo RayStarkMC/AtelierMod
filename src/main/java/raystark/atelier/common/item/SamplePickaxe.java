@@ -57,7 +57,7 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct<ItemStack>
         GameRegistry.registerItem(this, "samplePickaxe");
         setCreativeTab(CreativeTabs.tabTools);
         setMaxStackSize(1);
-        setTextureName(AtelierMod.MODID + ":samplePickaxe");
+        setTextureName(AtelierMod.DOMAIN + ":samplePickaxe");
     }
 
     @Override

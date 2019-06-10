@@ -15,7 +15,8 @@ import raystark.atelier.api.alchemy.potential.Potentials;
 
 @Mod(modid = AtelierMod.MODID, version = AtelierMod.VERSION)
 public class AtelierMod {
-    public static final String MODID = "ateliermod";
+    public static final String MODID = "AtelierMod";
+    public static final String DOMAIN = MODID.toLowerCase();
     public static final String VERSION = "0.1a";
 
     @EventHandler
