@@ -2,7 +2,6 @@ package raystark.atelier.common.block.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
-import raystark.atelier.api.tile.AbstractTileProduct;
 
 import java.util.List;
 

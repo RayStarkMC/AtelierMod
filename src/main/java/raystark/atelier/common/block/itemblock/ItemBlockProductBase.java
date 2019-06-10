@@ -1,4 +1,4 @@
-package raystark.atelier.common.block;
+package raystark.atelier.common.block.itemblock;
 
 import net.minecraft.block.Block;
 

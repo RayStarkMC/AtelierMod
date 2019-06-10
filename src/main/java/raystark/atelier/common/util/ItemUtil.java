@@ -1,4 +1,4 @@
-package raystark.atelier.api.util;
+package raystark.atelier.common.util;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;

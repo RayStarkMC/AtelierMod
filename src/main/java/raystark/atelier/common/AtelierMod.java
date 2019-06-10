@@ -8,7 +8,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import raystark.atelier.api.tile.AbstractTileProduct;
 import raystark.atelier.common.block.AtelierBlocks;
 import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.common.block.tile.SampleTileProduct;

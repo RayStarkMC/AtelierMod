@@ -1,4 +1,4 @@
-package raystark.atelier.common.block;
+package raystark.atelier.common.block.itemblock;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.api.alchemy.status.ItemProductStatus;
-import raystark.atelier.api.util.ItemUtil;
+import raystark.atelier.common.util.ItemUtil;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 
 import java.util.List;

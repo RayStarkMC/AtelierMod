@@ -10,8 +10,8 @@ import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.api.alchemy.status.ItemProductStatus;
 import raystark.atelier.api.alchemy.status.Quality;
-import raystark.atelier.api.util.ItemUtil;
-import raystark.atelier.api.util.NBTType;
+import raystark.atelier.common.util.ItemUtil;
+import raystark.atelier.common.util.NBTType;
 
 import java.util.List;
 

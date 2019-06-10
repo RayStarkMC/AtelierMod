@@ -6,13 +6,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.effect.Effects;
+import raystark.atelier.common.block.itemblock.ItemBlockProductBase;
 
 import java.util.List;
 
 public class SampleBlock extends BlockProductBase {
 
     public SampleBlock(Material mat, String blockName) {
-        super(mat, blockName, SampleItemBlock.class);
+        super(mat, blockName, ItemBlockProductBase.class);
     }
 
     @Override

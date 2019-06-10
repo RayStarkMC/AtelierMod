@@ -7,7 +7,7 @@ import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.potential.Potentials;
-import raystark.atelier.api.util.NBTType;
+import raystark.atelier.common.util.NBTType;
 
 import java.util.ArrayList;
 import java.util.Collections;

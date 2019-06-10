@@ -1,4 +1,4 @@
-package raystark.atelier.api.tile;
+package raystark.atelier.common.block.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
