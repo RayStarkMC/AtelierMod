@@ -77,5 +77,4 @@ public class SamplePickaxe extends ItemProductBase implements IAlchemicalProduct
     public float getDigSpeed(ItemStack itemstack, Block block, int metadata) {
         return Objects.equals(block.getHarvestTool(metadata), ToolClasses.PICKAXE.value()) ? 8.0f : 1.0f;
     }
-
 }

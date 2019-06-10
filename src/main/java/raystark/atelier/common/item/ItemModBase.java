@@ -11,7 +11,7 @@ public abstract class ItemModBase extends Item {
         setUnlocalizedName(AtelierMod.MODID + "." + itemName);
         setCreativeTab(TAB_ATELIER);
         setMaxStackSize(stackSize);
-        setTextureName(AtelierMod.DOMAIN_NAME + ":" + itemName.toLowerCase());
+        setTextureName((AtelierMod.MODID + ":" + itemName).toLowerCase());
 
         GameRegistry.registerItem(this, itemName);
     }

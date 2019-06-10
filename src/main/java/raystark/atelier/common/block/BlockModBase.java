@@ -13,7 +13,7 @@ public abstract class BlockModBase extends Block {
     protected BlockModBase(Material mat, String blockName, Class<? extends ItemBlockModBase> itemBlock) {
         super(mat);
         setBlockName(AtelierMod.MODID + "." + blockName);
-        setBlockTextureName(AtelierMod.DOMAIN_NAME + ":" + blockName.toLowerCase());
+        setBlockTextureName((AtelierMod.MODID + ":" + blockName).toLowerCase());
         setCreativeTab(TAB_ATELIER);
         GameRegistry.registerBlock(this, itemBlock, blockName);
     }
