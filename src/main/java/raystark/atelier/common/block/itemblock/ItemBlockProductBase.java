@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
 import raystark.atelier.api.alchemy.status.IProductStatus;
-import raystark.atelier.api.alchemy.status.ItemProductStatus;
+import raystark.atelier.common.alchemy.status.ItemProductStatus;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 import raystark.atelier.common.util.ItemUtil;
 

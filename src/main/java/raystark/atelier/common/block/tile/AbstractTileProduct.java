@@ -2,7 +2,7 @@ package raystark.atelier.common.block.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import raystark.atelier.api.alchemy.status.BlockProductStatus;
+import raystark.atelier.common.alchemy.status.BlockProductStatus;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 
 public abstract class AbstractTileProduct extends TileEntity {

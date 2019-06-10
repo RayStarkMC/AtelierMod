@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagString;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.status.IProductStatus;
-import raystark.atelier.api.alchemy.status.ItemProductStatus;
+import raystark.atelier.common.alchemy.status.ItemProductStatus;
 import raystark.atelier.api.alchemy.status.Quality;
 import raystark.atelier.common.util.ItemUtil;
 import raystark.atelier.common.util.NBTType;

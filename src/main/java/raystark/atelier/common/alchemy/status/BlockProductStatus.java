@@ -1,4 +1,4 @@
-package raystark.atelier.api.alchemy.status;
+package raystark.atelier.common.alchemy.status;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -7,6 +7,7 @@ import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.potential.Potentials;
+import raystark.atelier.api.alchemy.status.ProductStatus;
 import raystark.atelier.common.block.tile.AbstractTileProduct;
 import raystark.atelier.common.util.NBTType;
 

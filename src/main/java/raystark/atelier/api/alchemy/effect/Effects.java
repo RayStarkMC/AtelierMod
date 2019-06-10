@@ -1,8 +1,8 @@
 package raystark.atelier.api.alchemy.effect;
 
-import raystark.atelier.common.effect.EffectDiamondMiningLevel;
-import raystark.atelier.common.effect.EffectIronMiningLevel;
-import raystark.atelier.common.effect.EffectStoneMiningLevel;
+import raystark.atelier.common.alchemy.effect.EffectDiamondMiningLevel;
+import raystark.atelier.common.alchemy.effect.EffectIronMiningLevel;
+import raystark.atelier.common.alchemy.effect.EffectStoneMiningLevel;
 
 import java.util.HashMap;
 import java.util.Map;
