@@ -14,7 +14,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import raystark.atelier.api.alchemy.status.BlockProductStatus;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
@@ -88,9 +87,7 @@ public class SampleBlock extends Block implements ITileEntityProvider, IAlchemic
             AbstractTileProduct te = (AbstractTileProduct) world.getTileEntity(x, y, z);
             ItemStack stack = new ItemStack(this, 1, meta);
 
-            NBTTagCompound tagCompound = new NBTTagCompound();
-            ((BlockProductStatus)te.getStatus()).writeToNBT(tagCompound);
-            stack.setTagCompound(tagCompound);
+            stack.setTagCompound(te.writeStatusToNBT(new NBTTagCompound()));
 
             world.spawnEntityInWorld(new EntityItem(world, x+.5, y+.5, z+.5, stack));
         }

@@ -2,15 +2,14 @@ package raystark.atelier.common.item;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
 import raystark.atelier.api.alchemy.status.IProductStatus;
@@ -18,13 +17,12 @@ import raystark.atelier.api.alchemy.status.ItemProductStatus;
 import raystark.atelier.api.alchemy.status.Quality;
 import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.api.alchemy.effect.IEffect;
-import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.effect.IEffectMiningLevel;
+import raystark.atelier.api.util.ItemUtil;
 import raystark.atelier.api.util.ToolClasses;
 import raystark.atelier.api.util.NBTType;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static raystark.atelier.api.util.NBTTagNames.*;
 
@@ -73,31 +71,13 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct<ItemStack>
 
         for (IEffect effect : effects)
             subItems.add(addEffect(applyDefaultTag(new ItemStack(item, 1, 0)), effect));
+
+        subItems.add(applyDefaultTag(new ItemStack(item, 1, 100)));
     }
 
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean isDebugMode) {
-        if(!GuiScreen.isShiftKeyDown()) return;
-
-        IProductStatus status = getStatus(itemStack);
-
-        // listは文字列を格納したListであるためこのキャストは正しい
-        @SuppressWarnings("unchecked") List<String> toolTipList = list;
-
-        String quality = String.valueOf(status.getQuality());
-        List<String> effectList = status.getEffectList().stream()
-                .map(IEffect::getToolTipText)
-                .collect(Collectors.toList());
-        List<String> abilityList = status.getPotentialAbilityList().stream()
-                .map(IPotentialAbility::getToolTipText)
-                .collect(Collectors.toList());
-
-        toolTipList.add(EnumChatFormatting.AQUA + "[Quality]");
-        toolTipList.add(quality);
-        toolTipList.add(EnumChatFormatting.AQUA + "[Effects]");
-        toolTipList.addAll(effectList);
-        toolTipList.add(EnumChatFormatting.AQUA + "[PotentialAbility]");
-        toolTipList.addAll(abilityList);
+        ItemUtil.addProductInformation(itemStack, entityPlayer, list, isDebugMode);
     }
 
     @Override
@@ -120,6 +100,17 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct<ItemStack>
                 .findFirst()
                 .map(e -> ((IEffectMiningLevel) e).getMiningLevel())
                 .orElse(-1);
+    }
+
+    @Override
+    public int getMaxDamage(ItemStack stack) {
+        return 1000;
+    }
+
+    @Override
+    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_, int p_150894_5_, int p_150894_6_, EntityLivingBase entityLivingBase) {
+        p_150894_1_.damageItem(1, entityLivingBase);
+        return super.onBlockDestroyed(p_150894_1_, p_150894_2_, p_150894_3_, p_150894_4_, p_150894_5_, p_150894_6_, entityLivingBase);
     }
 
     @Override

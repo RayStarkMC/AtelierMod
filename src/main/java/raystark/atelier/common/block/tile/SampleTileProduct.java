@@ -7,7 +7,7 @@ import raystark.atelier.api.tile.AbstractTileProduct;
 import java.util.List;
 
 public class SampleTileProduct extends AbstractTileProduct {
-    int tick = 0;
+    private int tick = 0;
 
     @Override
     public void updateEntity() {

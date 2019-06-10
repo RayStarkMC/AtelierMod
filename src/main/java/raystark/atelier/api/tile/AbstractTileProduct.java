@@ -6,7 +6,7 @@ import raystark.atelier.api.alchemy.status.BlockProductStatus;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 
 public abstract class AbstractTileProduct extends TileEntity {
-    private IProductStatus status;
+    private BlockProductStatus status;
 
     protected AbstractTileProduct() {
         this.status = new BlockProductStatus(this);
@@ -19,16 +19,21 @@ public abstract class AbstractTileProduct extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
-        readStatus(tagCompound);
+        readStatusFromNBT(tagCompound);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
-        ((BlockProductStatus)status).writeToNBT(tagCompound);
+        writeStatusToNBT(tagCompound);
     }
 
-    public void readStatus(NBTTagCompound tagCompound) {
-        ((BlockProductStatus)status).readFromNBT(tagCompound);
+    public void readStatusFromNBT(NBTTagCompound tagCompound) {
+        status.readFromNBT(tagCompound);
+    }
+
+    public NBTTagCompound writeStatusToNBT(NBTTagCompound tagCompound) {
+        status.writeToNBT(tagCompound);
+        return tagCompound;
     }
 }
