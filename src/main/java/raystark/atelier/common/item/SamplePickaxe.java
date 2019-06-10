@@ -21,6 +21,7 @@ import raystark.atelier.api.alchemy.effect.IEffectMiningLevel;
 import raystark.atelier.api.util.ItemUtil;
 import raystark.atelier.api.util.ToolClasses;
 import raystark.atelier.api.util.NBTType;
+import raystark.atelier.common.AtelierMod;
 
 import java.util.*;
 
@@ -52,10 +53,11 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct<ItemStack>
     }
 
     public SamplePickaxe() {
-        setUnlocalizedName("samplePickaxe");
-        GameRegistry.registerItem(this, getUnlocalizedName());
+        setUnlocalizedName(AtelierMod.MODID + ".samplePickaxe");
+        GameRegistry.registerItem(this, "samplePickaxe");
         setCreativeTab(CreativeTabs.tabTools);
         setMaxStackSize(1);
+        setTextureName(AtelierMod.MODID + ":samplePickaxe");
     }
 
     @Override
@@ -118,10 +120,6 @@ public class SamplePickaxe extends Item implements IAlchemicalProduct<ItemStack>
         return Objects.equals(block.getHarvestTool(metadata), ToolClasses.PICKAXE.value()) ? 8.0f : 1.0f;
     }
 
-    @Override
-    public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_) {
-        return super.onItemRightClick(p_77659_1_, p_77659_2_, p_77659_3_);
-    }
 
     @Override
     public IProductStatus getStatus(ItemStack dataSource) {
