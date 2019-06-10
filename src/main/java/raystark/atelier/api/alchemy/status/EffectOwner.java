@@ -10,7 +10,8 @@ import java.util.List;
  */
 public interface EffectOwner {
     /**
-     * このアイテムに付与された効果一覧
+     * このアイテムに付与された効果一覧<p/>
+     *
      * @return 効果のリスト
      */
     List<IEffect> getEffectList();

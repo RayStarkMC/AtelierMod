@@ -23,5 +23,5 @@ public interface ElementOwner {
      * @param elementType 属性の種類
      * @return 属性値
      */
-    int getNumElement(ClassicalElement elementType);
+    int getElementValue(ClassicalElement elementType);
 }

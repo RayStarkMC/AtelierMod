@@ -14,7 +14,9 @@ public interface Quality {
     int MIN_VALUE = 1;
 
     /**
-     * 品質値を返す
+     * このアイテムの品質値を返す。<p/>
+     *
+     * このアイテムが品質値を持たなかった場合Quality.MIN_VALUEを返す。
      * @return 品質値
      */
     int getQuality();

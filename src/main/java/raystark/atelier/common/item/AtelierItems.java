@@ -1,6 +1,6 @@
 package raystark.atelier.common.item;
 
-public class AtelierItems {
+public final class AtelierItems {
     public static SamplePickaxe samplePickaxe;
 
     private AtelierItems() {}

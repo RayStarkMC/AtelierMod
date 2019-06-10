@@ -1,17 +1,17 @@
-package raystark.atelier.api.library;
+package raystark.atelier.api.registry;
 
 import raystark.atelier.api.alchemy.effect.IEffect;
 
 import java.util.Optional;
 
-public interface IEffectLibrary {
+public interface IEffectRegistry {
     /**
      * ライブラリにエフェクトを登録します。
      *
      * @param effect 登録するエフェクト
-     * @return 以前に登録されていたエフェクトがあった場合かつその時に限りtrue
+     * @return 以前に登録されていたエフェクトのOptional
      */
-    boolean registerEffect(IEffect effect);
+    Optional<IEffect> registerEffect(IEffect effect);
 
     /**
      * 引数で渡された文字列を名前に持つエフェクトを返します。
