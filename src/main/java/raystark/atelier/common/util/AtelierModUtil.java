@@ -12,8 +12,8 @@ import raystark.atelier.api.alchemy.status.IProductStatus;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class ItemUtil {
-    private ItemUtil() { }
+public final class AtelierModUtil {
+    private AtelierModUtil() { }
 
     public static void addProductInformation(ItemStack itemStack, EntityPlayer entityPlayer, List<?> list, boolean isDebugMode) {
         if(!(itemStack.getItem() instanceof IAlchemicalProduct)) {

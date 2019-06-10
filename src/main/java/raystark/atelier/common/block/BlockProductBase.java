@@ -54,10 +54,11 @@ public abstract class BlockProductBase extends BlockModBase implements ITileEnti
     @Override
     public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer p_149681_6_) {
         if(!world.isRemote) {
-            AbstractTileProduct te = (AbstractTileProduct) world.getTileEntity(x, y, z);
-            ItemStack stack = new ItemStack(this, 1, meta);
+            TileEntity tileEntity = world.getTileEntity(x, y, z);
+            if(!(tileEntity instanceof AbstractTileProduct)) return;
 
-            stack.setTagCompound(te.writeStatusToNBT(new NBTTagCompound()));
+            ItemStack stack = new ItemStack(this, 1, meta);
+            stack.setTagCompound(((AbstractTileProduct)tileEntity).writeStatusToNBT(new NBTTagCompound()));
 
             world.spawnEntityInWorld(new EntityItem(world, x+.5, y+.5, z+.5, stack));
         }

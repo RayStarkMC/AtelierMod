@@ -16,8 +16,8 @@ public interface IEffectLibrary {
     /**
      * 引数で渡された文字列を名前に持つエフェクトを返します。
      *
-     * @param effectName
-     * @return 名前に対応するエフェクト、又は存在しなければnull
+     * @param effectName エフェクト名
+     * @return 名前に対応するエフェクトのOptional
      */
     Optional<IEffect> getEffects(String effectName);
 }

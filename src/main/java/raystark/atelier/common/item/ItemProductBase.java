@@ -10,7 +10,7 @@ import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.common.alchemy.status.ItemProductStatus;
 import raystark.atelier.api.alchemy.status.Quality;
-import raystark.atelier.common.util.ItemUtil;
+import raystark.atelier.common.util.AtelierModUtil;
 import raystark.atelier.common.util.NBTType;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public abstract class ItemProductBase extends ItemModBase implements IAlchemical
 
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean isDebugMode) {
-        ItemUtil.addProductInformation(itemStack, entityPlayer, list, isDebugMode);
+        AtelierModUtil.addProductInformation(itemStack, entityPlayer, list, isDebugMode);
     }
 
     @Override
