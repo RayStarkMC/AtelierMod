@@ -3,11 +3,8 @@ package raystark.atelier.common.alchemy.status;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
-import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
-import raystark.atelier.api.alchemy.potential.Potentials;
-import raystark.atelier.api.alchemy.status.ProductStatus;
 import raystark.atelier.common.block.tile.AbstractTileProduct;
 import raystark.atelier.common.util.NBTType;
 
@@ -48,11 +45,11 @@ public class BlockProductStatus extends ProductStatus<AbstractTileProduct> {
 
         this.effectList = new ArrayList<>();
         for (int i = 0; i < tagEffectList.tagCount(); i++)
-            Effects.getEffects(tagEffectList.getStringTagAt(i)).ifPresent(effectList::add); //effectList.add(Effects.getEffects(tagList.getStringTagAt(i)));
+            effectRegistry.getEffect(tagEffectList.getStringTagAt(i)).ifPresent(effectList::add); //effectList.add(Effects.getEffect(tagList.getStringTagAt(i)));
 
         this.potentialAbilityList = new ArrayList<>();
         for(int i=0; i<tagPotentialList.tagCount() ;i++)
-            Potentials.getPotential(tagPotentialList.getStringTagAt(i)).ifPresent(potentialAbilityList::add);
+            abilityRegistry.getPotentialAbility(tagPotentialList.getStringTagAt(i)).ifPresent(potentialAbilityList::add);
     }
 
     public void writeToNBT(NBTTagCompound tagCompound) {

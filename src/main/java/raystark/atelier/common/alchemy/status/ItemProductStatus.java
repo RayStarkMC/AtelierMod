@@ -3,11 +3,8 @@ package raystark.atelier.common.alchemy.status;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
-import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
-import raystark.atelier.api.alchemy.potential.Potentials;
-import raystark.atelier.api.alchemy.status.ProductStatus;
 import raystark.atelier.api.alchemy.status.Quality;
 import raystark.atelier.common.util.NBTType;
 
@@ -45,7 +42,7 @@ public class ItemProductStatus extends ProductStatus<ItemStack> {
 
                 NBTTagList tagList = dataSource.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID());
                 for (int i = 0; i < tagList.tagCount(); i++)
-                    Effects.getEffects(tagList.getStringTagAt(i)).ifPresent(effectList::add); //effectList.add(Effects.getEffects(tagList.getStringTagAt(i)));
+                    effectRegistry.getEffect(tagList.getStringTagAt(i)).ifPresent(effectList::add); //effectList.add(Effects.getEffect(tagList.getStringTagAt(i)));
             }
         }
         return Collections.unmodifiableList(effectList);
@@ -62,7 +59,7 @@ public class ItemProductStatus extends ProductStatus<ItemStack> {
 
                 NBTTagList tagList = dataSource.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_POTENTIAL.name(), NBTType.STRING.getID());
                 for(int i=0; i<tagList.tagCount() ;i++)
-                    Potentials.getPotential(tagList.getStringTagAt(i)).ifPresent(potentialAbilityList::add);
+                    abilityRegistry.getPotentialAbility(tagList.getStringTagAt(i)).ifPresent(potentialAbilityList::add);
             }
         }
 

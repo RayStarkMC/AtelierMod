@@ -3,8 +3,7 @@ package raystark.atelier.api.registry;
 /**
  * エフェクトや潜在能力の種類と効果、各アイテムの属性値やデフォルトの潜在能力のレジストリを表すインターフェース。
  */
-public interface IAtelierRegistry {
-
+public interface IAtelierRegistry<I, B> {
     /**
      * エフェクトレジストリを返します。
      *
@@ -24,7 +23,5 @@ public interface IAtelierRegistry {
      *
      * @return 材料のデフォルトステータスのレジストリ
      */
-    IMaterialRegistry getMaterialRegistry();
-
-
+    IMaterialRegistry<I, B> getMaterialRegistry();
 }

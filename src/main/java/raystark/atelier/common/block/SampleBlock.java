@@ -5,8 +5,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import raystark.atelier.api.alchemy.effect.IEffect;
-import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.common.block.itemblock.SampleItemBlock;
+import raystark.atelier.common.registry.EffectRegistry;
 
 import java.util.List;
 
@@ -19,9 +19,9 @@ public class SampleBlock extends BlockProductBase {
     @Override
     public void getSubBlocks(Item item, CreativeTabs p_150895_2_, List list) {
         IEffect[] effects = new IEffect[]{
-                Effects.STONE_MINING_LEVEL,
-                Effects.IRON_MINING_LEVEL,
-                Effects.DIAMOND_MINING_LEVEL
+                EffectRegistry.STONE_MINING_LEVEL,
+                EffectRegistry.IRON_MINING_LEVEL,
+                EffectRegistry.DIAMOND_MINING_LEVEL
         };
 
         //listはItemStackを格納しているためこのキャストは正しい

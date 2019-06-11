@@ -19,5 +19,5 @@ public interface IEffectRegistry {
      * @param effectName エフェクト名
      * @return 名前に対応するエフェクトのOptional
      */
-    Optional<IEffect> getEffects(String effectName);
+    Optional<IEffect> getEffect(String effectName);
 }

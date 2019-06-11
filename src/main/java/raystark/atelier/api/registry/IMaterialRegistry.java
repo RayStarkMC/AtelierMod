@@ -2,6 +2,8 @@ package raystark.atelier.api.registry;
 
 import raystark.atelier.api.alchemy.status.IMaterialStatus;
 
+import java.util.Optional;
+
 /**
  * 材料の属性値、およびデフォルトの品質値、潜在能力のレジストリ
  *
@@ -17,7 +19,7 @@ public interface IMaterialRegistry<I, B> {
      * @param damage ダメージ値
      * @param status デフォルトの能力値
      */
-    void registerDefaultItemStatus(I materialItem, int damage, IMaterialStatus status);
+    Optional<IMaterialStatus> registerDefaultItemStatus(I materialItem, int damage, IMaterialStatus status);
 
     /**
      * 引数で与えられたアイテムに対して、ダメージ値を無視してデフォルトのステータスを登録します。
@@ -25,7 +27,7 @@ public interface IMaterialRegistry<I, B> {
      * @param materialItem 材料
      * @param status デフォルトの能力値
      */
-    void registerDefaultItemStatus(I materialItem, IMaterialStatus status);
+    Optional<IMaterialStatus> registerDefaultItemStatus(I materialItem, IMaterialStatus status);
 
     /**
      * 引数で与えられたダメージ値のアイテムのデフォルトステータスを取り出します。
@@ -53,7 +55,7 @@ public interface IMaterialRegistry<I, B> {
      * @param metadata メタデータ
      * @param status ステータス
      */
-    void registerDefaultBlockStatus(B materialBlock, int metadata, IMaterialStatus status);
+    Optional<IMaterialStatus> registerDefaultBlockStatus(B materialBlock, int metadata, IMaterialStatus status);
 
     /**
      * 引数で与えられたブロックに対して、メタ値を無視してステータスを登録します。
@@ -61,7 +63,7 @@ public interface IMaterialRegistry<I, B> {
      * @param materialBlock 材料
      * @param status ステータス
      */
-    void registerDefaultBlockStatus(B materialBlock, IMaterialStatus status);
+    Optional<IMaterialStatus> registerDefaultBlockStatus(B materialBlock, IMaterialStatus status);
 
     /**
      * 引数で与えられたメタ値のブロックのデフォルトステータスを取り出します。
@@ -77,8 +79,13 @@ public interface IMaterialRegistry<I, B> {
      *
      * <p>メタ値0のブロックのステータスを取り出します。
      *
-     * @param materialBlock
-     * @return
+     * @param materialBlock 材料
+     * @return ステータス
      */
     IMaterialStatus getDefaultBlockStatus(B materialBlock);
+
+    interface IMaterialKey<E> {
+        E getElement();
+        int getMetadata();
+    }
 }

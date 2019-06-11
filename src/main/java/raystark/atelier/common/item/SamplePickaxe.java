@@ -7,9 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
-import raystark.atelier.api.alchemy.effect.Effects;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.effect.IEffectMiningLevel;
+import raystark.atelier.common.registry.EffectRegistry;
 import raystark.atelier.common.util.ToolClasses;
 
 import java.util.*;
@@ -26,9 +26,9 @@ public class SamplePickaxe extends ItemProductBase implements IAlchemicalProduct
     @Override
     public void getSubItems(Item item, CreativeTabs p_150895_2_, List list) {
         IEffect[] effects = new IEffect[]{
-                Effects.STONE_MINING_LEVEL,
-                Effects.IRON_MINING_LEVEL,
-                Effects.DIAMOND_MINING_LEVEL
+                EffectRegistry.STONE_MINING_LEVEL,
+                EffectRegistry.IRON_MINING_LEVEL,
+                EffectRegistry.DIAMOND_MINING_LEVEL
         };
 
         //listはItemStackを格納しているためこのキャストは正しい

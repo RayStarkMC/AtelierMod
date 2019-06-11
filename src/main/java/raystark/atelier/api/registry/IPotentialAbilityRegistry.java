@@ -20,5 +20,5 @@ public interface IPotentialAbilityRegistry {
      * @param abilityName 潜在能力名
      * @return 名前に対応する潜在能力のOptional
      */
-    Optional<IEffect> getPotentialAbility(String abilityName);
+    Optional<IPotentialAbility> getPotentialAbility(String abilityName);
 }
