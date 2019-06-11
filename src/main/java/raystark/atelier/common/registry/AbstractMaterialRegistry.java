@@ -2,31 +2,17 @@ package raystark.atelier.common.registry;
 
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.status.ClassicalElement;
+import raystark.atelier.api.alchemy.status.ElementOwner;
 import raystark.atelier.api.alchemy.status.IMaterialStatus;
 import raystark.atelier.api.alchemy.status.Quality;
 import raystark.atelier.api.registry.IMaterialRegistry;
 
 import java.util.*;
 
+import static raystark.atelier.api.alchemy.status.IMaterialStatus.DEFAULT_STATUS;
+
 public abstract class AbstractMaterialRegistry<I, B> implements IMaterialRegistry<I, B> {
     private static final int META_ANY = -1;
-    private static final IMaterialStatus DEFAULT_STATUS = new IMaterialStatus() {
-        @Override
-        public int getElementValue(ClassicalElement elementType) {
-            return 0;
-        }
-
-        @Override
-        public List<IPotentialAbility> getPotentialAbilityList() {
-            @SuppressWarnings("unchecked") List<IPotentialAbility> ret = Collections.EMPTY_LIST;
-            return ret;
-        }
-
-        @Override
-        public int getQuality() {
-            return Quality.MIN_VALUE;
-        }
-    };
 
     private Map<IMaterialKey<I>, IMaterialStatus> itemMaterials;
     private Map<IMaterialKey<B>, IMaterialStatus> blockMaterials;

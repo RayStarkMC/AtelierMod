@@ -3,9 +3,10 @@ package raystark.atelier.common.registry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
-import raystark.atelier.api.alchemy.status.ClassicalElement;
 import raystark.atelier.api.alchemy.status.IMaterialStatus;
+import raystark.atelier.common.alchemy.status.SimpleMaterialStatus;
 import raystark.atelier.common.block.AtelierBlocks;
+import raystark.atelier.common.item.AtelierItems;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,22 +14,9 @@ import java.util.List;
 public class MaterialRegistry extends AbstractMaterialRegistry<Item, Block> {
     @Override
     public void init() {
-        registerDefaultBlockStatus(AtelierBlocks.sampleBlock, new IMaterialStatus() {
-            @Override
-            public int getElementValue(ClassicalElement elementType) {
-                return 10;
-            }
+        @SuppressWarnings("unchecked") List<IPotentialAbility> EMPTY_LIST = Collections.EMPTY_LIST;
 
-            @Override
-            public List<IPotentialAbility> getPotentialAbilityList() {
-                @SuppressWarnings("unchecked") List<IPotentialAbility> ret = Collections.EMPTY_LIST;
-                return ret;
-            }
-
-            @Override
-            public int getQuality() {
-                return 40;
-            }
-        });
+        registerDefaultBlockStatus(AtelierBlocks.sampleBlock, new SimpleMaterialStatus(10, EMPTY_LIST, 40, 40, 40, 40));
+        registerDefaultItemStatus(AtelierItems.samplePickaxe, IMaterialStatus.DEFAULT_STATUS);
     }
 }
