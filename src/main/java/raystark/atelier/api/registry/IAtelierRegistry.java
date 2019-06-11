@@ -1,9 +1,11 @@
 package raystark.atelier.api.registry;
 
+import raystark.atelier.api.util.Initializable;
+
 /**
  * エフェクトや潜在能力の種類と効果、各アイテムの属性値やデフォルトの潜在能力のレジストリを表すインターフェース。
  */
-public interface IAtelierRegistry<I, B> {
+public interface IAtelierRegistry<I, B> extends Initializable {
     /**
      * エフェクトレジストリを返します。
      *

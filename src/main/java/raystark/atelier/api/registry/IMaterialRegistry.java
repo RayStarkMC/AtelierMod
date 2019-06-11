@@ -1,6 +1,7 @@
 package raystark.atelier.api.registry;
 
 import raystark.atelier.api.alchemy.status.IMaterialStatus;
+import raystark.atelier.api.util.Initializable;
 
 import java.util.Optional;
 
@@ -10,7 +11,7 @@ import java.util.Optional;
  * @param <I> アイテムクラスの型
  * @param <B> ブロッククラスの型
  */
-public interface IMaterialRegistry<I, B> {
+public interface IMaterialRegistry<I, B> extends Initializable {
 
     /**
      * 引数で与えられたダメージ値のアイテムに対してデフォルトのステータスを登録します。

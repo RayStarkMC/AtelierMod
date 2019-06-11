@@ -1,10 +1,11 @@
 package raystark.atelier.api.registry;
 
 import raystark.atelier.api.alchemy.effect.IEffect;
+import raystark.atelier.api.util.Initializable;
 
 import java.util.Optional;
 
-public interface IEffectRegistry {
+public interface IEffectRegistry extends Initializable {
     /**
      * ライブラリにエフェクトを登録します。
      *

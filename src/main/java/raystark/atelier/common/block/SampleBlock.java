@@ -1,5 +1,6 @@
 package raystark.atelier.common.block;
 
+import javafx.scene.effect.Effect;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;

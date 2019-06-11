@@ -16,10 +16,10 @@ public class EffectRegistry implements IEffectRegistry {
     public static final IEffect IRON_MINING_LEVEL = new EffectIronMiningLevel();
     public static final IEffect DIAMOND_MINING_LEVEL = new EffectDiamondMiningLevel();
 
-    public static void init(IEffectRegistry registry) {
-        registry.registerEffect(STONE_MINING_LEVEL);
-        registry.registerEffect(IRON_MINING_LEVEL);
-        registry.registerEffect(DIAMOND_MINING_LEVEL);
+    public void init() {
+        registerEffect(STONE_MINING_LEVEL);
+        registerEffect(IRON_MINING_LEVEL);
+        registerEffect(DIAMOND_MINING_LEVEL);
     }
 
     private final Map<String, IEffect> effects;

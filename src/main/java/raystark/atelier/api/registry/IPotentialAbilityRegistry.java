@@ -2,10 +2,11 @@ package raystark.atelier.api.registry;
 
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
+import raystark.atelier.api.util.Initializable;
 
 import java.util.Optional;
 
-public interface IPotentialAbilityRegistry {
+public interface IPotentialAbilityRegistry extends Initializable {
     /**
      * ライブラリに潜在能力を登録します。
      *

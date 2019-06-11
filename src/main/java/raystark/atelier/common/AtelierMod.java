@@ -9,15 +9,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import raystark.atelier.api.registry.IAtelierRegistry;
 import raystark.atelier.common.block.AtelierBlocks;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 import raystark.atelier.common.item.AtelierItems;
 import raystark.atelier.common.registry.AtelierRegistry;
-import raystark.atelier.common.registry.EffectRegistry;
-import raystark.atelier.common.registry.MaterialRegistry;
-import raystark.atelier.common.registry.PotentialAbilityRegistry;
 
 @Mod(modid = AtelierMod.MODID, version = AtelierMod.VERSION)
 public class AtelierMod {
@@ -36,16 +32,13 @@ public class AtelierMod {
 
     public static AtelierMod getInstance() { return instance; }
 
-    private final IAtelierRegistry<Item, Block> atelierRegistry;
-
-    public AtelierMod() {
-        atelierRegistry = new AtelierRegistry();
-    }
+    private IAtelierRegistry<Item, Block> atelierRegistry;
 
     public IAtelierRegistry<Item, Block> getRegistry() { return this.atelierRegistry; }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        atelierRegistry = new AtelierRegistry();
         AtelierItems.init();
         AtelierBlocks.init();
 
@@ -54,11 +47,7 @@ public class AtelierMod {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        EffectRegistry.init(atelierRegistry.getEffectRegistry());
-        PotentialAbilityRegistry.init(atelierRegistry.getPotentialAbilityRegistry());
-        MaterialRegistry.init(atelierRegistry.getMaterialRegistry());
-
-        //TODO 初期化回り整理
+        atelierRegistry.init();
     }
 
     @EventHandler

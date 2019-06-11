@@ -14,7 +14,7 @@ public class PotentialAbilityRegistry implements IPotentialAbilityRegistry {
         abilities = new HashMap<>();
     }
 
-    public static void init(IPotentialAbilityRegistry registry) {
+    public void init() {
 
     }
 
