@@ -1,11 +1,17 @@
 package raystark.atelier.common.registry;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.status.ClassicalElement;
 import raystark.atelier.api.alchemy.status.IMaterialStatus;
 import raystark.atelier.api.alchemy.status.Quality;
 import raystark.atelier.api.registry.IMaterialRegistry;
+import raystark.atelier.common.block.AtelierBlocks;
+import raystark.atelier.common.block.SampleBlock;
+import raystark.atelier.common.item.AtelierItems;
 
+import javax.swing.text.html.Option;
 import java.util.*;
 
 public class MaterialRegistry<I, B> implements IMaterialRegistry<I, B> {
@@ -27,6 +33,26 @@ public class MaterialRegistry<I, B> implements IMaterialRegistry<I, B> {
             return Quality.MIN_VALUE;
         }
     };
+
+    public static void init(IMaterialRegistry<Item, Block> registry) {
+        registry.registerDefaultBlockStatus(AtelierBlocks.sampleBlock, new IMaterialStatus() {
+            @Override
+            public int getElementValue(ClassicalElement elementType) {
+                return 10;
+            }
+
+            @Override
+            public List<IPotentialAbility> getPotentialAbilityList() {
+                @SuppressWarnings("unchecked") List<IPotentialAbility> ret = Collections.EMPTY_LIST;
+                return ret;
+            }
+
+            @Override
+            public int getQuality() {
+                return 40;
+            }
+        });
+    }
 
     private Map<IMaterialKey<I>, IMaterialStatus> itemMaterials;
     private Map<IMaterialKey<B>, IMaterialStatus> blockMaterials;
@@ -68,6 +94,8 @@ public class MaterialRegistry<I, B> implements IMaterialRegistry<I, B> {
 
     @Override
     public IMaterialStatus getDefaultBlockStatus(B materialBlock, int metadata) {
+        System.out.println(metadata);
+        System.out.println(blockMaterials.get(new MaterialKey<>(materialBlock, metadata)) == null ? "null" : "exit");
         return Optional.ofNullable(blockMaterials.get(new MaterialKey<>(materialBlock, metadata))).orElse(DEFAULT_STATUS);
     }
 

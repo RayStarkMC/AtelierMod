@@ -4,9 +4,6 @@ import raystark.atelier.api.registry.IAtelierRegistry;
 import raystark.atelier.api.registry.IEffectRegistry;
 import raystark.atelier.api.registry.IMaterialRegistry;
 import raystark.atelier.api.registry.IPotentialAbilityRegistry;
-import raystark.atelier.common.registry.EffectRegistry;
-import raystark.atelier.common.registry.MaterialRegistry;
-import raystark.atelier.common.registry.PotentialAbilityRegistry;
 
 public abstract class AbstractAtelierRegistry<I, B> implements IAtelierRegistry<I, B> {
     private IEffectRegistry effectRegistry;

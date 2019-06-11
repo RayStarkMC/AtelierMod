@@ -10,11 +10,11 @@ public class SampleTileProduct extends AbstractTileProduct {
 
     @Override
     public void updateEntity() {
-        if(!worldObj.isRemote) {
+        /*if(!worldObj.isRemote) {
             @SuppressWarnings("unchecked") List<EntityPlayer> playerList = worldObj.playerEntities;
             for(EntityPlayer player : playerList)
             if (++tick % 20 == 0)
                 player.addChatComponentMessage(new ChatComponentText(String.valueOf(getStatus().getQuality())));
-        }
+        }*/
     }
 }

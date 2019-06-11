@@ -16,6 +16,7 @@ import raystark.atelier.common.block.tile.SampleTileProduct;
 import raystark.atelier.common.item.AtelierItems;
 import raystark.atelier.common.registry.AtelierRegistry;
 import raystark.atelier.common.registry.EffectRegistry;
+import raystark.atelier.common.registry.MaterialRegistry;
 import raystark.atelier.common.registry.PotentialAbilityRegistry;
 
 @Mod(modid = AtelierMod.MODID, version = AtelierMod.VERSION)
@@ -55,6 +56,9 @@ public class AtelierMod {
     public void init(FMLInitializationEvent event) {
         EffectRegistry.init(atelierRegistry.getEffectRegistry());
         PotentialAbilityRegistry.init(atelierRegistry.getPotentialAbilityRegistry());
+        MaterialRegistry.init(atelierRegistry.getMaterialRegistry());
+
+        //TODO 初期化回り整理
     }
 
     @EventHandler
