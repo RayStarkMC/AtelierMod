@@ -1,10 +1,6 @@
 package raystark.atelier.common.registry;
 
-import raystark.atelier.api.alchemy.potential.IPotentialAbility;
-import raystark.atelier.api.alchemy.status.ClassicalElement;
-import raystark.atelier.api.alchemy.status.ElementOwner;
 import raystark.atelier.api.alchemy.status.IMaterialStatus;
-import raystark.atelier.api.alchemy.status.Quality;
 import raystark.atelier.api.registry.IMaterialRegistry;
 
 import java.util.*;

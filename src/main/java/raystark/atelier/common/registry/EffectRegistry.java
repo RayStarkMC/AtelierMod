@@ -11,22 +11,32 @@ import java.util.Map;
 import java.util.Optional;
 
 public class EffectRegistry implements IEffectRegistry {
+    private boolean hasInit;
 
     public static final IEffect STONE_MINING_LEVEL = new EffectStoneMiningLevel();
     public static final IEffect IRON_MINING_LEVEL = new EffectIronMiningLevel();
     public static final IEffect DIAMOND_MINING_LEVEL = new EffectDiamondMiningLevel();
 
+    public EffectRegistry() {
+        effects = new HashMap<>();
+        hasInit = false;
+    }
+
     public void init() {
-        registerEffect(STONE_MINING_LEVEL);
-        registerEffect(IRON_MINING_LEVEL);
-        registerEffect(DIAMOND_MINING_LEVEL);
+        if(hasInit()) {
+            registerEffect(STONE_MINING_LEVEL);
+            registerEffect(IRON_MINING_LEVEL);
+            registerEffect(DIAMOND_MINING_LEVEL);
+        }
+        hasInit = true;
+    }
+
+    @Override
+    public boolean hasInit() {
+        return hasInit;
     }
 
     private final Map<String, IEffect> effects;
-
-    public EffectRegistry() {
-        effects = new HashMap<>();
-    }
 
     @Override
     public Optional<IEffect> registerEffect(IEffect effect) {

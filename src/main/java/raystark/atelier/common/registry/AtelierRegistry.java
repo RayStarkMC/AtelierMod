@@ -6,15 +6,25 @@ import raystark.atelier.api.registry.IMaterialRegistry;
 
 public class AtelierRegistry extends AbstractAtelierRegistry<Item, Block> {
     private IMaterialRegistry<Item, Block> materialRegistry;
+    private boolean hasInit;
 
     public AtelierRegistry() {
         materialRegistry = new MaterialRegistry();
+        hasInit = false;
     }
 
     public void init() {
-        effectRegistry.init();
-        abilityRegistry.init();
-        materialRegistry.init();
+        if(!hasInit()) {
+            effectRegistry.init();
+            abilityRegistry.init();
+            materialRegistry.init();
+        }
+        hasInit = true;
+    }
+
+    @Override
+    public boolean hasInit() {
+        return hasInit;
     }
 
     @Override

@@ -12,11 +12,26 @@ import java.util.Collections;
 import java.util.List;
 
 public class MaterialRegistry extends AbstractMaterialRegistry<Item, Block> {
+    private boolean hasInit;
+
+    public MaterialRegistry() {
+        super();
+        hasInit = false;
+    }
+
     @Override
     public void init() {
-        @SuppressWarnings("unchecked") List<IPotentialAbility> EMPTY_LIST = Collections.EMPTY_LIST;
+        if(!hasInit()) {
+            @SuppressWarnings("unchecked") List<IPotentialAbility> EMPTY_LIST = Collections.EMPTY_LIST;
 
-        registerDefaultBlockStatus(AtelierBlocks.sampleBlock, new SimpleMaterialStatus(10, EMPTY_LIST, 40, 40, 40, 40));
-        registerDefaultItemStatus(AtelierItems.samplePickaxe, IMaterialStatus.DEFAULT_STATUS);
+            registerDefaultBlockStatus(AtelierBlocks.sampleBlock, new SimpleMaterialStatus(10, EMPTY_LIST, 40, 40, 40, 40));
+            registerDefaultItemStatus(AtelierItems.samplePickaxe, IMaterialStatus.DEFAULT_STATUS);
+        }
+        hasInit = true;
+    }
+
+    @Override
+    public boolean hasInit() {
+        return hasInit;
     }
 }

@@ -9,13 +9,23 @@ import java.util.Optional;
 
 public class PotentialAbilityRegistry implements IPotentialAbilityRegistry {
     private final Map<String, IPotentialAbility> abilities;
+    private boolean hasInit;
 
     public PotentialAbilityRegistry() {
         abilities = new HashMap<>();
+        hasInit = false;
     }
 
     public void init() {
+        if(!hasInit()) {
 
+        }
+        hasInit = true;
+    }
+
+    @Override
+    public boolean hasInit() {
+        return hasInit;
     }
 
     @Override
