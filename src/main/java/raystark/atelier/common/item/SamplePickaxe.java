@@ -19,6 +19,8 @@ import raystark.atelier.common.util.ToolClasses;
 
 import java.util.*;
 
+import static raystark.atelier.common.util.AtelierModUtil.addEffect;
+import static raystark.atelier.common.util.AtelierModUtil.applyDefaultTag;
 import static raystark.atelier.common.util.NBTTagNames.*;
 import static raystark.atelier.common.util.NBTTagNames.TAG_ATELIER;
 
@@ -26,29 +28,8 @@ import static raystark.atelier.common.util.NBTTagNames.TAG_ATELIER;
  * 錬金術によって作られたピッケルのサンプル
  */
 public class SamplePickaxe extends ItemProductBase implements IAlchemicalProduct<ItemStack> {
-    //テスト用ヘルパメソッド アイテムにエフェクトを付与
-    private static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
-        itemStack.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
-        return itemStack;
-    }
-
-    //テスト用ヘルパメソッド アイテムにデフォルトのタグを付与
-    private static ItemStack applyDefaultTag(ItemStack stack) {
-        NBTTagCompound tagAtelier = new NBTTagCompound();
-        tagAtelier.setInteger(TAG_QUALITY.name(), Quality.MIN_VALUE);
-        tagAtelier.setTag(TAG_EFFECT.name(), new NBTTagList());
-        tagAtelier.setTag(TAG_POTENTIAL.name(), new NBTTagList());
-
-        NBTTagCompound tagCompound = new NBTTagCompound();
-        tagCompound.setTag(TAG_ATELIER.name(), tagAtelier);
-
-        stack.setTagCompound(tagCompound);
-        return stack;
-    }
-
-
-    public SamplePickaxe(String itemName, int stackSize) {
-        super(itemName, stackSize);
+    public SamplePickaxe() {
+        super("SamplePickaxe", 1);
     }
 
     @Override
@@ -78,12 +59,7 @@ public class SamplePickaxe extends ItemProductBase implements IAlchemicalProduct
             return -1;
         }
 
-        if(!itemStack.hasTagCompound()) {
-            return -1;
-        }
-
-        List<IEffect> effectList = getStatus(itemStack).getEffectList();
-        return effectList.stream()
+        return getStatus(itemStack).getEffectList().stream()
                 .filter(e -> e instanceof IEffectMiningLevel)
                 .findFirst()
                 .map(e -> ((IEffectMiningLevel) e).getMiningLevel())

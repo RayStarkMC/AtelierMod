@@ -19,33 +19,12 @@ import raystark.atelier.common.util.NBTType;
 
 import java.util.List;
 
-import static raystark.atelier.common.util.NBTTagNames.*;
-import static raystark.atelier.common.util.NBTTagNames.TAG_ATELIER;
+import static raystark.atelier.common.util.AtelierModUtil.addEffect;
+import static raystark.atelier.common.util.AtelierModUtil.applyDefaultTag;
 
 public class SampleBlock extends BlockProductBase {
-
-    //テスト用ヘルパメソッド アイテムにエフェクトを付与
-    private static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
-        itemStack.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
-        return itemStack;
-    }
-
-    //テスト用ヘルパメソッド アイテムにデフォルトのタグを付与
-    private static ItemStack applyDefaultTag(ItemStack stack) {
-        NBTTagCompound tagAtelier = new NBTTagCompound();
-        tagAtelier.setInteger(TAG_QUALITY.name(), 10);
-        tagAtelier.setTag(TAG_EFFECT.name(), new NBTTagList());
-        tagAtelier.setTag(TAG_POTENTIAL.name(), new NBTTagList());
-
-        NBTTagCompound tagCompound = new NBTTagCompound();
-        tagCompound.setTag(TAG_ATELIER.name(), tagAtelier);
-
-        stack.setTagCompound(tagCompound);
-        return stack;
-    }
-
-    public SampleBlock(Material mat, String blockName) {
-        super(mat, blockName, SampleItemBlock.class);
+    public SampleBlock() {
+        super(Material.clay, "sampleBlock", SampleItemBlock.class);
     }
 
     @Override

@@ -7,10 +7,10 @@ import raystark.atelier.common.AtelierMod;
 import static raystark.atelier.common.AtelierMod.TAB_ATELIER;
 
 public abstract class ItemModBase extends Item {
-    protected ItemModBase(String itemName, int stackSize) {
+    protected ItemModBase(String itemName, int defaultStackSize) {
         setUnlocalizedName(AtelierMod.MODID + "." + itemName);
         setCreativeTab(TAB_ATELIER);
-        setMaxStackSize(stackSize);
+        setMaxStackSize(defaultStackSize);
         setTextureName((AtelierMod.MODID + ":" + itemName).toLowerCase());
 
         GameRegistry.registerItem(this, itemName);

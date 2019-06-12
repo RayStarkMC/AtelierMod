@@ -19,8 +19,8 @@ import static raystark.atelier.common.util.NBTTagNames.*;
 import static raystark.atelier.common.util.NBTTagNames.TAG_ATELIER;
 
 public abstract class ItemProductBase extends ItemModBase implements IAlchemicalProduct<ItemStack> {
-    protected ItemProductBase(String itemName, int stackSize) {
-        super(itemName, stackSize);
+    protected ItemProductBase(String itemName, int defaultStackSize) {
+        super(itemName, defaultStackSize);
     }
 
     @Override
