@@ -6,6 +6,7 @@ import raystark.atelier.api.alchemy.status.ElementOwner;
 import raystark.atelier.api.alchemy.status.IMaterialStatus;
 import raystark.atelier.api.alchemy.status.Quality;
 
+import java.util.Collections;
 import java.util.List;
 
 public class SimpleMaterialStatus implements IMaterialStatus {
@@ -33,7 +34,7 @@ public class SimpleMaterialStatus implements IMaterialStatus {
 
     @Override
     public List<IPotentialAbility> getPotentialAbilityList() {
-        return list;
+        return Collections.unmodifiableList(list);
     }
 
     @Override

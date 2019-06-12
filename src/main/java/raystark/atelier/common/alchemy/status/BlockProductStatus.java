@@ -9,6 +9,7 @@ import raystark.atelier.common.block.tile.AbstractTileProduct;
 import raystark.atelier.common.util.NBTType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static raystark.atelier.api.util.NBTTagNames.*;
@@ -26,7 +27,7 @@ public class BlockProductStatus extends ProductStatus<AbstractTileProduct> {
 
     @Override
     public List<IEffect> getEffectList() {
-        return effectList;
+        return Collections.unmodifiableList(effectList);
     }
 
     @Override
