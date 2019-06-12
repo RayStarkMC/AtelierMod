@@ -4,8 +4,12 @@ import raystark.atelier.api.util.Initializable;
 
 /**
  * エフェクトや潜在能力の種類と効果、各アイテムの属性値やデフォルトの潜在能力のレジストリを表すインターフェース。
+ *
+ * @param <I> アイテム
+ * @param <B> ブロック
+ * @param <S> アイテムスタック
  */
-public interface IAtelierRegistry<I, B> extends Initializable {
+public interface IAtelierRegistry<I, B, S> extends Initializable {
     /**
      * エフェクトレジストリを返します。
      *
@@ -26,4 +30,11 @@ public interface IAtelierRegistry<I, B> extends Initializable {
      * @return 材料のデフォルトステータスのレジストリ
      */
     IMaterialRegistry<I, B> getMaterialRegistry();
+
+    /**
+     * カテゴリレジストリを返します。
+     *
+     * @return カテゴリレジストリ
+     */
+    ICategoryRegistry<I, B, S> getCategoryRegistry();
 }

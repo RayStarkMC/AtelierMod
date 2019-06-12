@@ -23,7 +23,7 @@ public class EffectRegistry implements IEffectRegistry {
     }
 
     public void init() {
-        if(hasInit()) {
+        if(!hasInit()) {
             registerEffect(STONE_MINING_LEVEL);
             registerEffect(IRON_MINING_LEVEL);
             registerEffect(DIAMOND_MINING_LEVEL);

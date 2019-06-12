@@ -20,8 +20,7 @@ public abstract class ItemBlockProductBase extends ItemBlockModBase implements I
 
     @Override
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
-        boolean ret = super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
-        if(!ret) return false;
+        if(!super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata)) return false;
 
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if(!(tileEntity instanceof AbstractTileProduct))

@@ -1,4 +1,4 @@
-package raystark.atelier.api.material;
+package raystark.atelier.api.category;
 
 /**
  * 錬金素材のカテゴリの列挙
@@ -17,9 +17,8 @@ public enum Category implements IMaterialCategory {
 
     @Override
     public String getOreDictName() {
-        return oreDictName;
+        return PREFIX + oreDictName;
     }
 
     // TODO どんなカテゴリを実装しよう？
-    // TODO 鉱石辞書名の命名規則の定義
 }

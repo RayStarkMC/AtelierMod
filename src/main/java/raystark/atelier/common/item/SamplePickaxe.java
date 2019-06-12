@@ -5,19 +5,47 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.effect.IEffectMiningLevel;
+import raystark.atelier.api.alchemy.status.Quality;
 import raystark.atelier.common.registry.EffectRegistry;
+import raystark.atelier.common.util.NBTType;
 import raystark.atelier.common.util.ToolClasses;
 
 import java.util.*;
+
+import static raystark.atelier.common.util.NBTTagNames.*;
+import static raystark.atelier.common.util.NBTTagNames.TAG_ATELIER;
 
 /**
  * 錬金術によって作られたピッケルのサンプル
  */
 public class SamplePickaxe extends ItemProductBase implements IAlchemicalProduct<ItemStack> {
+    //テスト用ヘルパメソッド アイテムにエフェクトを付与
+    private static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
+        itemStack.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
+        return itemStack;
+    }
+
+    //テスト用ヘルパメソッド アイテムにデフォルトのタグを付与
+    private static ItemStack applyDefaultTag(ItemStack stack) {
+        NBTTagCompound tagAtelier = new NBTTagCompound();
+        tagAtelier.setInteger(TAG_QUALITY.name(), Quality.MIN_VALUE);
+        tagAtelier.setTag(TAG_EFFECT.name(), new NBTTagList());
+        tagAtelier.setTag(TAG_POTENTIAL.name(), new NBTTagList());
+
+        NBTTagCompound tagCompound = new NBTTagCompound();
+        tagCompound.setTag(TAG_ATELIER.name(), tagAtelier);
+
+        stack.setTagCompound(tagCompound);
+        return stack;
+    }
+
 
     public SamplePickaxe(String itemName, int stackSize) {
         super(itemName, stackSize);

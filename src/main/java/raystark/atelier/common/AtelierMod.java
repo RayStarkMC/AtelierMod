@@ -9,6 +9,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import raystark.atelier.api.registry.IAtelierRegistry;
 import raystark.atelier.common.block.AtelierBlocks;
 import raystark.atelier.common.block.tile.SampleTileProduct;
@@ -32,9 +33,9 @@ public class AtelierMod {
 
     public static AtelierMod getInstance() { return instance; }
 
-    private IAtelierRegistry<Item, Block> atelierRegistry;
+    private IAtelierRegistry<Item, Block, ItemStack> atelierRegistry;
 
-    public IAtelierRegistry<Item, Block> getRegistry() { return this.atelierRegistry; }
+    public IAtelierRegistry<Item, Block, ItemStack> getRegistry() { return this.atelierRegistry; }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

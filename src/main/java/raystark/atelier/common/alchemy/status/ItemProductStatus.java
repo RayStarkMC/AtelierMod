@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static raystark.atelier.api.util.NBTTagNames.*;
+import static raystark.atelier.common.util.NBTTagNames.*;
 
 public class ItemProductStatus extends ProductStatus<ItemStack> {
     private boolean isQualityChecked;
@@ -41,8 +41,9 @@ public class ItemProductStatus extends ProductStatus<ItemStack> {
                 effectList = new ArrayList<>();
 
                 NBTTagList tagList = dataSource.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID());
-                for (int i = 0; i < tagList.tagCount(); i++)
+                for (int i = 0; i < tagList.tagCount(); i++) {
                     effectRegistry.getEffect(tagList.getStringTagAt(i)).ifPresent(effectList::add); //effectList.add(Effects.getEffect(tagList.getStringTagAt(i)));
+                }
             }
         }
         return Collections.unmodifiableList(effectList);

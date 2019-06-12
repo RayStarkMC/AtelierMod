@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static raystark.atelier.api.util.NBTTagNames.*;
+import static raystark.atelier.common.util.NBTTagNames.*;
 
 public class BlockProductStatus extends ProductStatus<AbstractTileProduct> {
 
@@ -36,8 +36,6 @@ public class BlockProductStatus extends ProductStatus<AbstractTileProduct> {
     }
 
     public void readFromNBT(NBTTagCompound tagCompound) {
-        System.out.println(tagCompound.hasKey(TAG_ATELIER.name()));
-
         NBTTagCompound tagAtelier = tagCompound.getCompoundTag(TAG_ATELIER.name());
         NBTTagList tagEffectList = tagAtelier.getTagList(TAG_EFFECT.name(), NBTType.STRING.getID());
         NBTTagList tagPotentialList = tagAtelier.getTagList(TAG_POTENTIAL.name(), NBTType.STRING.getID());

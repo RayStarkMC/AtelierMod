@@ -29,6 +29,7 @@ public final class AtelierModUtil {
         List<String> effectList = status.getEffectList().stream()
                 .map(IEffect::getToolTipText)
                 .collect(Collectors.toList());
+
         List<String> abilityList = status.getPotentialAbilityList().stream()
                 .map(IPotentialAbility::getToolTipText)
                 .collect(Collectors.toList());

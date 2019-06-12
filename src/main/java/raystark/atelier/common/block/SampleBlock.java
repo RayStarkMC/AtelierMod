@@ -1,26 +1,48 @@
 package raystark.atelier.common.block;
 
-import javafx.scene.effect.Effect;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.effect.IEffect;
-import raystark.atelier.api.alchemy.potential.IPotentialAbility;
-import raystark.atelier.api.alchemy.status.ClassicalElement;
-import raystark.atelier.api.alchemy.status.IMaterialStatus;
+import raystark.atelier.api.category.Category;
 import raystark.atelier.common.block.itemblock.SampleItemBlock;
 import raystark.atelier.common.registry.EffectRegistry;
+import raystark.atelier.common.util.NBTType;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static raystark.atelier.common.util.NBTTagNames.*;
+import static raystark.atelier.common.util.NBTTagNames.TAG_ATELIER;
+
 public class SampleBlock extends BlockProductBase {
+
+    //テスト用ヘルパメソッド アイテムにエフェクトを付与
+    private static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
+        itemStack.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
+        return itemStack;
+    }
+
+    //テスト用ヘルパメソッド アイテムにデフォルトのタグを付与
+    private static ItemStack applyDefaultTag(ItemStack stack) {
+        NBTTagCompound tagAtelier = new NBTTagCompound();
+        tagAtelier.setInteger(TAG_QUALITY.name(), 10);
+        tagAtelier.setTag(TAG_EFFECT.name(), new NBTTagList());
+        tagAtelier.setTag(TAG_POTENTIAL.name(), new NBTTagList());
+
+        NBTTagCompound tagCompound = new NBTTagCompound();
+        tagCompound.setTag(TAG_ATELIER.name(), tagAtelier);
+
+        stack.setTagCompound(tagCompound);
+        return stack;
+    }
 
     public SampleBlock(Material mat, String blockName) {
         super(mat, blockName, SampleItemBlock.class);
@@ -33,12 +55,12 @@ public class SampleBlock extends BlockProductBase {
                 EffectRegistry.IRON_MINING_LEVEL,
                 EffectRegistry.DIAMOND_MINING_LEVEL
         };
-
         //listはItemStackを格納しているためこのキャストは正しい
         @SuppressWarnings("unchecked") List<ItemStack> subItems = list;
 
-        for (IEffect effect : effects)
+        for (IEffect effect : effects) {
             subItems.add(addEffect(applyDefaultTag(new ItemStack(item, 1, 0)), effect));
+        }
     }
 
     @Override
@@ -49,7 +71,8 @@ public class SampleBlock extends BlockProductBase {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float sideX, float sideY, float sideZ) {
         if(!world.isRemote) {
-            IMaterialStatus status = registry.getMaterialRegistry().getDefaultBlockStatus(this);
+            player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.GOLD + String.valueOf(registry.getCategoryRegistry().isItemStackBelongToCategory(new ItemStack(this, 1, 0), Category.METAL))));
+            /*IMaterialStatus status = registry.getMaterialRegistry().getDefaultBlockStatus(this);
 
             List<String> chatlist = new ArrayList<>();
             chatlist.add("Status of Material");
@@ -67,6 +90,7 @@ public class SampleBlock extends BlockProductBase {
 
             for(String text : chatlist)
                 player.addChatComponentMessage(new ChatComponentText(text));
+            */
 
         }
         return true;

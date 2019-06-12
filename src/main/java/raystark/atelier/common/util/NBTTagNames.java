@@ -1,4 +1,4 @@
-package raystark.atelier.api.util;
+package raystark.atelier.common.util;
 
 public enum NBTTagNames {
     TAG_ATELIER,

@@ -8,5 +8,10 @@ public interface Initializable {
      */
     void init();
 
+    /**
+     * このインスタンスが初期化済みならtrueを返します。
+     *
+     * @return インスタンスが初期化済みの場合true
+     */
     boolean hasInit();
 }
