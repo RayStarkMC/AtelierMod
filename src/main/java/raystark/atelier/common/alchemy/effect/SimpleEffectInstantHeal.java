@@ -8,7 +8,7 @@ public class SimpleEffectInstantHeal extends SimpleEffect implements IEffectInst
 
     private final int amountHeal;
 
-    protected SimpleEffectInstantHeal(int amountHeal, String strength) {
+    public SimpleEffectInstantHeal(int amountHeal, String strength) {
         super(PREFIX, strength);
         this.amountHeal = amountHeal;
     }

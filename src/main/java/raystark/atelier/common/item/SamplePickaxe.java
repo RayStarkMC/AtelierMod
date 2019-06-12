@@ -54,9 +54,9 @@ public class SamplePickaxe extends ItemProductBase implements IAlchemicalProduct
     @Override
     public void getSubItems(Item item, CreativeTabs p_150895_2_, List list) {
         IEffect[] effects = new IEffect[]{
-                EffectRegistry.STONE_MINING_LEVEL,
-                EffectRegistry.IRON_MINING_LEVEL,
-                EffectRegistry.DIAMOND_MINING_LEVEL
+                EffectRegistry.EFFECT_STONE_MINING,
+                EffectRegistry.EFFECT_IRON_MINING,
+                EffectRegistry.EFFECT_DIAMOND_MINING
         };
 
         //listはItemStackを格納しているためこのキャストは正しい
