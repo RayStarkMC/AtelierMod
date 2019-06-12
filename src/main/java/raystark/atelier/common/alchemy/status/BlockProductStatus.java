@@ -32,7 +32,7 @@ public class BlockProductStatus extends ProductStatus<AbstractTileProduct> {
 
     @Override
     public List<IPotentialAbility> getPotentialAbilityList() {
-        return potentialAbilityList;
+        return Collections.unmodifiableList(potentialAbilityList);
     }
 
     public void readFromNBT(NBTTagCompound tagCompound) {
