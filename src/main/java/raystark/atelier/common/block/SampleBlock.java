@@ -79,10 +79,10 @@ public class SampleBlock extends BlockProductBase {
             chatlist.add("[Quality] " + String.valueOf(status.getQuality()));
             chatlist.add("");
             chatlist.add("[Element]");
-            chatlist.add(String.valueOf(EnumChatFormatting.RED + "[" + ClassicalElement.FIRE + "] " + String.valueOf(status.getElementValue(ClassicalElement.FIRE))));
-            chatlist.add(String.valueOf(EnumChatFormatting.AQUA + "[" + ClassicalElement.WATER + "] " + String.valueOf(status.getElementValue(ClassicalElement.WATER))));
-            chatlist.add(String.valueOf(EnumChatFormatting.YELLOW + "[" + ClassicalElement.AIR + "] " + String.valueOf(status.getElementValue(ClassicalElement.AIR))));
-            chatlist.add(String.valueOf(EnumChatFormatting.GREEN + "[" + ClassicalElement.EARTH + "] " + String.valueOf(status.getElementValue(ClassicalElement.EARTH))));
+            chatlist.add(String.valueOf(EnumChatFormatting.RED + "[" + Elements.FIRE + "] " + String.valueOf(status.getElementValue(Elements.FIRE))));
+            chatlist.add(String.valueOf(EnumChatFormatting.AQUA + "[" + Elements.WATER + "] " + String.valueOf(status.getElementValue(Elements.WATER))));
+            chatlist.add(String.valueOf(EnumChatFormatting.YELLOW + "[" + Elements.AIR + "] " + String.valueOf(status.getElementValue(Elements.AIR))));
+            chatlist.add(String.valueOf(EnumChatFormatting.GREEN + "[" + Elements.EARTH + "] " + String.valueOf(status.getElementValue(Elements.EARTH))));
             chatlist.add("");
             chatlist.add("[PotentialAbility]");
             for (IPotentialAbility abilitty : status.getPotentialAbilityList())

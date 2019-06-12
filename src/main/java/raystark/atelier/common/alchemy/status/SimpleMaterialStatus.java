@@ -1,7 +1,7 @@
 package raystark.atelier.common.alchemy.status;
 
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
-import raystark.atelier.api.alchemy.status.ClassicalElement;
+import raystark.atelier.api.alchemy.status.Elements;
 import raystark.atelier.api.alchemy.status.ElementOwner;
 import raystark.atelier.api.alchemy.status.IMaterialStatus;
 import raystark.atelier.api.alchemy.status.Quality;
@@ -28,7 +28,7 @@ public class SimpleMaterialStatus implements IMaterialStatus {
     }
 
     @Override
-    public int getElementValue(ClassicalElement elementType) {
+    public int getElementValue(Elements elementType) {
         return elements.getElementValue(elementType);
     }
 
@@ -60,7 +60,7 @@ public class SimpleMaterialStatus implements IMaterialStatus {
         }
 
         @Override
-        public int getElementValue(ClassicalElement elementType) {
+        public int getElementValue(Elements elementType) {
             switch (elementType) {
                 case FIRE:
                     return fire;
