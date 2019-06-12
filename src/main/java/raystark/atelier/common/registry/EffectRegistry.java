@@ -2,9 +2,7 @@ package raystark.atelier.common.registry;
 
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.registry.IEffectRegistry;
-import raystark.atelier.common.alchemy.effect.EffectDiamondMiningLevel;
-import raystark.atelier.common.alchemy.effect.EffectIronMiningLevel;
-import raystark.atelier.common.alchemy.effect.EffectStoneMiningLevel;
+import raystark.atelier.common.alchemy.effect.SimpleEffectMiningLevel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,9 +11,9 @@ import java.util.Optional;
 public class EffectRegistry implements IEffectRegistry {
     private boolean hasInit;
 
-    public static final IEffect STONE_MINING_LEVEL = new EffectStoneMiningLevel();
-    public static final IEffect IRON_MINING_LEVEL = new EffectIronMiningLevel();
-    public static final IEffect DIAMOND_MINING_LEVEL = new EffectDiamondMiningLevel();
+    public static final IEffect STONE_MINING_LEVEL = new SimpleEffectMiningLevel(1, "Weak");
+    public static final IEffect IRON_MINING_LEVEL = new SimpleEffectMiningLevel(2, "Medium");
+    public static final IEffect DIAMOND_MINING_LEVEL = new SimpleEffectMiningLevel(3, "Strong");
 
     public EffectRegistry() {
         effects = new HashMap<>();
@@ -23,11 +21,12 @@ public class EffectRegistry implements IEffectRegistry {
     }
 
     public void init() {
-        if(!hasInit()) {
-            registerEffect(STONE_MINING_LEVEL);
-            registerEffect(IRON_MINING_LEVEL);
-            registerEffect(DIAMOND_MINING_LEVEL);
-        }
+        if(hasInit()) return;
+
+        registerEffect(STONE_MINING_LEVEL);
+        registerEffect(IRON_MINING_LEVEL);
+        registerEffect(DIAMOND_MINING_LEVEL);
+
         hasInit = true;
     }
 

@@ -19,12 +19,6 @@ public interface IEffect {
     String getName();
 
     /**
-     * 調合時に表示される効果の分類名を返す。
-     * @return 効果の分類名
-     */
-    String getNameOnAlchemy();
-
-    /**
      * ツールチップ上で表示される効果名を返す。
      * @return ツールチップ上のテキスト
      */

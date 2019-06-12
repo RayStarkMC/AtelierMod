@@ -1,7 +1,7 @@
 package raystark.atelier.api.alchemy.effect;
 
 /**
- * アイテムに採掘レベルを与える効果
+ * 採掘レベルの効果を表すインターフェース
  */
 public interface IEffectMiningLevel extends IEffect {
     /**

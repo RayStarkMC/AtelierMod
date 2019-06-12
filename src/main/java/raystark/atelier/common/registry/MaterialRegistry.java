@@ -21,12 +21,13 @@ public class MaterialRegistry extends AbstractMaterialRegistry<Item, Block> {
 
     @Override
     public void init() {
-        if(!hasInit()) {
-            @SuppressWarnings("unchecked") List<IPotentialAbility> EMPTY_LIST = Collections.EMPTY_LIST;
+        if(hasInit()) return;
 
-            registerDefaultBlockStatus(AtelierBlocks.sampleBlock, new SimpleMaterialStatus(10, EMPTY_LIST, 40, 40, 40, 40));
-            registerDefaultItemStatus(AtelierItems.samplePickaxe, IMaterialStatus.DEFAULT_STATUS);
-        }
+        @SuppressWarnings("unchecked") List<IPotentialAbility> EMPTY_LIST = Collections.EMPTY_LIST;
+
+        registerDefaultBlockStatus(AtelierBlocks.sampleBlock, new SimpleMaterialStatus(10, EMPTY_LIST, 40, 40, 40, 40));
+        registerDefaultItemStatus(AtelierItems.samplePickaxe, IMaterialStatus.DEFAULT_STATUS);
+
         hasInit = true;
     }
 

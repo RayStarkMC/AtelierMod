@@ -42,9 +42,11 @@ public class CategoryRegistry implements ICategoryRegistry<Item, Block, ItemStac
 
     @Override
     public void init() {
-        if(!hasInit()) {
-            registerBlock(AtelierBlocks.sampleBlock, Category.METAL);
-        }
+        if(hasInit()) return;
+
+        registerBlock(AtelierBlocks.sampleBlock, Category.METAL);
+
+        hasInit = true;
     }
 
     @Override

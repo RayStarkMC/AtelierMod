@@ -19,12 +19,13 @@ public class AtelierRegistry extends AbstractAtelierRegistry<Item, Block, ItemSt
     }
 
     public void init() {
-        if(!hasInit()) {
-            effectRegistry.init();
-            abilityRegistry.init();
-            materialRegistry.init();
-            categoryRegistry.init();
-        }
+        if(hasInit()) return;
+
+        effectRegistry.init();
+        abilityRegistry.init();
+        materialRegistry.init();
+        categoryRegistry.init();
+
         hasInit = true;
     }
 

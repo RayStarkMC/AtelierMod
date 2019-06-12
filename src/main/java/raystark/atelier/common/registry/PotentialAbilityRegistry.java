@@ -17,9 +17,8 @@ public class PotentialAbilityRegistry implements IPotentialAbilityRegistry {
     }
 
     public void init() {
-        if(!hasInit()) {
+        if(hasInit()) return;
 
-        }
         hasInit = true;
     }
 
