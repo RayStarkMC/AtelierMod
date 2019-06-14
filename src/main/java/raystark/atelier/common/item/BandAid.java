@@ -4,6 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.effect.IEffectInstantHeal;
 import raystark.atelier.common.registry.EffectRegistry;
@@ -37,12 +38,14 @@ public class BandAid extends ItemProductBase {
     }
 
     private void healEntity(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
-        Optional<IEffectInstantHeal> optionalHeal = getStatus(itemStack).getEffectList().stream()
-                .filter(e -> e instanceof IEffectInstantHeal)
-                .findFirst()
-                .map(e -> (IEffectInstantHeal)e);
+        if(!world.isRemote) {
+            Optional<IEffectInstantHeal> optionalHeal = getStatus(itemStack).getEffectList().stream()
+                    .filter(e -> e instanceof IEffectInstantHeal)
+                    .findFirst()
+                    .map(e -> (IEffectInstantHeal) e);
 
-        optionalHeal.ifPresent(e -> entityPlayer.heal(e.getAmountOfHeal()));
-        itemStack.stackSize--;
+            optionalHeal.ifPresent(e -> entityPlayer.heal(e.getAmountOfHeal()));
+            itemStack.stackSize--;
+        }
     }
 }
