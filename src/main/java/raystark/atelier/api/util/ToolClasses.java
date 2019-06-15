@@ -1,4 +1,4 @@
-package raystark.atelier.common.util;
+package raystark.atelier.api.util;
 
 /**
  * ツールの種類の文字列表現を表す列挙

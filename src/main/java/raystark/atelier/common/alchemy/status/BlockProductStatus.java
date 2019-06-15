@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static raystark.atelier.common.util.NBTTagNames.*;
+import static raystark.atelier.api.util.NBTTagNames.*;
 
 public class BlockProductStatus extends ProductStatus<AbstractTileProduct> {
 

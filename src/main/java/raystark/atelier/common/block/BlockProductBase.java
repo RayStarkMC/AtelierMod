@@ -6,22 +6,15 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
-import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.common.block.tile.AbstractTileProduct;
-import raystark.atelier.common.util.NBTType;
 import raystark.atelier.common.block.itemblock.ItemBlockProductBase;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 
 import java.util.ArrayList;
-
-import static raystark.atelier.common.util.NBTTagNames.*;
-import static raystark.atelier.common.util.NBTTagNames.TAG_ATELIER;
 
 public abstract class BlockProductBase extends BlockModBase implements ITileEntityProvider, IAlchemicalProduct<AbstractTileProduct> {
 

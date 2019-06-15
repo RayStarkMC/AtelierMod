@@ -1,4 +1,4 @@
-package raystark.atelier.api.alchemy;
+package raystark.atelier.api.alchemy.recipe;
 
 /**
  * 錬金術レシピの要求物を表すインターフェース。

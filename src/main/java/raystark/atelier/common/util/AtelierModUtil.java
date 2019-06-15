@@ -16,8 +16,8 @@ import raystark.atelier.api.alchemy.status.Quality;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static raystark.atelier.common.util.NBTTagNames.*;
-import static raystark.atelier.common.util.NBTTagNames.TAG_ATELIER;
+import static raystark.atelier.api.util.NBTTagNames.*;
+import static raystark.atelier.api.util.NBTTagNames.TAG_ATELIER;
 
 public final class AtelierModUtil {
     private AtelierModUtil() { }
