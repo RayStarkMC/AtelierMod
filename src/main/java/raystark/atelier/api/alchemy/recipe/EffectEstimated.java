@@ -1,6 +1,5 @@
 package raystark.atelier.api.alchemy.recipe;
 
-import com.typesafe.config.ConfigException;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.status.ElementOwner;
 import raystark.atelier.api.alchemy.status.Elements;
@@ -24,6 +23,11 @@ public class EffectEstimated<T extends IEffect> implements IEffectEstimated<T> {
     }
 
     public EffectEstimated<T> addEffect(int minimumRequired, T effect) {
+        Optional<IEffectEntry<T>> optional = entryList.stream()
+                .filter(e -> e.getMinimumRequired() == minimumRequired)
+                .findAny();
+        if(optional.isPresent()) throw new IllegalArgumentException();
+
         entryList.add(new EffectEntry<>(minimumRequired, effect));
         return this;
     }
