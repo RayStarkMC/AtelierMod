@@ -16,4 +16,5 @@ public interface IAlchemicalProduct<T>{
      * @return この製品のステータス
      */
     IProductStatus getStatus(T dataSource);
+
 }

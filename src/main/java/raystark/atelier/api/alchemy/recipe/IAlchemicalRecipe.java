@@ -1,6 +1,7 @@
 package raystark.atelier.api.alchemy.recipe;
 
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.status.ElementOwner;
 
@@ -36,7 +37,7 @@ public interface IAlchemicalRecipe<S> {
      *
      * @return 効果予測のリスト
      */
-    List<?> getEffectsEstimated();
+    List<IEffectEstimated<?>> getEffectsEstimated();
 
     /**
      * 材料のリストを受け取り、レシピが実行できるか調べます。
