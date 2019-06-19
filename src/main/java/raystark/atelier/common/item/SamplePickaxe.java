@@ -6,7 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.effect.IEffectMiningLevel;
 import raystark.atelier.common.registry.EffectRegistry;
@@ -20,7 +20,7 @@ import static raystark.atelier.common.util.AtelierModUtil.applyDefaultTag;
 /**
  * 錬金術によって作られたピッケルのサンプル
  */
-public class SamplePickaxe extends ItemProductBase implements IAlchemicalProduct<ItemStack> {
+public class SamplePickaxe extends ItemProductBase implements ItemAlchemicalProduct<ItemStack> {
     public SamplePickaxe() {
         super("SamplePickaxe", 1);
     }

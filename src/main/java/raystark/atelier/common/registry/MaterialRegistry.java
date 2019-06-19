@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.status.IMaterialStatus;
-import raystark.atelier.common.alchemy.status.SimpleMaterialStatus;
+import raystark.atelier.api.alchemy.status.SimpleMaterialStatus;
 import raystark.atelier.common.block.AtelierBlocks;
 import raystark.atelier.common.item.AtelierItems;
 

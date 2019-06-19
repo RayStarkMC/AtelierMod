@@ -1,20 +1,10 @@
 package raystark.atelier.api.alchemy;
 
-import raystark.atelier.api.alchemy.status.IProductStatus;
-
 /**
- * 錬金術によって作られた製品を表すインターフェース。
+ * 錬金術で作られた製品を表すマーカーインターフェース。
  *
- * @param <T> データを保存しているクラスの型
+ * <p>錬金術製品を追加する場合、このインターフェースを実装したアイテム又はブロッククラスを定義し、
+ * IAlchemicalRecipeを実装したレシピクラスを定義する必要があります。
  */
-public interface IAlchemicalProduct<T>{
-
-    /**
-     * この製品のステータスを返す。
-     *
-     * @param dataSource データの保存先
-     * @return この製品のステータス
-     */
-    IProductStatus getStatus(T dataSource);
-
+public interface IAlchemicalProduct {
 }

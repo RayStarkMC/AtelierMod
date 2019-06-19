@@ -5,7 +5,7 @@ package raystark.atelier.api.alchemy.recipe;
  *
  * @param <S> アイテムスタック
  */
-public interface IAlchemicalRecipeRequirement<S> {
+public interface IRequirement<S> {
 
     /**
      * 引数に渡されたアイテムスタックが材料と利用できるか調べます。

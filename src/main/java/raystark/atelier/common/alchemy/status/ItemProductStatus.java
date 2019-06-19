@@ -2,7 +2,7 @@ package raystark.atelier.common.alchemy.status;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
-import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.status.Quality;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import static raystark.atelier.api.util.NBTTagNames.*;
 
-public class ItemProductStatus extends ProductStatus<ItemStack> {
+public class ItemProductStatus extends ProductStatusWithRegistry<ItemStack> {
     private boolean isQualityChecked;
 
     public ItemProductStatus(ItemStack dataSource) {
@@ -68,7 +68,7 @@ public class ItemProductStatus extends ProductStatus<ItemStack> {
     }
 
     private boolean hasSourceAtelierTag() {
-        return dataSource.getItem() instanceof IAlchemicalProduct
+        return dataSource.getItem() instanceof ItemAlchemicalProduct
                 && dataSource.hasTagCompound()
                 && dataSource.getTagCompound().hasKey(TAG_ATELIER.name());
     }

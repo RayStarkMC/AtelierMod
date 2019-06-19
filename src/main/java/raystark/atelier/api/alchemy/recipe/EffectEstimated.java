@@ -22,6 +22,10 @@ public class EffectEstimated<T extends IEffect> implements IEffectEstimated<T> {
         entryList = new ArrayList<>();
     }
 
+    public static <T extends IEffect> EffectEstimated<T> newEffectEstimated(Elements elementRequired, String effectString) {
+        return new EffectEstimated<>(elementRequired, effectString);
+    }
+
     public EffectEstimated<T> addEffect(int minimumRequired, T effect) {
         Optional<IEffectEntry<T>> optional = entryList.stream()
                 .filter(e -> e.getMinimumRequired() == minimumRequired)

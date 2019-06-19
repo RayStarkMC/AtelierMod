@@ -1,4 +1,4 @@
-package raystark.atelier.common.alchemy.status;
+package raystark.atelier.api.alchemy.status;
 
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.status.Elements;

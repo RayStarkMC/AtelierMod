@@ -10,7 +10,9 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import raystark.atelier.api.alchemy.recipe.IAlchemicalRecipe;
 import raystark.atelier.api.registry.IAtelierRegistry;
+import raystark.atelier.common.alchemy.recipe.RecipeBandAid;
 import raystark.atelier.common.block.AtelierBlocks;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 import raystark.atelier.common.item.AtelierItems;
@@ -20,6 +22,8 @@ import raystark.atelier.common.registry.AtelierRegistry;
 public class AtelierMod {
     public static final String MODID = "AtelierMod";
     public static final String VERSION = "0.1a";
+
+    public IAlchemicalRecipe<ItemStack> recipe;
 
     @Instance(MODID)
     private static AtelierMod instance;
@@ -49,6 +53,7 @@ public class AtelierMod {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         atelierRegistry.init();
+        recipe = new RecipeBandAid();
     }
 
     @EventHandler

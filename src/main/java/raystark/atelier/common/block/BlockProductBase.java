@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.common.block.tile.AbstractTileProduct;
 import raystark.atelier.common.block.itemblock.ItemBlockProductBase;
@@ -16,7 +16,7 @@ import raystark.atelier.common.block.tile.SampleTileProduct;
 
 import java.util.ArrayList;
 
-public abstract class BlockProductBase extends BlockModBase implements ITileEntityProvider, IAlchemicalProduct<AbstractTileProduct> {
+public abstract class BlockProductBase extends BlockModBase implements ITileEntityProvider, ItemAlchemicalProduct<AbstractTileProduct> {
 
     private static final ArrayList<ItemStack> EMPTY_LIST = new ArrayList<>(0);
 

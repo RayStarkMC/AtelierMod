@@ -4,16 +4,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.effect.IEffectInstantHeal;
-import raystark.atelier.common.registry.EffectRegistry;
+import raystark.atelier.api.alchemy.status.Quality;
+import raystark.atelier.common.AtelierMod;
+import raystark.atelier.api.alchemy.status.SimpleMaterialStatus;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
-import static raystark.atelier.common.util.AtelierModUtil.addEffect;
-import static raystark.atelier.common.util.AtelierModUtil.applyDefaultTag;
 
 public class BandAid extends ItemProductBase {
 
@@ -24,7 +23,13 @@ public class BandAid extends ItemProductBase {
     @SuppressWarnings("unchecked")
     @Override
     public void getSubItems(Item item, CreativeTabs p_150895_2_, List p_150895_3_) {
-        p_150895_3_.add(addEffect(applyDefaultTag(new ItemStack(item, 1, 0)), EffectRegistry.EFFECT_WEAK_HEAL));
+        ItemStack stack = AtelierMod.getInstance().recipe.createProduct(Quality.MIN_VALUE, new SimpleMaterialStatus.ElementContainer(0, 0, 0, 0), Collections.EMPTY_LIST);
+        ItemStack stack2 = AtelierMod.getInstance().recipe.createProduct(50, new SimpleMaterialStatus.ElementContainer(0, 80, 0, 0), Collections.EMPTY_LIST);
+        stack.stackSize = 1;
+        stack2.stackSize = 1;
+        p_150895_3_.add(stack);
+        p_150895_3_.add(stack2);
+        // p_150895_3_.add(addEffect(applyDefaultTag(new ItemStack(item, 1, 0)), EffectRegistry.EFFECT_WEAK_HEAL));
     }
 
     @Override

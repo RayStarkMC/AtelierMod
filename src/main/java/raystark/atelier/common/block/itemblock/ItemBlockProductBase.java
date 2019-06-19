@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.common.alchemy.status.ItemProductStatus;
 import raystark.atelier.common.block.tile.AbstractTileProduct;
@@ -13,7 +13,7 @@ import raystark.atelier.common.util.AtelierModUtil;
 
 import java.util.List;
 
-public abstract class ItemBlockProductBase extends ItemBlockModBase implements IAlchemicalProduct<ItemStack> {
+public abstract class ItemBlockProductBase extends ItemBlockModBase implements ItemAlchemicalProduct<ItemStack> {
     protected ItemBlockProductBase(Block block) {
         super(block);
     }

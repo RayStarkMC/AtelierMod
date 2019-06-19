@@ -1,6 +1,6 @@
 package raystark.atelier.api.alchemy.recipe;
 
-import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.status.ElementOwner;
@@ -23,21 +23,21 @@ public interface IAlchemicalRecipe<S> {
      *
      * @return このレシピで作成するアイテム
      */
-    IAlchemicalProduct<?> getProduct();
+    ItemAlchemicalProduct<?> getProduct();
 
     /**
      * このレシピの要求物のリストを返します。
      *
      * @return このレシピの要求物の不変リスト
      */
-    List<IAlchemicalRecipeRequirement<S>> getRequirements();
+    List<IRequirement<S>> getRequirements();
 
     /**
      *
      *
      * @return 効果予測のリスト
      */
-    List<IEffectEstimated<?>> getEffectsEstimated();
+    List<IEffectEstimated<? extends IEffect>> getEffectsEstimated();
 
     /**
      * 材料のリストを受け取り、レシピが実行できるか調べます。
@@ -50,10 +50,12 @@ public interface IAlchemicalRecipe<S> {
     /**
      * 属性値と潜在能力から完成品のアイテムスタックを生成します。
      *
+     * <o>
+     *
      * @param quality アイテムに適用する品質値
      * @param elements アイテムに適用する属性値
      * @param abilities アイテムに適用する潜在能力
      * @return 性能決定後の完成品のアイテムスタック
      */
-    S getProduct(int quality, ElementOwner elements, List<IPotentialAbility> abilities);
+    S createProduct(int quality, ElementOwner elements, List<IPotentialAbility> abilities);
 }

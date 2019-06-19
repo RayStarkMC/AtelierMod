@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumChatFormatting;
-import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.status.IProductStatus;
@@ -23,13 +23,13 @@ public final class AtelierModUtil {
     private AtelierModUtil() { }
 
     public static void addProductInformation(ItemStack itemStack, EntityPlayer entityPlayer, List<?> list, boolean isDebugMode) {
-        if(!(itemStack.getItem() instanceof IAlchemicalProduct)) {
+        if(!(itemStack.getItem() instanceof ItemAlchemicalProduct)) {
             throw new IllegalArgumentException("ItemStack is not Alchemical Product!");
         }
 
         if(!GuiScreen.isShiftKeyDown()) return;
 
-        @SuppressWarnings("unchecked") IProductStatus status = ((IAlchemicalProduct<ItemStack>)itemStack.getItem()).getStatus(itemStack);
+        @SuppressWarnings("unchecked") IProductStatus status = ((ItemAlchemicalProduct<ItemStack>)itemStack.getItem()).getStatus(itemStack);
         @SuppressWarnings("unchecked") List<String> toolTip = (List<String>)list;
 
         String quality = String.valueOf(status.getQuality());

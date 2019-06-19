@@ -2,14 +2,14 @@ package raystark.atelier.common.item;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import raystark.atelier.api.alchemy.IAlchemicalProduct;
+import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.common.alchemy.status.ItemProductStatus;
 import raystark.atelier.common.util.AtelierModUtil;
 
 import java.util.List;
 
-public abstract class ItemProductBase extends ItemModBase implements IAlchemicalProduct<ItemStack> {
+public abstract class ItemProductBase extends ItemModBase implements ItemAlchemicalProduct<ItemStack> {
     protected ItemProductBase(String itemName, int defaultStackSize) {
         super(itemName, defaultStackSize);
     }
