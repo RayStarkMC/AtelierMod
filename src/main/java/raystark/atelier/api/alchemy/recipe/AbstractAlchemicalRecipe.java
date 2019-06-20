@@ -20,16 +20,14 @@ public abstract class AbstractAlchemicalRecipe<S> implements IAlchemicalRecipe<S
         this.effectsEstimated = new ArrayList<>();
     }
 
-    protected AbstractAlchemicalRecipe<S> addRequirement(IRequirement<S> requirement) {
+    protected void addRequirement(IRequirement<S> requirement) {
         if (requirement == null) throw new NullPointerException("requirement must not be null.");
         requirements.add(requirement);
-        return this;
     }
 
-    protected AbstractAlchemicalRecipe<S> addeffectEstimated(IEffectEstimated<? extends IEffect> effectEstimated) {
+    protected void addeffectEstimated(IEffectEstimated<? extends IEffect> effectEstimated) {
         if (effectEstimated == null) throw new NullPointerException("effectEstimated must not be null");
         effectsEstimated.add(effectEstimated);
-        return this;
     }
 
     @Override
