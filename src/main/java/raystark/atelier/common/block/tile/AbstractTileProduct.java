@@ -9,7 +9,7 @@ public abstract class AbstractTileProduct extends TileEntity {
     private BlockProductStatus status;
 
     protected AbstractTileProduct() {
-        this.status = new BlockProductStatus(this);
+        this.status = new BlockProductStatus();
     }
 
     public IProductStatus getStatus() {
@@ -32,8 +32,7 @@ public abstract class AbstractTileProduct extends TileEntity {
         status.readFromNBT(tagCompound);
     }
 
-    public NBTTagCompound writeStatusToNBT(NBTTagCompound tagCompound) {
+    public void writeStatusToNBT(NBTTagCompound tagCompound) {
         status.writeToNBT(tagCompound);
-        return tagCompound;
     }
 }

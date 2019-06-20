@@ -8,12 +8,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.category.Category;
 import raystark.atelier.common.block.itemblock.SampleItemBlock;
+import raystark.atelier.common.block.tile.SampleTileProduct;
 import raystark.atelier.common.registry.EffectRegistry;
 import raystark.atelier.common.util.NBTType;
 
@@ -73,5 +75,10 @@ public class SampleBlock extends BlockProductBase {
 
         }
         return true;
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+        return new SampleTileProduct();
     }
 }

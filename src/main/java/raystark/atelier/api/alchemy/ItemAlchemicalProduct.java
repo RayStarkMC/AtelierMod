@@ -3,7 +3,7 @@ package raystark.atelier.api.alchemy;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 
 /**
- * 錬金術によって作られた製品を表すインターフェース。
+ * 錬金術によって作られたアイテムを表すインターフェース。
  *
  * @param <S> アイテムスタックの型
  */

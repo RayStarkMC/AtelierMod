@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
+import raystark.atelier.api.alchemy.BlockAlchemicalProduct;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.common.block.tile.AbstractTileProduct;
 import raystark.atelier.common.block.itemblock.ItemBlockProductBase;
@@ -16,9 +16,9 @@ import raystark.atelier.common.block.tile.SampleTileProduct;
 
 import java.util.ArrayList;
 
-public abstract class BlockProductBase extends BlockModBase implements ITileEntityProvider, ItemAlchemicalProduct<AbstractTileProduct> {
+public abstract class BlockProductBase extends BlockModBase implements ITileEntityProvider, BlockAlchemicalProduct<World> {
 
-    private static final ArrayList<ItemStack> EMPTY_LIST = new ArrayList<>(0);
+    private static final ArrayList<ItemStack> EMPTY_DROPS = new ArrayList<>(0);
 
     protected BlockProductBase(Material mat, String blockName, Class<? extends ItemBlockProductBase> itemBlock) {
         super(mat, blockName, itemBlock);
@@ -30,8 +30,12 @@ public abstract class BlockProductBase extends BlockModBase implements ITileEnti
             TileEntity tileEntity = world.getTileEntity(x, y, z);
             if(!(tileEntity instanceof AbstractTileProduct)) return;
 
+            AbstractTileProduct tileProduct = (AbstractTileProduct)tileEntity;
+
             ItemStack stack = new ItemStack(this, 1, meta);
-            stack.setTagCompound(((AbstractTileProduct)tileEntity).writeStatusToNBT(new NBTTagCompound()));
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            tileProduct.writeStatusToNBT(tagCompound);
+            stack.setTagCompound(tagCompound);
 
             world.spawnEntityInWorld(new EntityItem(world, x+.5, y+.5, z+.5, stack));
         }
@@ -40,22 +44,17 @@ public abstract class BlockProductBase extends BlockModBase implements ITileEnti
     }
 
     @Override
-    protected boolean canSilkHarvest() {
+    protected final boolean canSilkHarvest() {
         return false;
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        return EMPTY_LIST;
+    public final ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+        return EMPTY_DROPS;
     }
 
     @Override
-    public IProductStatus getStatus(AbstractTileProduct dataSource) {
-        return dataSource.getStatus();
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World world, int metadata) {
-        return new SampleTileProduct();
+    public IProductStatus getStatus(int x, int y, int z, World world) {
+        return ((AbstractTileProduct)world.getTileEntity(x, y, z)).getStatus();
     }
 }

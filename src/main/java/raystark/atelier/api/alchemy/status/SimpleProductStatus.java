@@ -4,6 +4,7 @@ import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SimpleProductStatus implements IProductStatus {
@@ -19,17 +20,17 @@ public class SimpleProductStatus implements IProductStatus {
     }
 
     @Override
+    public int getQuality() {
+        return quality;
+    }
+
+    @Override
     public List<IEffect> getEffectList() {
-        return effectList;
+        return Collections.unmodifiableList(effectList);
     }
 
     @Override
     public List<IPotentialAbility> getPotentialAbilityList() {
-        return potentialAbilityList;
-    }
-
-    @Override
-    public int getQuality() {
-        return quality;
+        return Collections.unmodifiableList(potentialAbilityList);
     }
 }
