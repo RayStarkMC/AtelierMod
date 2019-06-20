@@ -52,7 +52,7 @@ public final class AtelierModUtil {
     }
 
     public static AtelierTagBuilder newTagBuilder() {
-        return new AtelierTagBuilder();
+        return newTagBuilder(new NBTTagCompound());
     }
 
     public static AtelierTagBuilder newTagBuilder(NBTTagCompound tagCompound) {
@@ -60,14 +60,10 @@ public final class AtelierModUtil {
     }
 
     public static class AtelierTagBuilder {
-        private NBTTagCompound tagCompound;
+        private final NBTTagCompound tagCompound;
         private int quality;
-        private List<IEffect> effects;
-        private List<IPotentialAbility> abilities;
-
-        private AtelierTagBuilder() {
-            this(new NBTTagCompound());
-        }
+        private final List<IEffect> effects;
+        private final List<IPotentialAbility> abilities;
 
         private AtelierTagBuilder(NBTTagCompound tagCompound) {
             this.tagCompound = tagCompound;

@@ -32,7 +32,7 @@ public interface IEffectEstimated<T extends IEffect> {
      * @param owner 属性値
      * @return 発動する効果のOptional
      */
-    Optional<T> getEffect(ElementOwner owner);
+    Optional<T> getOptionalEffect(ElementOwner owner);
 
     /**
      * 属性値と効果の対応のリストを返します。

@@ -5,6 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
@@ -35,7 +36,8 @@ public class SampleBlock extends BlockProductBase {
 
         for (IEffect effect : effects) {
             ItemStack stack = new ItemStack(item, 1, 0);
-            stack.setTagCompound(AtelierModUtil.newTagBuilder().addEffect(effect).build());
+            NBTTagCompound tagCompound = AtelierModUtil.newTagBuilder().addEffect(effect).build();
+            stack.setTagCompound(tagCompound);
             subItems.add(stack);
         }
     }
@@ -49,26 +51,6 @@ public class SampleBlock extends BlockProductBase {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float sideX, float sideY, float sideZ) {
         if(!world.isRemote) {
             player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.GOLD + String.valueOf(registry.getCategoryRegistry().isItemStackBelongToCategory(new ItemStack(this, 1, 0), Category.METAL))));
-            /*IMaterialStatus status = registry.getMaterialRegistry().getDefaultBlockStatus(this);
-
-            List<String> chatlist = new ArrayList<>();
-            chatlist.add("Status of Material");
-            chatlist.add("[Quality] " + String.valueOf(status.getQuality()));
-            chatlist.add("");
-            chatlist.add("[Element]");
-            chatlist.add(String.valueOf(EnumChatFormatting.RED + "[" + Elements.FIRE + "] " + String.valueOf(status.getElementValue(Elements.FIRE))));
-            chatlist.add(String.valueOf(EnumChatFormatting.AQUA + "[" + Elements.WATER + "] " + String.valueOf(status.getElementValue(Elements.WATER))));
-            chatlist.add(String.valueOf(EnumChatFormatting.YELLOW + "[" + Elements.AIR + "] " + String.valueOf(status.getElementValue(Elements.AIR))));
-            chatlist.add(String.valueOf(EnumChatFormatting.GREEN + "[" + Elements.EARTH + "] " + String.valueOf(status.getElementValue(Elements.EARTH))));
-            chatlist.add("");
-            chatlist.add("[PotentialAbility]");
-            for (IPotentialAbility abilitty : status.getPotentialAbilityList())
-                chatlist.add(abilitty.getName());
-
-            for(String text : chatlist)
-                player.addChatComponentMessage(new ChatComponentText(text));
-            */
-
         }
         return true;
     }
