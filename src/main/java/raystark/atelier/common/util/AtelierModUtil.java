@@ -13,11 +13,13 @@ import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.api.alchemy.status.Quality;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static raystark.atelier.api.util.NBTTagNames.*;
-import static raystark.atelier.api.util.NBTTagNames.TAG_ATELIER;
 
 public final class AtelierModUtil {
     private AtelierModUtil() { }
@@ -49,23 +51,75 @@ public final class AtelierModUtil {
         toolTip.addAll(abilityList);
     }
 
-    //テスト用ヘルパメソッド アイテムにエフェクトを付与
-    public static ItemStack addEffect(ItemStack itemStack, IEffect effect) {
-        itemStack.getTagCompound().getCompoundTag(TAG_ATELIER.name()).getTagList(TAG_EFFECT.name(), NBTType.STRING.getID()).appendTag(new NBTTagString(effect.getName()));
-        return itemStack;
+    public static AtelierTagBuilder newTagBuilder() {
+        return new AtelierTagBuilder();
     }
 
-    //テスト用ヘルパメソッド アイテムにデフォルトのタグを付与
-    public static ItemStack applyDefaultTag(ItemStack stack) {
-        NBTTagCompound tagAtelier = new NBTTagCompound();
-        tagAtelier.setInteger(TAG_QUALITY.name(), Quality.MIN_VALUE);
-        tagAtelier.setTag(TAG_EFFECT.name(), new NBTTagList());
-        tagAtelier.setTag(TAG_POTENTIAL.name(), new NBTTagList());
+    public static AtelierTagBuilder newTagBuilder(NBTTagCompound tagCompound) {
+        return new AtelierTagBuilder(tagCompound);
+    }
 
-        NBTTagCompound tagCompound = new NBTTagCompound();
-        tagCompound.setTag(TAG_ATELIER.name(), tagAtelier);
+    public static class AtelierTagBuilder {
+        private NBTTagCompound tagCompound;
+        private int quality;
+        private List<IEffect> effects;
+        private List<IPotentialAbility> abilities;
 
-        stack.setTagCompound(tagCompound);
-        return stack;
+        private AtelierTagBuilder() {
+            this(new NBTTagCompound());
+        }
+
+        private AtelierTagBuilder(NBTTagCompound tagCompound) {
+            this.tagCompound = tagCompound;
+            quality = Quality.MIN_VALUE;
+            effects = new ArrayList<>();
+            abilities = new ArrayList<>();
+        }
+
+        public AtelierTagBuilder setQuality(int quality) {
+            if(quality < Quality.MIN_VALUE) throw new IllegalArgumentException("quality must be positive.");
+            this.quality = quality;
+            return this;
+        }
+
+        public AtelierTagBuilder addEffect(IEffect effect) {
+            effects.add(Optional.ofNullable(effect).orElseThrow(() -> new NullPointerException("effect must not be null.")));
+            return this;
+        }
+
+        public AtelierTagBuilder addAllEffects(Collection<? extends IEffect> effects) {
+            this.effects.addAll(effects);
+            return this;
+        }
+
+        public AtelierTagBuilder addPotentialAbility(IPotentialAbility ability) {
+            abilities.add(Optional.ofNullable(ability).orElseThrow(() -> new NullPointerException("effect must not be null.")));
+            return this;
+        }
+
+        public AtelierTagBuilder addAllPotentials(Collection<? extends IPotentialAbility> abilities) {
+            this.abilities.addAll(abilities);
+            return this;
+        }
+
+        public NBTTagCompound build() {
+            NBTTagCompound tagAtelier = new NBTTagCompound();
+            NBTTagList tagEffects = new NBTTagList();
+            NBTTagList tagPotentials = new NBTTagList();
+
+            this.tagCompound.setTag(TAG_ATELIER.name(), tagAtelier);
+
+            tagAtelier.setInteger(TAG_QUALITY.name(), quality);
+            tagAtelier.setTag(TAG_EFFECT.name(), tagEffects);
+            tagAtelier.setTag(TAG_POTENTIAL.name(), tagPotentials);
+
+            for(IEffect effect : effects)
+                tagEffects.appendTag(new NBTTagString(effect.getName()));
+
+            for(IPotentialAbility ability : abilities)
+                tagPotentials.appendTag(new NBTTagString(ability.getName()));
+
+            return this.tagCompound;
+        }
     }
 }

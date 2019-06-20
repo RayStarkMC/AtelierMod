@@ -5,9 +5,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
@@ -17,12 +14,9 @@ import raystark.atelier.api.category.Category;
 import raystark.atelier.common.block.itemblock.SampleItemBlock;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 import raystark.atelier.common.registry.EffectRegistry;
-import raystark.atelier.common.util.NBTType;
+import raystark.atelier.common.util.AtelierModUtil;
 
 import java.util.List;
-
-import static raystark.atelier.common.util.AtelierModUtil.addEffect;
-import static raystark.atelier.common.util.AtelierModUtil.applyDefaultTag;
 
 public class SampleBlock extends BlockProductBase {
     public SampleBlock() {
@@ -40,7 +34,9 @@ public class SampleBlock extends BlockProductBase {
         @SuppressWarnings("unchecked") List<ItemStack> subItems = list;
 
         for (IEffect effect : effects) {
-            subItems.add(addEffect(applyDefaultTag(new ItemStack(item, 1, 0)), effect));
+            ItemStack stack = new ItemStack(item, 1, 0);
+            stack.setTagCompound(AtelierModUtil.newTagBuilder().addEffect(effect).build());
+            subItems.add(stack);
         }
     }
 

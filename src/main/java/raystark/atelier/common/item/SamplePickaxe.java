@@ -9,13 +9,12 @@ import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.effect.IEffectMiningLevel;
-import raystark.atelier.common.registry.EffectRegistry;
 import raystark.atelier.api.util.ToolClasses;
+import raystark.atelier.common.registry.EffectRegistry;
+import raystark.atelier.common.util.AtelierModUtil;
 
-import java.util.*;
-
-import static raystark.atelier.common.util.AtelierModUtil.addEffect;
-import static raystark.atelier.common.util.AtelierModUtil.applyDefaultTag;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 錬金術によって作られたピッケルのサンプル
@@ -36,10 +35,11 @@ public class SamplePickaxe extends ItemProductBase implements ItemAlchemicalProd
         //listはItemStackを格納しているためこのキャストは正しい
         @SuppressWarnings("unchecked") List<ItemStack> subItems = list;
 
-        for (IEffect effect : effects)
-            subItems.add(addEffect(applyDefaultTag(new ItemStack(item, 1, 0)), effect));
-
-        subItems.add(applyDefaultTag(new ItemStack(item, 1, 100)));
+        for(IEffect effect : effects) {
+            ItemStack stack = new ItemStack(item, 1, 0);
+            stack.setTagCompound(AtelierModUtil.newTagBuilder().addEffect(effect).build());
+            subItems.add(stack);
+        }
     }
 
     @Override
