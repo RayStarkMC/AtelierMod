@@ -52,7 +52,7 @@ public class EffectEstimated<T extends IEffect> implements IEffectEstimated<T> {
     }
 
     @Override
-    public Optional<T> getOptionalEffect(ElementOwner owner) {
+    public Optional<T> getEffectFromElement(ElementOwner owner) {
         int elementValue = owner.getElementValue(getElementRequired());
 
         Optional<IEffectEntry<T>> entryOptional = getEntryList().stream()

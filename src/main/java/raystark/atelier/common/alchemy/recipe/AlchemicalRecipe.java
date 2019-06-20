@@ -3,7 +3,6 @@ package raystark.atelier.common.alchemy.recipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
@@ -24,7 +23,7 @@ public class AlchemicalRecipe extends AbstractAlchemicalRecipe<ItemStack> {
     @Override
     public ItemStack createProduct(int quality, ElementOwner elements, List<IPotentialAbility> abilities) {
         List<? extends IEffect> effects = getEffectsEstimated().stream()
-                .map(e -> e.getOptionalEffect(elements))
+                .map(e -> e.getEffectFromElement(elements))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
