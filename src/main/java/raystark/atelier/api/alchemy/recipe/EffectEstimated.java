@@ -14,11 +14,8 @@ public class EffectEstimated<T extends IEffect> implements IEffectEstimated<T> {
     private List<IEffectEntry<T>> entryList;
 
     public EffectEstimated(Elements elementRequired, String effectString) {
-        if(elementRequired == null) throw new NullPointerException();
-        if(effectString == null) throw new NullPointerException();
-
-        this.elementRequired = elementRequired;
-        this.effectString = effectString;
+        this.elementRequired = Objects.requireNonNull(elementRequired);
+        this.effectString = Objects.requireNonNull(effectString);
         entryList = new ArrayList<>();
     }
 

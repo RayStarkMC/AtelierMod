@@ -19,6 +19,6 @@ public class RecipeBandAid extends AlchemicalRecipe{
                 .addEffect(0, EffectRegistry.EFFECT_WEAK_HEAL)
                 .addEffect(70, EffectRegistry.EFFECT_MEDIUM_WEAK_HEAL);
 
-        addeffectEstimated(instantHeal);
+        addEffectEstimated(instantHeal);
     }
 }

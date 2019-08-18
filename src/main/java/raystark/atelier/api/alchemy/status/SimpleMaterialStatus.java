@@ -8,6 +8,7 @@ import raystark.atelier.api.alchemy.status.Quality;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class SimpleMaterialStatus implements IMaterialStatus {
     private List<IPotentialAbility> list;
@@ -16,11 +17,10 @@ public class SimpleMaterialStatus implements IMaterialStatus {
 
     public SimpleMaterialStatus(int quality, List<IPotentialAbility> list, ElementContainer elements) {
         if(quality < Quality.MIN_VALUE) throw new IllegalArgumentException("quality must be positive.");
-        if(list == null) throw new NullPointerException("list must not be null.");
-        if(elements == null) throw new NullPointerException("elements must not be null");
+
         this.quality = quality;
-        this.list = list;
-        this.elements = elements;
+        this.list = Objects.requireNonNull(list, "list must not be null.");
+        this.elements = Objects.requireNonNull(elements, "elements must not be null");
     }
 
     public SimpleMaterialStatus(int quality, List<IPotentialAbility> list, int fire, int water, int air, int earth) {
@@ -47,11 +47,12 @@ public class SimpleMaterialStatus implements IMaterialStatus {
 
 
         public ElementContainer(int fire, int water, int air, int earth) {
-            if(fire < MIN_VALUE || MAX_VALUE < fire
+            if(
+                    fire < MIN_VALUE || MAX_VALUE < fire
                     || water < MIN_VALUE || MAX_VALUE < water
                     || air < MIN_VALUE || MAX_VALUE < air
-                    || earth < MIN_VALUE || MAX_VALUE < earth)
-                throw new IllegalArgumentException("Element must be during 0-100.");
+                    || earth < MIN_VALUE || MAX_VALUE < earth
+            ) throw new IllegalArgumentException("Element must be during 0-100.");
 
             this.fire = fire;
             this.water = water;
@@ -61,7 +62,7 @@ public class SimpleMaterialStatus implements IMaterialStatus {
 
         @Override
         public int getElementValue(Elements elementType) {
-            switch (elementType) {
+            switch (Objects.requireNonNull(elementType)) {
                 case FIRE:
                     return fire;
                 case WATER:

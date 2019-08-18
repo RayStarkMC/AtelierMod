@@ -18,12 +18,15 @@ import raystark.atelier.common.block.tile.SampleTileProduct;
 import raystark.atelier.common.item.AtelierItems;
 import raystark.atelier.common.registry.AtelierRegistry;
 
-@Mod(modid = AtelierMod.MODID, version = AtelierMod.VERSION)
+@Mod(
+        modid = AtelierMod.MODID,
+        name = AtelierMod.NAME,
+        version = AtelierMod.VERSION
+)
 public class AtelierMod {
     public static final String MODID = "AtelierMod";
-    public static final String VERSION = "0.1a";
-
-    public IAlchemicalRecipe<ItemStack> recipe;
+    public static final String NAME = "AtelierMod";
+    public static final String VERSION = "0.0.0.0";
 
     @Instance(MODID)
     private static AtelierMod instance;
@@ -31,15 +34,18 @@ public class AtelierMod {
     public static final CreativeTabs TAB_ATELIER = new CreativeTabs(MODID) {
         @Override
         public Item getTabIconItem() {
-            return AtelierItems.samplePickaxe;
+            return AtelierItems.bandAid;
         }
     };
 
     public static AtelierMod getInstance() { return instance; }
 
-    private IAtelierRegistry<Item, Block, ItemStack> atelierRegistry;
+    @InstanceFactory
+    public static AtelierMod newInstance() { return new AtelierMod(); }
 
-    public IAtelierRegistry<Item, Block, ItemStack> getRegistry() { return this.atelierRegistry; }
+    private AtelierMod() {
+
+    }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -60,4 +66,10 @@ public class AtelierMod {
     public void postInit(FMLPostInitializationEvent event) {
 
     }
+
+    public IAlchemicalRecipe<ItemStack> recipe;
+
+    private IAtelierRegistry<Item, Block, ItemStack> atelierRegistry;
+
+    public IAtelierRegistry<Item, Block, ItemStack> getRegistry() { return this.atelierRegistry; }
 }

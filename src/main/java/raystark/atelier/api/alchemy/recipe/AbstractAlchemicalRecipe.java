@@ -1,37 +1,40 @@
 package raystark.atelier.api.alchemy.recipe;
 
+import raystark.atelier.api.alchemy.IAlchemicalProduct;
 import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.effect.IEffect;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * IAlchemicalRecipeの骨格実装。
+ * @param <S>
+ */
 public abstract class AbstractAlchemicalRecipe<S> implements IAlchemicalRecipe<S> {
-    private ItemAlchemicalProduct<?> product;
+    private IAlchemicalProduct product;
 
     private List<IRequirement<S>> requirements;
     private List<IEffectEstimated<? extends IEffect>> effectsEstimated;
 
     protected AbstractAlchemicalRecipe(ItemAlchemicalProduct<?> product) {
-        if (product == null) throw new NullPointerException("product must not be null.");
-        this.product = product;
+        this.product = Objects.requireNonNull(product, "product must not be null.");
         this.requirements = new ArrayList<>();
         this.effectsEstimated = new ArrayList<>();
     }
 
     protected void addRequirement(IRequirement<S> requirement) {
-        if (requirement == null) throw new NullPointerException("requirement must not be null.");
-        requirements.add(requirement);
+        requirements.add(Objects.requireNonNull(requirement, "requirement must not be null."));
     }
 
-    protected void addeffectEstimated(IEffectEstimated<? extends IEffect> effectEstimated) {
-        if (effectEstimated == null) throw new NullPointerException("effectEstimated must not be null");
-        effectsEstimated.add(effectEstimated);
+    protected void addEffectEstimated(IEffectEstimated<? extends IEffect> effectEstimated) {
+        effectsEstimated.add(Objects.requireNonNull(effectEstimated, "effectEstimated must not be null"));
     }
 
     @Override
-    public ItemAlchemicalProduct<?> getProduct() {
+    public IAlchemicalProduct getProduct() {
         return product;
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class AlchemicalRecipe extends AbstractAlchemicalRecipe<ItemStack> {
+public abstract class AlchemicalRecipe extends AbstractAlchemicalRecipe<ItemStack> {
 
     protected AlchemicalRecipe(ItemAlchemicalProduct<?> product) {
         super(product);
