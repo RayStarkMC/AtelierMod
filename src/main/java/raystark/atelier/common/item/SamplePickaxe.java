@@ -37,7 +37,7 @@ public class SamplePickaxe extends ItemProductBase implements ItemAlchemicalProd
 
         for(IEffect effect : effects) {
             ItemStack stack = new ItemStack(item, 1, 0);
-            stack.setTagCompound(AtelierModUtil.newTagBuilder().addEffect(effect).build());
+            stack.setTagCompound(AtelierModUtil.newAtelierTagBuilder().addEffect(effect).build());
             subItems.add(stack);
         }
     }

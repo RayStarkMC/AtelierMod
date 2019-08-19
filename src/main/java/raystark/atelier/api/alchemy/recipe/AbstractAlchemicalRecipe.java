@@ -19,18 +19,13 @@ public abstract class AbstractAlchemicalRecipe<S> implements IAlchemicalRecipe<S
     private List<IRequirement<S>> requirements;
     private List<IEffectEstimated<? extends IEffect>> effectsEstimated;
 
-    protected AbstractAlchemicalRecipe(ItemAlchemicalProduct<?> product) {
+    protected AbstractAlchemicalRecipe(IAlchemicalProduct product) {
         this.product = Objects.requireNonNull(product, "product must not be null.");
         this.requirements = new ArrayList<>();
         this.effectsEstimated = new ArrayList<>();
-    }
 
-    protected void addRequirement(IRequirement<S> requirement) {
-        requirements.add(Objects.requireNonNull(requirement, "requirement must not be null."));
-    }
-
-    protected void addEffectEstimated(IEffectEstimated<? extends IEffect> effectEstimated) {
-        effectsEstimated.add(Objects.requireNonNull(effectEstimated, "effectEstimated must not be null"));
+        prepareRequirements(requirements);
+        prepareEffectsEstimated(effectsEstimated);
     }
 
     @Override
@@ -48,8 +43,20 @@ public abstract class AbstractAlchemicalRecipe<S> implements IAlchemicalRecipe<S
         return Collections.unmodifiableList(effectsEstimated);
     }
 
-    @Override
-    public boolean isReady(List<S> inputs) {
-        return false;
-    }
+    /**
+     * レシピの要求物を準備します。
+     *
+     * <p>このメソッドはコンストラクタで1度だけ呼び出されます。引数のリストに要求物を追加してください。
+     */
+    protected abstract void prepareRequirements(List<IRequirement<S>> requirements);
+
+    /**
+     * レシピの効果予測を準備します。
+     *
+     * <p>このメソッドはコンストラクタで1度だけ呼び出されます。引数のリストに効果予測を追加してください。
+     */
+    protected abstract void prepareEffectsEstimated(List<IEffectEstimated<? extends IEffect>> effectsEstimated);
+
+    // future
+    // protected abstract void preparePotentials();
 }

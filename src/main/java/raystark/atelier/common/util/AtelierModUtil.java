@@ -13,10 +13,7 @@ import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 import raystark.atelier.api.alchemy.status.Quality;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static raystark.atelier.api.util.NBTTagNames.*;
@@ -51,14 +48,31 @@ public final class AtelierModUtil {
         toolTip.addAll(abilityList);
     }
 
-    public static AtelierTagBuilder newTagBuilder() {
-        return newTagBuilder(new NBTTagCompound());
-    }
-
-    public static AtelierTagBuilder newTagBuilder(NBTTagCompound tagCompound) {
+    /**
+     * 引数のタグを編集するAtelierTagBuilderを生成します。
+     *
+     * 引数のTagCompoundが既に別のTagを持っていた場合、ビルダーはそれらに対して一切干渉しません。
+     * ただし、
+     *
+     * @param tagCompound 編集するNBTTagCompound
+     * @return AtelierTagBuilder
+     */
+    public static AtelierTagBuilder newAtelierTagBuilder(NBTTagCompound tagCompound) {
         return new AtelierTagBuilder(tagCompound);
     }
 
+    /**
+     *
+     *
+     * @return
+     */
+    public static AtelierTagBuilder newAtelierTagBuilder() {
+        return newAtelierTagBuilder(new NBTTagCompound());
+    }
+
+    /**
+     *
+     */
     public static class AtelierTagBuilder {
         private final NBTTagCompound tagCompound;
         private int quality;
@@ -79,7 +93,7 @@ public final class AtelierModUtil {
         }
 
         public AtelierTagBuilder addEffect(IEffect effect) {
-            effects.add(Optional.ofNullable(effect).orElseThrow(() -> new NullPointerException("effect must not be null.")));
+            effects.add(Objects.requireNonNull(effect, "effect must not be null."));
             return this;
         }
 
@@ -89,7 +103,7 @@ public final class AtelierModUtil {
         }
 
         public AtelierTagBuilder addPotentialAbility(IPotentialAbility ability) {
-            abilities.add(Optional.ofNullable(ability).orElseThrow(() -> new NullPointerException("effect must not be null.")));
+            abilities.add(Objects.requireNonNull(ability, "effect must not be null."));
             return this;
         }
 

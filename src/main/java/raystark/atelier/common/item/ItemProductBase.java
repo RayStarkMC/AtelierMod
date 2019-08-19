@@ -20,9 +20,9 @@ public abstract class ItemProductBase extends ItemModBase implements ItemAlchemi
     }
 
     @Override
-    public IProductStatus getStatus(ItemStack dataSource) {
+    public IProductStatus getStatus(ItemStack stack) {
         NBTReadableStatus status = new NBTReadableStatus();
-        status.readFromNBT(dataSource.getTagCompound());
+        status.readFromNBT(stack.getTagCompound());
         return status;
     }
 }

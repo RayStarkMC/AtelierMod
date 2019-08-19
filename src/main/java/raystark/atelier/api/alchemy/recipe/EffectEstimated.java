@@ -6,12 +6,12 @@ import raystark.atelier.api.alchemy.status.Elements;
 
 import java.util.*;
 
-public class EffectEstimated<T extends IEffect> implements IEffectEstimated<T> {
+public final class EffectEstimated<T extends IEffect> implements IEffectEstimated<T> {
 
-    private Elements elementRequired;
-    private String effectString;
+    private final Elements elementRequired;
+    private final String effectString;
 
-    private List<IEffectEntry<T>> entryList;
+    private final List<IEffectEntry<T>> entryList;
 
     public EffectEstimated(Elements elementRequired, String effectString) {
         this.elementRequired = Objects.requireNonNull(elementRequired);
@@ -19,52 +19,48 @@ public class EffectEstimated<T extends IEffect> implements IEffectEstimated<T> {
         entryList = new ArrayList<>();
     }
 
-    public static <T extends IEffect> EffectEstimated<T> newEffectEstimated(Elements elementRequired, String effectString) {
-        return new EffectEstimated<>(elementRequired, effectString);
-    }
-
-    public EffectEstimated<T> addEffect(int minimumRequired, T effect) {
-        Optional<IEffectEntry<T>> optional = entryList.stream()
+    public final EffectEstimated<T> addEffect(int minimumRequired, T effect) {
+        entryList.stream()
                 .filter(e -> e.getMinimumRequired() == minimumRequired)
-                .findAny();
-        if(optional.isPresent()) throw new IllegalArgumentException();
+                .findAny()
+                .ifPresent(e -> {throw new IllegalArgumentException();});
 
         entryList.add(new EffectEntry<>(minimumRequired, effect));
         return this;
     }
 
-    public EffectEstimated<T> addEmptyEffect(int minimumRequired) {
+    public final EffectEstimated<T> addEmptyEffect(int minimumRequired) {
         addEffect(minimumRequired, null);
         return this;
     }
 
     @Override
-    public Elements getElementRequired() {
+    public final Elements getElementRequired() {
         return elementRequired;
     }
 
     @Override
-    public List<IEffectEntry<T>> getEntryList() {
+    public final List<IEffectEntry<T>> getEntryList() {
         return Collections.unmodifiableList(entryList);
     }
 
     @Override
-    public Optional<T> getEffectFromElement(ElementOwner owner) {
-        int elementValue = owner.getElementValue(getElementRequired());
-
-        Optional<IEffectEntry<T>> entryOptional = getEntryList().stream()
-                .filter(e -> e.getMinimumRequired() <= elementValue)
+    public final Optional<T> getEffectFromElement(ElementOwner owner) {
+        Optional<IEffectEntry<T>> entryOptional = entryList.stream()
+                .filter(e -> e.getMinimumRequired() <= owner.getElementValue(getElementRequired()))
                 .max(Comparator.naturalOrder());
+
+        //TODO このへんのゴチャっとした感じを直す。
 
         return entryOptional.isPresent() ? entryOptional.get().getEffect() : Optional.empty();
     }
 
     @Override
-    public String getEffectString() {
+    public final String getEffectString() {
         return effectString;
     }
 
-    private static class EffectEntry<T extends IEffect> implements IEffectEntry<T> {
+    private static final class EffectEntry<T extends IEffect> implements IEffectEntry<T> {
         private int minimumRequired;
         private T effect;
 

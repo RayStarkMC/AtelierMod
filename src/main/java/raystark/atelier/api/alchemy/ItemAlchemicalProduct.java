@@ -5,16 +5,16 @@ import raystark.atelier.api.alchemy.status.IProductStatus;
 /**
  * 錬金術によって作られたアイテムを表すインターフェース。
  *
- * @param <T> データを保存しているクラスの型
+ * @param <S> アイテムスタックの型
  */
-public interface ItemAlchemicalProduct<T> extends IAlchemicalProduct{
+public interface ItemAlchemicalProduct<S> extends IAlchemicalProduct{
 
     /**
      * この製品のステータスを返す。
      *
-     * @param dataSource データの保存先
+     * @param stack アイテムスタック
      * @return この製品のステータス
      */
-    IProductStatus getStatus(T dataSource);
+    IProductStatus getStatus(S stack);
 
 }

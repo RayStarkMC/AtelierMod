@@ -36,9 +36,9 @@ public abstract class ItemBlockProductBase extends ItemBlockModBase implements I
     }
 
     @Override
-    public IProductStatus getStatus(ItemStack dataSource) {
+    public IProductStatus getStatus(ItemStack stack) {
         NBTReadableStatus status = new NBTReadableStatus();
-        status.readFromNBT(dataSource.getTagCompound());
+        status.readFromNBT(stack.getTagCompound());
         return status;
     }
 }

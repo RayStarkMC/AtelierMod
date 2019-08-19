@@ -36,7 +36,7 @@ public class SampleBlock extends BlockProductBase {
 
         for (IEffect effect : effects) {
             ItemStack stack = new ItemStack(item, 1, 0);
-            NBTTagCompound tagCompound = AtelierModUtil.newTagBuilder().addEffect(effect).build();
+            NBTTagCompound tagCompound = AtelierModUtil.newAtelierTagBuilder().addEffect(effect).build();
             stack.setTagCompound(tagCompound);
             subItems.add(stack);
         }
