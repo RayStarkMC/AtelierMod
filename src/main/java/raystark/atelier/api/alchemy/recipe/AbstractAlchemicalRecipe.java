@@ -11,6 +11,8 @@ import java.util.Objects;
 
 /**
  * IAlchemicalRecipeの骨格実装。
+ *
+ * <p>このクラスはMinecraft本体のバージョンに依存しない実装を提供します。
  * @param <S>
  */
 public abstract class AbstractAlchemicalRecipe<S> implements IAlchemicalRecipe<S> {

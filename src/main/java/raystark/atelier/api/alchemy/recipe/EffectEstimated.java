@@ -12,7 +12,7 @@ import java.util.*;
 public final class EffectEstimated implements IEffectEstimated {
     private static final class EffectEntry implements IEffectEntry {
         private int minimumRequired;
-        private IEffect effect;
+        private final IEffect effect;
 
         private EffectEntry(int minimumRequired, IEffect effect) {
             this.minimumRequired = minimumRequired;
@@ -31,13 +31,43 @@ public final class EffectEstimated implements IEffectEstimated {
 
         @Override
         public int compareTo(IEffectEntry other) {
-            if(other == null) throw new NullPointerException("other must not be null");
+            return Integer.compare(this.getMinimumRequired(), Objects.requireNonNull(other, "other must not be null").getMinimumRequired());
+        }
+    }
 
-            return Integer.compare(this.getMinimumRequired(), other.getMinimumRequired());
+    public static class EffectEstimatedBuilder {
+        private final Elements elementRequired;
+        private final String effectString;
+        private final List<IEffectEntry> entryList;
+
+        private EffectEstimatedBuilder(Elements elementRequired, String effectString) {
+            this.elementRequired = Objects.requireNonNull(elementRequired);
+            this.effectString = Objects.requireNonNull(effectString);
+            this.entryList = new ArrayList<>();
+        }
+
+        public final EffectEstimatedBuilder addEffect(int minimumRequired, IEffect effect) {
+            this.entryList.stream()
+                    .filter(e -> e.getMinimumRequired() == minimumRequired)
+                    .findAny()
+                    .ifPresent(e -> {throw new IllegalArgumentException();});
+
+            this.entryList.add(new EffectEntry(minimumRequired, effect));
+            return this;
+        }
+
+        public final EffectEstimatedBuilder addEmptyEffect(int minimumRequired) {
+            return addEffect(minimumRequired, null);
+        }
+
+        public IEffectEstimated build() {
+            return new EffectEstimated(this);
         }
     }
 
     private static final IEffectEntry EMPTY_ENTRY = new EffectEntry(0, null);
+
+    public static EffectEstimatedBuilder newBuilder(Elements elementRequired, String effectString) { return new EffectEstimatedBuilder(elementRequired, effectString); }
 
     private final Elements elementRequired;
 
@@ -45,24 +75,10 @@ public final class EffectEstimated implements IEffectEstimated {
 
     private final List<IEffectEntry> entryList;
 
-    public EffectEstimated(Elements elementRequired, String effectString) {
-        this.elementRequired = Objects.requireNonNull(elementRequired);
-        this.effectString = Objects.requireNonNull(effectString);
-        entryList = new ArrayList<>();
-    }
-
-    public final EffectEstimated addEffect(int minimumRequired, IEffect effect) {
-        entryList.stream()
-                .filter(e -> e.getMinimumRequired() == minimumRequired)
-                .findAny()
-                .ifPresent(e -> {throw new IllegalArgumentException();});
-
-        entryList.add(new EffectEntry(minimumRequired, effect));
-        return this;
-    }
-
-    public final EffectEstimated addEmptyEffect(int minimumRequired) {
-        return addEffect(minimumRequired, null);
+    private EffectEstimated(EffectEstimatedBuilder builder) {
+        this.elementRequired = builder.elementRequired;
+        this.effectString = builder.effectString;
+        this.entryList = builder.entryList;
     }
 
     @Override

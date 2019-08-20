@@ -26,8 +26,11 @@ public class RecipeBandAid extends AlchemicalRecipeBase {
 
     @Override
     protected void prepareEffectsEstimated(List<IEffectEstimated> effectsEstimated) {
-        effectsEstimated.add(new EffectEstimated(Elements.WATER, "Efficacy")
+        effectsEstimated.add(
+                EffectEstimated.newBuilder(Elements.WATER, "Efficacy")
                 .addEffect(0, EffectRegistry.EFFECT_WEAK_HEAL)
-                .addEffect(70, EffectRegistry.EFFECT_MEDIUM_WEAK_HEAL));
+                .addEffect(70, EffectRegistry.EFFECT_MEDIUM_WEAK_HEAL)
+                .build()
+        );
     }
 }

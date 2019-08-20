@@ -57,7 +57,7 @@ public interface IEffectEstimated {
      * <p>エントリには効果が含まれていない場合があります。調合時の属性値がそのエントリの効果が発動する条件を満たしていた場合、
      * アイテムには効果が付与されません。
      * 効果が含まれていないエントリを用いることで「属性値が特定の範囲内にある時のみ効果を発動する」
-     * といった効果予測を作ることが出来る。
+     * といった効果予測を作ることが出来ます。
      *
      */
     interface IEffectEntry extends Comparable<IEffectEntry>{
