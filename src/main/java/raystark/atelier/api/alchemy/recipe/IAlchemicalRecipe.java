@@ -37,7 +37,7 @@ public interface IAlchemicalRecipe<S> {
      *
      * @return 効果予測のリスト
      */
-    List<IEffectEstimated<? extends IEffect>> getEffectsEstimated();
+    List<IEffectEstimated> getEffectsEstimated();
 
     /**
      * 材料のリストを受け取り、レシピが実行できるか調べます。

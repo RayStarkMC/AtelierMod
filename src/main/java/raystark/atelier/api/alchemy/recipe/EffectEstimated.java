@@ -6,71 +6,21 @@ import raystark.atelier.api.alchemy.status.Elements;
 
 import java.util.*;
 
-public final class EffectEstimated<T extends IEffect> implements IEffectEstimated<T> {
-
-    private final Elements elementRequired;
-    private final String effectString;
-
-    private final List<IEffectEntry<T>> entryList;
-
-    public EffectEstimated(Elements elementRequired, String effectString) {
-        this.elementRequired = Objects.requireNonNull(elementRequired);
-        this.effectString = Objects.requireNonNull(effectString);
-        entryList = new ArrayList<>();
-    }
-
-    public final EffectEstimated<T> addEffect(int minimumRequired, T effect) {
-        entryList.stream()
-                .filter(e -> e.getMinimumRequired() == minimumRequired)
-                .findAny()
-                .ifPresent(e -> {throw new IllegalArgumentException();});
-
-        entryList.add(new EffectEntry<>(minimumRequired, effect));
-        return this;
-    }
-
-    public final EffectEstimated<T> addEmptyEffect(int minimumRequired) {
-        addEffect(minimumRequired, null);
-        return this;
-    }
-
-    @Override
-    public final Elements getElementRequired() {
-        return elementRequired;
-    }
-
-    @Override
-    public final List<IEffectEntry<T>> getEntryList() {
-        return Collections.unmodifiableList(entryList);
-    }
-
-    @Override
-    public final Optional<T> getEffectFromElement(ElementOwner owner) {
-        Optional<IEffectEntry<T>> entryOptional = entryList.stream()
-                .filter(e -> e.getMinimumRequired() <= owner.getElementValue(getElementRequired()))
-                .max(Comparator.naturalOrder());
-
-        //TODO このへんのゴチャっとした感じを直す。
-
-        return entryOptional.isPresent() ? entryOptional.get().getEffect() : Optional.empty();
-    }
-
-    @Override
-    public final String getEffectString() {
-        return effectString;
-    }
-
-    private static final class EffectEntry<T extends IEffect> implements IEffectEntry<T> {
+/**
+ * IEffectEstimatedの実装。
+ */
+public final class EffectEstimated implements IEffectEstimated {
+    private static final class EffectEntry implements IEffectEntry {
         private int minimumRequired;
-        private T effect;
+        private IEffect effect;
 
-        private EffectEntry(int minimumRequired, T effect) {
+        private EffectEntry(int minimumRequired, IEffect effect) {
             this.minimumRequired = minimumRequired;
             this.effect = effect;
         }
 
         @Override
-        public Optional<T> getEffect() {
+        public Optional<IEffect> getEffect() {
             return Optional.ofNullable(effect);
         }
 
@@ -80,10 +30,62 @@ public final class EffectEstimated<T extends IEffect> implements IEffectEstimate
         }
 
         @Override
-        public int compareTo(IEffectEntry<T> other) {
+        public int compareTo(IEffectEntry other) {
             if(other == null) throw new NullPointerException("other must not be null");
 
             return Integer.compare(this.getMinimumRequired(), other.getMinimumRequired());
         }
+    }
+
+    private static final IEffectEntry EMPTY_ENTRY = new EffectEntry(0, null);
+
+    private final Elements elementRequired;
+
+    private final String effectString;
+
+    private final List<IEffectEntry> entryList;
+
+    public EffectEstimated(Elements elementRequired, String effectString) {
+        this.elementRequired = Objects.requireNonNull(elementRequired);
+        this.effectString = Objects.requireNonNull(effectString);
+        entryList = new ArrayList<>();
+    }
+
+    public final EffectEstimated addEffect(int minimumRequired, IEffect effect) {
+        entryList.stream()
+                .filter(e -> e.getMinimumRequired() == minimumRequired)
+                .findAny()
+                .ifPresent(e -> {throw new IllegalArgumentException();});
+
+        entryList.add(new EffectEntry(minimumRequired, effect));
+        return this;
+    }
+
+    public final EffectEstimated addEmptyEffect(int minimumRequired) {
+        return addEffect(minimumRequired, null);
+    }
+
+    @Override
+    public final Elements getElementRequired() {
+        return elementRequired;
+    }
+
+    @Override
+    public final List<IEffectEntry> getEntryList() {
+        return Collections.unmodifiableList(entryList);
+    }
+
+    @Override
+    public final Optional<IEffect> getEffectFromElement(ElementOwner owner) {
+        IEffectEntry entry = entryList.stream()
+                .filter(e -> e.getMinimumRequired() <= owner.getElementValue(getElementRequired()))
+                .max(Comparator.naturalOrder())
+                .orElse(EMPTY_ENTRY);
+        return entry.getEffect();
+    }
+
+    @Override
+    public final String getEffectString() {
+        return effectString;
     }
 }
