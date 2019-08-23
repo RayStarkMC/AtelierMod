@@ -8,13 +8,18 @@ import java.util.*;
 
 /**
  * IEffectEstimatedの実装。
+ *
+ * <p>ビルダーを利用してこのクラスのインスタンスを生成できます。一度生成されたインスタンスは以後不変です。
  */
 public final class EffectEstimated implements IEffectEstimated {
     private static final class EffectEntry implements IEffectEntry {
-        private int minimumRequired;
+        private final int minimumRequired;
         private final IEffect effect;
 
         private EffectEntry(int minimumRequired, IEffect effect) {
+            if(minimumRequired < 0 || minimumRequired > 100)
+                throw new IllegalArgumentException("minimumRequired must be during 0-100.");
+
             this.minimumRequired = minimumRequired;
             this.effect = effect;
         }
@@ -35,6 +40,11 @@ public final class EffectEstimated implements IEffectEstimated {
         }
     }
 
+    /**
+     * EffectEstimatedのビルダークラス。
+     *
+     * <p>ビルダーを通じて効果予測を設定することが出来ます。
+     */
     public static class EffectEstimatedBuilder {
         private final Elements elementRequired;
         private final String effectString;
@@ -46,27 +56,79 @@ public final class EffectEstimated implements IEffectEstimated {
             this.entryList = new ArrayList<>();
         }
 
+        /**
+         * 効果予測に効果を追加します。
+         *
+         * @param minimumRequired 最低要求属性値
+         * @param effect 効果
+         * @return このビルダー
+         *
+         * @throws IllegalArgumentException 要求値が不正、または既に利用されている場合
+         */
         public final EffectEstimatedBuilder addEffect(int minimumRequired, IEffect effect) {
             this.entryList.stream()
                     .filter(e -> e.getMinimumRequired() == minimumRequired)
                     .findAny()
-                    .ifPresent(e -> {throw new IllegalArgumentException();});
+                    .ifPresent(e -> {throw new IllegalArgumentException("要求値: " + minimumRequired + "は既に使用されています。");});
 
             this.entryList.add(new EffectEntry(minimumRequired, effect));
             return this;
         }
 
+        /**
+         * 効果予測に空の効果を追加します。
+         *
+         * @param minimumRequired 最低要求属性値
+         * @return このビルダー
+         *
+         * @throws IllegalArgumentException 要求値が不正、または既に利用されている場合
+         */
         public final EffectEstimatedBuilder addEmptyEffect(int minimumRequired) {
             return addEffect(minimumRequired, null);
         }
 
+        /**
+         * 効果予測を生成します。
+         *
+         * 効果予測は少なくとも1つの効果を含んでいる必要があります。もし効果が存在しない、
+         * または空のエントリのみが登録されていた場合にはビルドは失敗し、IllegalStateExceptionがスローされます。
+         * 効果予測はビルド後に不変になります。
+         *
+         * @return 生成された効果予測
+         *
+         * @throws IllegalStateException 効果が無い場合。
+         */
         public IEffectEstimated build() {
+            if(isIllegalState())
+                throw new IllegalStateException("There is no effect in this EffectEstimated.");
             return new EffectEstimated(this);
+        }
+
+        private boolean isIllegalState() {
+            if(entryList.isEmpty()) return true;
+
+            for(IEffectEntry entry : entryList) {
+                if(!entry.getEffect().isPresent())
+                    return true;
+            }
+
+            return false;
         }
     }
 
     private static final IEffectEntry EMPTY_ENTRY = new EffectEntry(0, null);
 
+    /**
+     * この効果予測のビルダーを返すファクトリメソッド。
+     *
+     * 要求属性と効果の文字列表現を指定してビルダーを生成します。
+     *
+     * @param elementRequired この効果予測の要求属性
+     * @param effectString この効果の文字列表現
+     * @return ビルダー
+     *
+     * @throws NullPointerException elementRequired, またはeffectStringがnullの場合
+     */
     public static EffectEstimatedBuilder newBuilder(Elements elementRequired, String effectString) { return new EffectEstimatedBuilder(elementRequired, effectString); }
 
     private final Elements elementRequired;
@@ -93,11 +155,11 @@ public final class EffectEstimated implements IEffectEstimated {
 
     @Override
     public final Optional<IEffect> getEffectFromElement(ElementOwner owner) {
-        IEffectEntry entry = entryList.stream()
+        return entryList.stream()
                 .filter(e -> e.getMinimumRequired() <= owner.getElementValue(getElementRequired()))
                 .max(Comparator.naturalOrder())
-                .orElse(EMPTY_ENTRY);
-        return entry.getEffect();
+                .orElse(EMPTY_ENTRY)
+                .getEffect();
     }
 
     @Override

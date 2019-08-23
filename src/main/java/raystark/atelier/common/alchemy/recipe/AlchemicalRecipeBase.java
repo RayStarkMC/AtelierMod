@@ -23,6 +23,15 @@ public abstract class AlchemicalRecipeBase extends AbstractAlchemicalRecipe<Item
         super(product);
     }
 
+
+    /**
+     * このレシピの完成品のアイテムスタックを生成します。
+     *
+     * @param quality アイテムに適用する品質値
+     * @param elements アイテムに適用する属性値
+     * @param abilities アイテムに適用する潜在能力
+     * @return 完成品のアイテムスタック
+     */
     @Override
     public ItemStack createProduct(int quality, ElementOwner elements, List<IPotentialAbility> abilities) {
         List<IEffect> effects = getEffectsEstimated().stream()

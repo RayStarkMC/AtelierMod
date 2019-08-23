@@ -3,13 +3,10 @@ package raystark.atelier.api.category;
 /**
  * 錬金素材のカテゴリを表すインターフェース.
  */
+//他Modがカテゴリ追加する可能性を考慮してインターフェースを定義
 public interface IMaterialCategory {
-    /**
-     * 鉱石辞書名の接頭辞
-     */
-    String PREFIX = "category";
+    // TODO 鉱石辞書への依存をなくす
 
-    //他Modがカテゴリ追加する可能性を考慮してインターフェースを定義
 
     /**
      * カテゴリに対応する鉱石辞書名を返します。
@@ -19,3 +16,5 @@ public interface IMaterialCategory {
      */
     String getOreDictName();
 }
+
+
