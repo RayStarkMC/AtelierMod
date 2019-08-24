@@ -13,6 +13,8 @@ import java.util.List;
  * 品質値と潜在能力は材料に用いたアイテムに直接付与された値が利用される。材料として
  * 用いたアイテムに能力が何も付与されていなかった場合、デフォルトの能力値が適応され
  * る。
+ *
+ * @author RayStark
  */
 public interface IMaterialStatus extends Quality, ElementOwner, PotentialAbilityOwner {
     IMaterialStatus DEFAULT_STATUS = new IMaterialStatus() {

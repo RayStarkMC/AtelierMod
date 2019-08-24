@@ -10,6 +10,8 @@ import java.util.Optional;
  *
  * @param <I> アイテムクラスの型
  * @param <B> ブロッククラスの型
+ *
+ * @author RayStark
  */
 public interface IMaterialRegistry<I, B> extends Initializable {
 

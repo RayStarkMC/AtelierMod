@@ -12,8 +12,9 @@ import java.util.List;
  * <p>レシピは材料としてアイテムそのものを指定できるほか、アイテムの属すカテゴリを指定することが出来る。
  * 材料としてカテゴリが指定された場合、そのカテゴリに属す任意のアイテムをレシピの材料として用いることが出来る。
  *
- *
  * @param <S> アイテムスタックの型
+ *
+ * @author RayStark
  */
 public interface IAlchemicalRecipe<S> {
 

@@ -6,6 +6,8 @@ import raystark.atelier.api.alchemy.status.IProductStatus;
  * 錬金術によって作られたブロックを表すインターフェース
  *
  * @param <W> ワールドの型
+ *
+ * @author RayStark
  */
 public interface BlockAlchemicalProduct<W> extends IAlchemicalProduct {
     /**

@@ -2,6 +2,8 @@ package raystark.atelier.api.util;
 
 /**
  * ツールの種類の文字列表現を表す列挙
+ *
+ * @author RayStark
  */
 public enum ToolClasses {
     PICKAXE("pickaxe"),

@@ -5,6 +5,8 @@ package raystark.atelier.api.alchemy;
  *
  * <p>錬金術製品を追加する場合、このインターフェースを実装したアイテム又はブロッククラスを定義し、
  * IAlchemicalRecipeを実装したレシピクラスを定義する必要があります。
+ *
+ * @author RayStark
  */
 public interface IAlchemicalProduct {
 }

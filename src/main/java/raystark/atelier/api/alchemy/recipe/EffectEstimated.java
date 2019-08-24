@@ -10,14 +10,22 @@ import java.util.*;
  * IEffectEstimatedの実装。
  *
  * <p>ビルダーを利用してこのクラスのインスタンスを生成できます。一度生成されたインスタンスは以後不変です。
+ *
+ * @author RayStark
  */
 public final class EffectEstimated implements IEffectEstimated {
+
+    /**
+     * EffectEntryの実装
+     *
+     * @author RayStark
+     */
     private static final class EffectEntry implements IEffectEntry {
         private final int minimumRequired;
         private final IEffect effect;
 
         private EffectEntry(int minimumRequired, IEffect effect) {
-            if(minimumRequired < 0 || minimumRequired > 100)
+            if(minimumRequired < ElementOwner.MIN_VALUE || ElementOwner.MAX_VALUE < minimumRequired)
                 throw new IllegalArgumentException("minimumRequired must be during 0-100.");
 
             this.minimumRequired = minimumRequired;
@@ -44,6 +52,8 @@ public final class EffectEstimated implements IEffectEstimated {
      * EffectEstimatedのビルダークラス。
      *
      * <p>ビルダーを通じて効果予測を設定することが出来ます。
+     *
+     * @author RayStark
      */
     public static class EffectEstimatedBuilder {
         private final Elements elementRequired;

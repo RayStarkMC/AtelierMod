@@ -8,6 +8,8 @@ import raystark.atelier.api.util.Initializable;
  * @param <I> アイテム
  * @param <B> ブロック
  * @param <S> アイテムスタック
+ *
+ * @author RayStark
  */
 public interface IAtelierRegistry<I, B, S> extends Initializable {
     /**

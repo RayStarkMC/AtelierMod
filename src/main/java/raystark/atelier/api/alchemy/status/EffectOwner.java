@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * 効果を持つものを表すインターフェース
+ *
+ * @author RayStark
  */
 public interface EffectOwner {
     /**

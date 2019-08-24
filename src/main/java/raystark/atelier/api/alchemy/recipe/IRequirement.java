@@ -3,7 +3,9 @@ package raystark.atelier.api.alchemy.recipe;
 /**
  * 錬金術レシピの要求物を表すインターフェース。
  *
- * @param <S> アイテムスタック
+ * @param <S> アイテムスタックの型
+ *
+ * @author RayStark
  */
 public interface IRequirement<S> {
 

@@ -15,6 +15,8 @@ import java.util.Optional;
  * 渡されたElementOwnerが持つ属性値が適用されます。属性値と効果の対応はgetEntryListから取得できます。
  * 効果予測には発動する効果を抽象的に表す名前が付いており、getEffectStringから取得できます。
  * 空の効果予測を作成することはできません。
+ *
+ * @author RayStark
  */
 public interface IEffectEstimated {
     /**

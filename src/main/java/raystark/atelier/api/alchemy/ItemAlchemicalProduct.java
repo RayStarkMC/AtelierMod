@@ -6,6 +6,8 @@ import raystark.atelier.api.alchemy.status.IProductStatus;
  * 錬金術によって作られたアイテムを表すインターフェース。
  *
  * @param <S> アイテムスタックの型
+ *
+ * @author RayStark
  */
 public interface ItemAlchemicalProduct<S> extends IAlchemicalProduct{
 

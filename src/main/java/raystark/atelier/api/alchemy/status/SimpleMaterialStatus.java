@@ -10,7 +10,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * IMaterialStatusの標準実装
+ *
+ * @author RayStark
+ */
 public class SimpleMaterialStatus implements IMaterialStatus {
+
+    /**
+     * 錬金素材の属性値を保持するクラス
+     *
+     * @author RayStark
+     */
     public static class ElementContainer implements ElementOwner {
         private int fire, water, air, earth;
 

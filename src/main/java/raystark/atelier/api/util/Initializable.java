@@ -1,5 +1,10 @@
 package raystark.atelier.api.util;
 
+/**
+ *
+ *
+ * @author RayStark
+ */
 public interface Initializable {
     /**
      * インスタンスの初期化を行います。

@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * IProductStatusの標準実装
+ *
+ * @author RayStark
+ */
 public class SimpleProductStatus implements IProductStatus {
 
     protected int quality;

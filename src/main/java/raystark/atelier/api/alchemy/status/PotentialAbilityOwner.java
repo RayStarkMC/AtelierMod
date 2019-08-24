@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * 潜在能力を持ったものを表すインターフェース。
+ *
+ * @author RayStark
  */
 public interface PotentialAbilityOwner {
     /**

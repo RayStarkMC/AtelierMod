@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * 錬金術製品の能力値を表すインターフェース
+ *
+ * @author RayStark
  */
 public interface IProductStatus extends Quality, EffectOwner, PotentialAbilityOwner {
 

@@ -2,6 +2,8 @@ package raystark.atelier.api.category;
 
 /**
  * 錬金素材のカテゴリを表すインターフェース.
+ *
+ * @author RayStark
  */
 //他Modがカテゴリ追加する可能性を考慮してインターフェースを定義
 public interface IMaterialCategory {

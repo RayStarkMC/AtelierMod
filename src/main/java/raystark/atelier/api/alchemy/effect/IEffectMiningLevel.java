@@ -2,6 +2,8 @@ package raystark.atelier.api.alchemy.effect;
 
 /**
  * 採掘レベルの効果を表すインターフェース
+ *
+ * @author RayStark
  */
 public interface IEffectMiningLevel extends IEffect {
     /**

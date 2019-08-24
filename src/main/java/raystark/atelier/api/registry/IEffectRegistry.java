@@ -5,6 +5,13 @@ import raystark.atelier.api.util.Initializable;
 
 import java.util.Optional;
 
+/**
+ * エフェクトレジストリを表すインターフェース。
+ *
+ * <p>レジストリには効果を登録することができます。登録された効果は効果名から取得することが出来ます。
+ *
+ * @author RayStark
+ */
 public interface IEffectRegistry extends Initializable {
     /**
      * ライブラリにエフェクトを登録します。

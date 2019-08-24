@@ -2,6 +2,8 @@ package raystark.atelier.api.alchemy.effect;
 
 /**
  * 即時回復の効果を表すインターフェース
+ *
+ * @author RayStark
  */
 public interface IEffectInstantHeal extends IEffect{
     /**
