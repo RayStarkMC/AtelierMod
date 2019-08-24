@@ -20,7 +20,10 @@ public final class CategoryRegistry implements ICategoryRegistry<Item, Block, It
     //TODO カテゴリregistry実装
 
     /**
+     * レジストリの実装クラス。
      *
+     * <p>この実装ではアイテムとブロックを分けて登録します。
+     * この実装ではメタデータにワイルドカードが定義されており、任意のメタデータのアイテムを登録対象とする。
      */
     private static final class Registry {
         private final List<ElementWithMetadata<Item>> items;
@@ -33,23 +36,30 @@ public final class CategoryRegistry implements ICategoryRegistry<Item, Block, It
             blocks = new ArrayList<>();
         }
 
+        //TODO 重複登録の禁止実装
         private void addItem(Item item, int meta) {
-
-
-            ElementWithMetadata<Item> element = new ElementWithMetadata<>(item, meta);
-            if(!items.contains(element)) items.add(element);
+            if(!containsItem(Objects.requireNonNull(item, "item must not be null."), checkItemMeta(meta)))
+                items.add(new ElementWithMetadata<>(item, meta));
         }
 
         private int checkItemMeta(int meta) {
+            if(meta < 0 && meta != WILD_CARD)
+                throw new IllegalArgumentException("0 <= meta: " + meta);
             return meta;
         }
 
+        private boolean containsItem(Item item, int meta) {
+            return items.contains(new ElementWithMetadata<>(item, WILD_CARD)) || items.contains(new ElementWithMetadata<>(item, meta));
+        }
+
         private void addBlock(Block block, int meta) {
-            ElementWithMetadata<Block> element = new ElementWithMetadata<>(block, meta);
+            ElementWithMetadata<Block> element = new ElementWithMetadata<>(Objects.requireNonNull(block, "block must not be null."), checkBlockMeta(meta));
             if(!blocks.contains(element)) blocks.add(element);
         }
 
         private int checkBlockMeta(int meta) {
+            if(meta != WILD_CARD && (meta < 0 || meta > 16))
+                throw new IllegalArgumentException("0 <= meta <= 15: " + meta);
             return meta;
         }
 
