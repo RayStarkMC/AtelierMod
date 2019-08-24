@@ -9,17 +9,113 @@ import raystark.atelier.api.category.IMaterialCategory;
 import raystark.atelier.api.registry.ICategoryRegistry;
 import raystark.atelier.common.block.AtelierBlocks;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+/**
+ * ICategoryRegistryの1.7.10実装。
+ *
+ *
+ */
 public final class CategoryRegistry implements ICategoryRegistry<Item, Block, ItemStack> {
     //TODO カテゴリregistry実装
 
-    private static class RegistryElement<E> {
-        private E element;
+    /**
+     *
+     */
+    private static final class Registry {
+        private final List<ElementWithMetadata<Item>> items;
+        private final List<ElementWithMetadata<Block>> blocks;
 
-        private RegistryElement(E element) {
+        private static final int WILD_CARD = Integer.MIN_VALUE;
 
+        private Registry() {
+            items = new ArrayList<>();
+            blocks = new ArrayList<>();
+        }
+
+        private void addItem(Item item, int meta) {
+
+
+            ElementWithMetadata<Item> element = new ElementWithMetadata<>(item, meta);
+            if(!items.contains(element)) items.add(element);
+        }
+
+        private int checkItemMeta(int meta) {
+            return meta;
+        }
+
+        private void addBlock(Block block, int meta) {
+            ElementWithMetadata<Block> element = new ElementWithMetadata<>(block, meta);
+            if(!blocks.contains(element)) blocks.add(element);
+        }
+
+        private int checkBlockMeta(int meta) {
+            return meta;
+        }
+
+        private List<ElementWithMetadata<Item>> getItems() {
+            return Collections.unmodifiableList(items);
+        }
+
+        private List<ElementWithMetadata<Block>> getBlockw() {
+            return Collections.unmodifiableList(blocks);
+        }
+    }
+
+    /**
+     * メタデータを持つ要素を表すクラス。
+     *
+     * 要素とint型で表されるメタデータを持ちます。
+     *
+     * @param <E> 要素の型
+     */
+    private static final class ElementWithMetadata<E> {
+        private final E element;
+        private final int metadata;
+
+        /**
+         * メタデータ付き要素を生成します。
+         *
+         * 要素としてnullを利用することが出来ます。
+         *
+         * @param element nullを許容する要素
+         * @param metadata メタデータ
+         */
+        ElementWithMetadata(E element, int metadata){
+            this.element = element;
+            this.metadata = metadata;
+        }
+
+        /**
+         * 要素を返します。
+         *
+         * @return 要素
+         */
+        private E getElement() {
+            return element;
+        }
+
+        /**
+         * メタデータを返します。
+         *
+         * @return メタデータ
+         */
+        private int getMetadata() {
+            return metadata;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ElementWithMetadata<?> that = (ElementWithMetadata<?>) o;
+            return metadata == that.metadata &&
+                    Objects.equals(element, that.element);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(element, metadata);
         }
     }
 

@@ -10,6 +10,9 @@ import java.util.List;
  *
  * <p>カテゴリをキーにアイテム, ブロックをレジストリに登録することが出来ます。
  * このレジストリはレシピに参照され、レシピのカテゴリ要求に利用されます。
+ * レジストリは重複要素を許さず、そのような要素を登録しようとした場合は何も起こりません。
+ * レジストリはnull要素、又はnullカテゴリを認めず、登録しようとした場合はNullPointerExceptionがスローされます。
+ * メタデータは不正値を定めることが出来、レジストリに追加しようとした場合にIllegalArgumentExceptionがスローされます。
  *
  * @param <I> アイテムの型
  * @param <B> ブロックの型
@@ -24,6 +27,9 @@ public interface ICategoryRegistry<I, B, S> extends Initializable {
      * @param item アイテム
      * @param meta メタデータ
      * @param category カテゴリ
+     *
+     * @throws NullPointerException アイテム、又はカテゴリがnullの場合
+     * @throws IllegalArgumentException メタデータが不正の場合
      */
     void registerItem(I item, int meta, IMaterialCategory category);
 
@@ -32,6 +38,8 @@ public interface ICategoryRegistry<I, B, S> extends Initializable {
      *
      * @param item アイテム
      * @param category カテゴリ
+     *
+     * @throws NullPointerException アイテム、又はカテゴリがnullの場合
      */
     void registerItemIgnoringMetadata(I item, IMaterialCategory category);
 
@@ -41,6 +49,9 @@ public interface ICategoryRegistry<I, B, S> extends Initializable {
      * @param block ブロック
      * @param meta メタデータ
      * @param category カテゴリ
+     *
+     * @throws NullPointerException アイテム、又はカテゴリがnullの場合
+     * @throws IllegalArgumentException メタデータが不正の場合
      */
     void registerBlock(B block, int meta, IMaterialCategory category);
 
@@ -49,6 +60,8 @@ public interface ICategoryRegistry<I, B, S> extends Initializable {
      *
      * @param block ブロック
      * @param category カテゴリ
+     *
+     * @throws NullPointerException アイテム、又はカテゴリがnullの場合
      */
     void registerBlockIgnoringMetadata(B block, IMaterialCategory category);
 
@@ -61,6 +74,8 @@ public interface ICategoryRegistry<I, B, S> extends Initializable {
      * @param itemStack アイテムスタック
      * @param ignoreMeta trueの場合メタデータを無視する。
      * @param category カテゴリ
+     *
+     * @throws NullPointerException アイテムスタック、又はカテゴリがnullの場合
      */
     void registerItemStack(S itemStack, boolean ignoreMeta, IMaterialCategory category);
 
