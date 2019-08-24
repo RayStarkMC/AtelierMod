@@ -6,8 +6,19 @@ package raystark.atelier.api.util;
  * @author RayStark
  */
 public enum ToolClasses {
+    /**
+     * つるはしの文字列表現。
+     */
     PICKAXE("pickaxe"),
+
+    /**
+     * ショベルの文字列表現。
+     */
     SHOVEL("shovel"),
+
+    /**
+     * 斧の文字列表現。
+     */
     AXE("axe");
 
     private String toolClass;
