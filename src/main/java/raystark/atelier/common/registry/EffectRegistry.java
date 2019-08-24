@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class EffectRegistry implements IEffectRegistry {
+public final class EffectRegistry implements IEffectRegistry {
     private boolean hasInit;
 
     public static final IEffectMiningLevel EFFECT_STONE_MINING = new SimpleEffectMiningLevel(1, "Weak");

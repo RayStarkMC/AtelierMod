@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import raystark.atelier.api.registry.ICategoryRegistry;
 import raystark.atelier.api.registry.IMaterialRegistry;
 
-public class AtelierRegistry extends AbstractAtelierRegistry<Item, Block, ItemStack> {
+public final class AtelierRegistry extends AbstractAtelierRegistry<Item, Block, ItemStack> {
     private IMaterialRegistry<Item, Block> materialRegistry;
     private ICategoryRegistry<Item, Block, ItemStack> categoryRegistry;
 

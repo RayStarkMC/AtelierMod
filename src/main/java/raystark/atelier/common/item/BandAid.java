@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class BandAid extends ItemProductBase {
+public final class BandAid extends ItemProductBase {
 
     public BandAid() {
         super("BandAid", 2);

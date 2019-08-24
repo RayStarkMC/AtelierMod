@@ -3,29 +3,42 @@ package raystark.atelier.api.category;
 /**
  * 錬金素材のカテゴリの列挙
  *
- * 各カテゴリは対応した鉱石辞書名を持つ。
- *
  * @author RayStark
  */
 public enum Category implements IMaterialCategory {
-    METAL("Metal"),         //金属
-    PLANT("Plant"),         //植物
-    DAILY("Daily"),         //日用品
-    VALUABLE("Valuable"),   //貴重品
-    WOOD("wood");           //木材
+    /**
+     * 金属カテゴリ
+     */
+    METAL("Metal"),
 
+    /**
+     * 植物カテゴリ
+     */
+    PLANT("Plant"),
 
+    /**
+     * 日用品カテゴリ
+     */
+    DAILY("Daily"),
 
-    Category(String oreDictName) {
-        this.oreDictName = oreDictName;
+    /**
+     * 貴重品カテゴリ
+     */
+    VALUABLE("Valuable"),
+
+    /**
+     * 木材カテゴリ
+     */
+    WOOD("Wood");
+
+    Category(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    private String oreDictName;
+    private String categoryName;
 
     @Override
-    public String getOreDictName() {
-        return oreDictName;
+    public String getCategoryName() {
+        return categoryName;
     }
-
-    // TODO どんなカテゴリを実装しよう？
 }

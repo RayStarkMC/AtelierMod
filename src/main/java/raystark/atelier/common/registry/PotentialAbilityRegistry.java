@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class PotentialAbilityRegistry implements IPotentialAbilityRegistry {
+public final class PotentialAbilityRegistry implements IPotentialAbilityRegistry {
     private final Map<String, IPotentialAbility> abilities;
     private boolean hasInit;
 

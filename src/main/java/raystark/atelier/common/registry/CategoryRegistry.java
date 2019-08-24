@@ -9,7 +9,20 @@ import raystark.atelier.api.category.IMaterialCategory;
 import raystark.atelier.api.registry.ICategoryRegistry;
 import raystark.atelier.common.block.AtelierBlocks;
 
-public class CategoryRegistry implements ICategoryRegistry<Item, Block, ItemStack> {
+import java.util.List;
+import java.util.Map;
+
+public final class CategoryRegistry implements ICategoryRegistry<Item, Block, ItemStack> {
+    //TODO カテゴリregistry実装
+
+    private static class RegistryElement<E> {
+        private E element;
+
+        private RegistryElement(E element) {
+
+        }
+    }
+
     private boolean hasInit;
 
     public CategoryRegistry() {
@@ -17,34 +30,42 @@ public class CategoryRegistry implements ICategoryRegistry<Item, Block, ItemStac
     }
 
     @Override
-    public void registerItem(Item item, IMaterialCategory category) {
-        OreDictionary.registerOre(category.getOreDictName(), item);
+    public void registerItem(Item item, int meta, IMaterialCategory category) {
     }
 
     @Override
-    public void registerBlock(Block block, IMaterialCategory category) {
-        OreDictionary.registerOre(category.getOreDictName(), block);
+    public void registerItemIgnoringMetadata(Item item, IMaterialCategory category) {
+
     }
 
     @Override
-    public void registerItemStack(ItemStack itemStack, IMaterialCategory category) {
-        OreDictionary.registerOre(category.getOreDictName(), itemStack);
+    public void registerBlock(Block block, int meta, IMaterialCategory category) {
     }
 
     @Override
-    public boolean isItemStackBelongToCategory(ItemStack itemStack, IMaterialCategory category) {
-        for(ItemStack target : OreDictionary.getOres(category.getOreDictName()))
-            if(OreDictionary.itemMatches(target, itemStack, false))
-                return true;
+    public void registerBlockIgnoringMetadata(Block block, IMaterialCategory category) {
 
-        return false;
+    }
+
+    @Override
+    public void registerItemStack(ItemStack itemStack, boolean ignoreMeta, IMaterialCategory category) {
+    }
+
+    @Override
+    public List<IMaterialCategory> getCategories(ItemStack itemStack) {
+        return null;
+    }
+
+    @Override
+    public List<ItemStack> getItems(IMaterialCategory category) {
+        return null;
     }
 
     @Override
     public void init() {
         if(hasInit()) return;
 
-        registerBlock(AtelierBlocks.sampleBlock, Category.METAL);
+        registerBlockIgnoringMetadata(AtelierBlocks.sampleBlock, Category.METAL);
 
         hasInit = true;
     }

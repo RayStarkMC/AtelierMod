@@ -11,7 +11,7 @@ import raystark.atelier.common.item.AtelierItems;
 import java.util.Collections;
 import java.util.List;
 
-public class MaterialRegistry extends AbstractMaterialRegistry<Item, Block> {
+public final class MaterialRegistry extends AbstractMaterialRegistry<Item, Block> {
     private boolean hasInit;
 
     public MaterialRegistry() {
