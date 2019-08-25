@@ -11,10 +11,10 @@ import raystark.atelier.api.registry.IAtelierRegistry;
 import raystark.atelier.api.registry.IEffectRegistry;
 import raystark.atelier.api.registry.IPotentialAbilityRegistry;
 import raystark.atelier.common.AtelierMod;
-import raystark.atelier.common.util.NBTType;
 
 import java.util.Collections;
 
+import static net.minecraftforge.common.util.Constants.NBT.TAG_STRING;
 import static raystark.atelier.api.util.NBTTagNames.*;
 
 /**
@@ -27,9 +27,9 @@ public class NBTReadableStatus extends SimpleProductStatus {
      *
      * <p>NBTタグがアトリエタグを持っていない場合、IllegalArgumentExceptionをスローします。
      *
+     * @param tagCompound NBTタグ
      * @throws NullPointerException 引数がnullの場合
      * @throws IllegalArgumentException 引数がアトリエタグを持っていない場合
-     * * @param tagCompound NBTタグ
      */
     public void readFromNBT(NBTTagCompound tagCompound) {
         if(tagCompound == null) throw new NullPointerException("tagCompound must not be null.");
@@ -40,8 +40,8 @@ public class NBTReadableStatus extends SimpleProductStatus {
         IPotentialAbilityRegistry abilityRegistry = registry.getPotentialAbilityRegistry();
 
         NBTTagCompound tagAtelier = tagCompound.getCompoundTag(TAG_ATELIER.name());
-        NBTTagList tagEffectList = tagAtelier.getTagList(TAG_EFFECT.name(), NBTType.STRING.getID());
-        NBTTagList tagPotentialList = tagAtelier.getTagList(TAG_POTENTIAL.name(), NBTType.STRING.getID());
+        NBTTagList tagEffectList = tagAtelier.getTagList(TAG_EFFECT.name(), TAG_STRING);
+        NBTTagList tagPotentialList = tagAtelier.getTagList(TAG_POTENTIAL.name(), TAG_STRING);
 
         this.quality = Math.max(tagAtelier.getInteger(TAG_QUALITY.name()), Quality.MIN_VALUE);
 

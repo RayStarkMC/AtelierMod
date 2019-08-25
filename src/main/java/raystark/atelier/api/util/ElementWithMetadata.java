@@ -6,12 +6,21 @@ import java.util.Objects;
  * メタデータを持つ要素を表すクラス。
  *
  * <p>要素とint型で表されるメタデータを持ちます。要素にはnullをとることが出来、メタデータにはint型の範囲で制限がありません。
+ * このクラスでは要素とメタデータは公開されています。いずれもfinal変数として宣言されており、要素が不変クラスの場合このクラスは不変です。
+ * 要素が可変クラスの場合、このクラスは不変であることを保証しません。
  *
  * @param <E> 要素の型
  */
 public final class ElementWithMetadata<E> {
-    private final E element;
-    private final int metadata;
+    /**
+     * メタデータの付与される要素
+     */
+    public final E element;
+
+    /**
+     * メタデータ
+     */
+    public final int metadata;
 
     /**
      * メタデータ付き要素を生成します。
@@ -24,24 +33,6 @@ public final class ElementWithMetadata<E> {
     public ElementWithMetadata(E element, int metadata){
         this.element = element;
         this.metadata = metadata;
-    }
-
-    /**
-     * 要素を返します。
-     *
-     * @return 要素
-     */
-    public E getElement() {
-        return element;
-    }
-
-    /**
-     * メタデータを返します。
-     *
-     * @return メタデータ
-     */
-    public int getMetadata() {
-        return metadata;
     }
 
     @Override

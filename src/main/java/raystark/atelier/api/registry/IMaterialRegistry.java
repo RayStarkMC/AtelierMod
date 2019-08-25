@@ -86,9 +86,4 @@ public interface IMaterialRegistry<I, B> extends Initializable {
      * @return ステータス
      */
     IMaterialStatus getDefaultBlockStatus(B materialBlock);
-
-    interface IMaterialKey<E> {
-        E getElement();
-        int getMetadata();
-    }
 }

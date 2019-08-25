@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import raystark.atelier.api.category.Category;
 import raystark.atelier.api.category.IMaterialCategory;
 import raystark.atelier.api.registry.ICategoryRegistry;
+import raystark.atelier.api.util.ElementWithMetadata;
 import raystark.atelier.common.block.AtelierBlocks;
 
 import java.util.*;
@@ -18,8 +19,6 @@ import java.util.stream.Collectors;
  * @author RayStark
  */
 public final class CategoryRegistry implements ICategoryRegistry<Item, Block, ItemStack> {
-    //TODO カテゴリレジストリの動作テスト
-
     /**
      * レジストリの実装クラス。
      *
@@ -45,7 +44,7 @@ public final class CategoryRegistry implements ICategoryRegistry<Item, Block, It
 
             ElementWithMetadata<Item> element = new ElementWithMetadata<>(item, checkItemMeta(meta));
 
-            if(meta == WILD_CARD) items.removeIf(e -> e.getElement() == item);
+            if(meta == WILD_CARD) items.removeIf(e -> e.element == item);
             else if(items.contains(new ElementWithMetadata<>(item, WILD_CARD)) || items.contains(element)) return;
 
             items.add(element);
@@ -60,7 +59,7 @@ public final class CategoryRegistry implements ICategoryRegistry<Item, Block, It
         private void addBlock(Block block, int meta) {
             ElementWithMetadata<Block> element = new ElementWithMetadata<>(Objects.requireNonNull(block, "block must not be null."), checkBlockMeta(meta));
 
-            if(meta == WILD_CARD) blocks.removeIf(e -> e.getElement() == block);
+            if(meta == WILD_CARD) blocks.removeIf(e -> e.element == block);
             else if(blocks.contains(new ElementWithMetadata<>(block, WILD_CARD)) || blocks.contains(element)) return;
 
             blocks.add(element);
@@ -88,65 +87,6 @@ public final class CategoryRegistry implements ICategoryRegistry<Item, Block, It
 
         private List<ElementWithMetadata<Block>> getBlocks() {
             return Collections.unmodifiableList(blocks);
-        }
-    }
-
-
-    //TODO ElementWithMetadata<E>消去してutilの物を利用
-    /**
-     * メタデータを持つ要素を表すクラス。
-     *
-     * 要素とint型で表されるメタデータを持ちます。
-     *
-     * @param <E> 要素の型
-     */
-    private static final class ElementWithMetadata<E> {
-        private final E element;
-        private final int metadata;
-
-        /**
-         * メタデータ付き要素を生成します。
-         *
-         * 要素としてnullを利用することが出来ます。
-         *
-         * @param element nullを許容する要素
-         * @param metadata メタデータ
-         */
-        ElementWithMetadata(E element, int metadata){
-            this.element = element;
-            this.metadata = metadata;
-        }
-
-        /**
-         * 要素を返します。
-         *
-         * @return 要素
-         */
-        private E getElement() {
-            return element;
-        }
-
-        /**
-         * メタデータを返します。
-         *
-         * @return メタデータ
-         */
-        private int getMetadata() {
-            return metadata;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            ElementWithMetadata<?> that = (ElementWithMetadata<?>) o;
-            return metadata == that.metadata &&
-                    Objects.equals(element, that.element);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(element, metadata);
         }
     }
 
@@ -274,8 +214,8 @@ public final class CategoryRegistry implements ICategoryRegistry<Item, Block, It
 
         Registry registry = categoryMap.get(category);
         List<ItemStack> itemList = new ArrayList<>();
-        itemList.addAll(registry.getItems().stream().map(e -> new ItemStack(e.getElement(), 1, e.getMetadata() == Registry.WILD_CARD ? 0 : e.getMetadata())).collect(Collectors.toList()));
-        itemList.addAll(registry.getBlocks().stream().map(e -> new ItemStack(e.getElement(), 1, e.getMetadata() == Registry.WILD_CARD ? 0 : e.getMetadata())).collect(Collectors.toList()));
+        itemList.addAll(registry.getItems().stream().map(e -> new ItemStack(e.element, 1, e.metadata == Registry.WILD_CARD ? 0 : e.metadata)).collect(Collectors.toList()));
+        itemList.addAll(registry.getBlocks().stream().map(e -> new ItemStack(e.element, 1, e.metadata == Registry.WILD_CARD ? 0 : e.metadata)).collect(Collectors.toList()));
         return itemList;
     }
 
@@ -283,7 +223,8 @@ public final class CategoryRegistry implements ICategoryRegistry<Item, Block, It
     public void init() {
         if(hasInit()) return;
 
-        registerBlockIgnoringMetadata(AtelierBlocks.sampleBlock, Category.METAL);
+        for(IMaterialCategory category : Category.values())
+            registerBlockIgnoringMetadata(AtelierBlocks.sampleBlock, category);
 
         hasInit = true;
     }
