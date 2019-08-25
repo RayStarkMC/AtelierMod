@@ -60,6 +60,8 @@ public abstract class AbstractMaterialRegistry<I, B> implements IMaterialRegistr
         return getDefaultBlockStatus(materialBlock, META_ANY);
     }
 
+    //TODO MaterialKey<E>消去してutilの物を利用
+
     private static class MaterialKey<E> implements IMaterialKey<E> {
         private E element;
         private int metadata;

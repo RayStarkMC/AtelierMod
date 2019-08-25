@@ -14,9 +14,11 @@ import java.util.stream.Collectors;
 
 /**
  * ICategoryRegistryの1.7.10実装。
+ *
+ * @author RayStark
  */
 public final class CategoryRegistry implements ICategoryRegistry<Item, Block, ItemStack> {
-    //TODO カテゴリレジストリテスト
+    //TODO カテゴリレジストリの動作テスト
 
     /**
      * レジストリの実装クラス。
@@ -89,6 +91,8 @@ public final class CategoryRegistry implements ICategoryRegistry<Item, Block, It
         }
     }
 
+
+    //TODO ElementWithMetadata<E>消去してutilの物を利用
     /**
      * メタデータを持つ要素を表すクラス。
      *
