@@ -29,7 +29,7 @@ public interface ICategoryRegistry<I, B, S> extends Initializable {
      * @param category カテゴリ
      *
      * @throws NullPointerException アイテム、又はカテゴリがnullの場合
-     * @throws IllegalArgumentException メタデータが不正の場合
+     * @throws IllegalArgumentException メタデータ、またはアイテムが不正の場合
      */
     void registerItem(I item, int meta, IMaterialCategory category);
 
@@ -84,14 +84,25 @@ public interface ICategoryRegistry<I, B, S> extends Initializable {
      *
      * @param itemStack アイテムスタック
      * @return カテゴリの不変リスト
+     *
+     * @throws NullPointerException アイテムスタックがnullの場合
      */
     List<IMaterialCategory> getCategories(S itemStack);
+
+    /**
+     * このレジストリに登録されているすべてのカテゴリの不変リストを返します。
+     *
+     * @return カテゴリの不変リスト
+     */
+    List<IMaterialCategory> getCategories();
 
     /**
      * 引数のカテゴリに属すアイテムスタックの不変リストを返します。
      *
      * @param category カテゴリ
      * @return アイテムの不変リスト
+     *
+     * @throws NullPointerException categoryがnullの場合
      */
     List<S> getItems(IMaterialCategory category);
 }
