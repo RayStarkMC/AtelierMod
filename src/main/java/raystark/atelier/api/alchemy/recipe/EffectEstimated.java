@@ -11,6 +11,8 @@ import java.util.*;
  *
  * <p>ビルダーを利用してこのクラスのインスタンスを生成できます。一度生成されたインスタンスは以後不変です。
  *
+ * <p>この実装では
+ *
  * @author RayStark
  */
 public final class EffectEstimated implements IEffectEstimated {
@@ -76,12 +78,13 @@ public final class EffectEstimated implements IEffectEstimated {
          * @throws IllegalArgumentException 要求値が不正、または既に利用されている場合
          */
         public final EffectEstimatedBuilder addEffect(int minimumRequired, IEffect effect) {
-            this.entryList.stream()
-                    .filter(e -> e.getMinimumRequired() == minimumRequired)
-                    .findAny()
-                    .ifPresent(e -> {throw new IllegalArgumentException("要求値: " + minimumRequired + "は既に使用されています。");});
+            if (entryList.stream()
+                    .mapToInt(IEffectEntry::getMinimumRequired)
+                    .anyMatch(e -> e == minimumRequired)
+                    //.anyMatch(BiIntPredicate.equal().applyPartially(minimumRequired))
+            ) throw new IllegalArgumentException("minimumRequired: " + minimumRequired + "is already contained.");
 
-            this.entryList.add(new EffectEntry(minimumRequired, effect));
+            entryList.add(new EffectEntry(minimumRequired, effect));
             return this;
         }
 
@@ -109,24 +112,13 @@ public final class EffectEstimated implements IEffectEstimated {
          * @throws IllegalStateException 効果が無い場合。
          */
         public IEffectEstimated build() {
-            if(isIllegalState())
-                throw new IllegalStateException("There is no effect in this EffectEstimated.");
+            if(entryList.stream()
+                    .map(IEffectEntry::getEffect)
+                    .noneMatch(Optional::isPresent)
+            ) throw new IllegalStateException("There is no effect in this EffectEstimated.");
             return new EffectEstimated(this);
         }
-
-        private boolean isIllegalState() {
-            if(entryList.isEmpty()) return true;
-
-            for(IEffectEntry entry : entryList) {
-                if(!entry.getEffect().isPresent())
-                    return true;
-            }
-
-            return false;
-        }
     }
-
-    private static final IEffectEntry EMPTY_ENTRY = new EffectEntry(0, null);
 
     /**
      * この効果予測のビルダーを返すファクトリメソッド。
@@ -166,10 +158,9 @@ public final class EffectEstimated implements IEffectEstimated {
     @Override
     public final Optional<IEffect> getEffectFromElement(ElementOwner owner) {
         return entryList.stream()
-                .filter(e -> e.getMinimumRequired() <= owner.getElementValue(getElementRequired()))
+                .filter(e -> e.getMinimumRequired() <= owner.getElementValue(elementRequired))
                 .max(Comparator.naturalOrder())
-                .orElse(EMPTY_ENTRY)
-                .getEffect();
+                .flatMap(IEffectEntry::getEffect);
     }
 
     @Override

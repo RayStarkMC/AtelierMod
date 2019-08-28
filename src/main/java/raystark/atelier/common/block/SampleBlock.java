@@ -11,8 +11,8 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.effect.IEffect;
-import raystark.atelier.api.category.Category;
 import raystark.atelier.api.category.IMaterialCategory;
+import raystark.atelier.api.util.FunctionUtils;
 import raystark.atelier.common.block.itemblock.SampleItemBlock;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 import raystark.atelier.common.registry.EffectRegistry;
@@ -55,6 +55,7 @@ public class SampleBlock extends BlockProductBase {
 
             for(IMaterialCategory category : registry.getCategoryRegistry().getCategories(new ItemStack(this, 1, 0)))
                 player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.GOLD + category.getCategoryName()));
+
         }
         return true;
     }

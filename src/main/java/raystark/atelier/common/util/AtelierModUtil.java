@@ -22,13 +22,15 @@ public final class AtelierModUtil {
     private AtelierModUtil() { }
 
     public static void addProductInformation(ItemStack itemStack, EntityPlayer entityPlayer, List<?> list, boolean isDebugMode) {
+        if(!GuiScreen.isShiftKeyDown()) return;
+
         if(!(itemStack.getItem() instanceof ItemAlchemicalProduct)) {
             throw new IllegalArgumentException("ItemStack is not Alchemical Product!");
         }
+        @SuppressWarnings("unchecked")
+        ItemAlchemicalProduct<ItemStack> product = (ItemAlchemicalProduct<ItemStack>) itemStack.getItem();
 
-        if(!GuiScreen.isShiftKeyDown()) return;
-
-        @SuppressWarnings("unchecked") IProductStatus status = ((ItemAlchemicalProduct<ItemStack>)itemStack.getItem()).getStatus(itemStack);
+        IProductStatus status = product.getStatus(itemStack);
         @SuppressWarnings("unchecked") List<String> toolTip = (List<String>)list;
 
         String quality = String.valueOf(status.getQuality());
