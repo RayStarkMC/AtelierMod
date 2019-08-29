@@ -49,6 +49,7 @@ public abstract class AlchemicalRecipeBase extends AbstractAlchemicalRecipe<Item
 
     @Override
     public boolean isReady(List<ItemStack> inputs) {
+        //TODO isReady実装
         return false;
     }
 }
