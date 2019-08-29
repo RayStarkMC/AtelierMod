@@ -11,12 +11,17 @@ import java.util.*;
  *
  * <p>ビルダーを利用してこのクラスのインスタンスを生成できます。一度生成されたインスタンスは以後不変です。
  *
+ * <p>この実装では、属性値の最小要求値が重複するエントリを追加することが出来ません。そのようなエントリを追加しようとした場合、
+ * IllegalArgumentExceptionがスローされます。
+ *
  * @author RayStark
  */
 public final class EffectEstimated implements IEffectEstimated {
 
     /**
      * EffectEntryの実装
+     *
+     * EffectEstimatedが属性値の最小要求値の重複を認めないため、compareToでは属性値のみを比較します。
      *
      * @author RayStark
      */
@@ -42,9 +47,15 @@ public final class EffectEstimated implements IEffectEstimated {
             return minimumRequired;
         }
 
+        /**
+         * この実装では属性値が等しい場合、0を返します。
+         *
+         * @param other 他方のエントリ
+         * @return このエントリと他方のエントリを比較し、高いなら正、等しいならゼロ、低いなら負の整数
+         */
         @Override
         public int compareTo(IEffectEntry other) {
-            return Integer.compare(this.getMinimumRequired(), Objects.requireNonNull(other, "other must not be null").getMinimumRequired());
+            return Integer.compare(minimumRequired, Objects.requireNonNull(other, "other must not be null").getMinimumRequired());
         }
     }
 
@@ -79,8 +90,8 @@ public final class EffectEstimated implements IEffectEstimated {
             if (entryList.stream()
                     .mapToInt(IEffectEntry::getMinimumRequired)
                     .anyMatch(e -> e == minimumRequired)
-                    //.anyMatch(BiIntPredicate.equal().applyPartially(minimumRequired))
-            ) throw new IllegalArgumentException("minimumRequired: " + minimumRequired + "is already contained.");
+                    //.anyMatch(FunctionUtils.BiIntPredicate.equal(minimumRequired))
+            ) throw new IllegalArgumentException("minimumRequired: " + minimumRequired + "is already used.");
 
             entryList.add(new EffectEntry(minimumRequired, effect));
             return this;

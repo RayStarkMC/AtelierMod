@@ -36,6 +36,8 @@ public final class FunctionUtils {
             return (e1, e2) -> e1 == e2;
         }
 
+        static IntPredicate equal(int e1) { return equal().applyPartially(e1); }
+
         default IntFunction<IntPredicate> currying() {
             return e1 -> e2 -> test(e1, e2);
         }
