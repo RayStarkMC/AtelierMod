@@ -12,7 +12,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.category.IMaterialCategory;
-import raystark.atelier.api.util.FunctionUtils;
 import raystark.atelier.common.block.itemblock.SampleItemBlock;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 import raystark.atelier.common.registry.EffectRegistry;

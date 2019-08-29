@@ -11,8 +11,6 @@ import java.util.*;
  *
  * <p>ビルダーを利用してこのクラスのインスタンスを生成できます。一度生成されたインスタンスは以後不変です。
  *
- * <p>この実装では
- *
  * @author RayStark
  */
 public final class EffectEstimated implements IEffectEstimated {

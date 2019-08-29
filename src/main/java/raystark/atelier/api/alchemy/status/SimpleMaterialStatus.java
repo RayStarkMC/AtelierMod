@@ -1,10 +1,6 @@
 package raystark.atelier.api.alchemy.status;
 
 import raystark.atelier.api.alchemy.potential.IPotentialAbility;
-import raystark.atelier.api.alchemy.status.Elements;
-import raystark.atelier.api.alchemy.status.ElementOwner;
-import raystark.atelier.api.alchemy.status.IMaterialStatus;
-import raystark.atelier.api.alchemy.status.Quality;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,21 +18,21 @@ public class SimpleMaterialStatus implements IMaterialStatus {
      *
      * @author RayStark
      */
-    public static class ElementContainer implements ElementOwner {
+    public static class ElementOwner implements raystark.atelier.api.alchemy.status.ElementOwner {
         private int fire, water, air, earth;
 
-        public ElementContainer(int fire, int water, int air, int earth) {
-            if(
-                    fire < MIN_VALUE || MAX_VALUE < fire
-                            || water < MIN_VALUE || MAX_VALUE < water
-                            || air < MIN_VALUE || MAX_VALUE < air
-                            || earth < MIN_VALUE || MAX_VALUE < earth
-            ) throw new IllegalArgumentException("Element must be during 0-100.");
+        public ElementOwner(int fire, int water, int air, int earth) {
+            if(isIllegalElement(fire) || isIllegalElement(water) || isIllegalElement(air) || isIllegalElement(earth))
+                throw new IllegalArgumentException("Element must be during 0-100.");
 
             this.fire = fire;
             this.water = water;
             this.air = air;
             this.earth = earth;
+        }
+
+        private boolean isIllegalElement(int element) {
+            return element < MIN_VALUE || MAX_VALUE < element;
         }
 
         @Override
@@ -58,9 +54,9 @@ public class SimpleMaterialStatus implements IMaterialStatus {
     private final List<IPotentialAbility> list;
     private final int quality;
 
-    private final ElementContainer elements;
+    private final ElementOwner elements;
 
-    public SimpleMaterialStatus(int quality, List<IPotentialAbility> list, ElementContainer elements) {
+    public SimpleMaterialStatus(int quality, List<IPotentialAbility> list, ElementOwner elements) {
         if(quality < Quality.MIN_VALUE) throw new IllegalArgumentException("quality must be positive.");
 
         this.quality = quality;
@@ -69,7 +65,7 @@ public class SimpleMaterialStatus implements IMaterialStatus {
     }
 
     public SimpleMaterialStatus(int quality, List<IPotentialAbility> list, int fire, int water, int air, int earth) {
-        this(quality, list, new ElementContainer(fire, water, air, earth));
+        this(quality, list, new ElementOwner(fire, water, air, earth));
     }
 
     @Override

@@ -23,8 +23,8 @@ public final class BandAid extends ItemProductBase {
     @SuppressWarnings("unchecked")
     @Override
     public void getSubItems(Item item, CreativeTabs p_150895_2_, List p_150895_3_) {
-        ItemStack stack = AtelierMod.getInstance().recipe.createProduct(Quality.MIN_VALUE, new SimpleMaterialStatus.ElementContainer(0, 0, 0, 0), Collections.EMPTY_LIST);
-        ItemStack stack2 = AtelierMod.getInstance().recipe.createProduct(50, new SimpleMaterialStatus.ElementContainer(0, 80, 0, 0), Collections.EMPTY_LIST);
+        ItemStack stack = AtelierMod.getInstance().recipe.createProduct(Quality.MIN_VALUE, new SimpleMaterialStatus.ElementOwner(0, 0, 0, 0), Collections.EMPTY_LIST);
+        ItemStack stack2 = AtelierMod.getInstance().recipe.createProduct(50, new SimpleMaterialStatus.ElementOwner(0, 80, 0, 0), Collections.EMPTY_LIST);
         stack.stackSize = 1;
         stack2.stackSize = 1;
         p_150895_3_.add(stack);
