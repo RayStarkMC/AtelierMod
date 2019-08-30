@@ -8,7 +8,7 @@ import raystark.atelier.common.alchemy.status.NBTReadableStatus;
 import raystark.atelier.common.util.AtelierModUtil;
 
 import java.util.List;
-
+//TODO ItemModBaseの継承解除
 public abstract class ItemProductBase extends ItemModBase implements ItemAlchemicalProduct<ItemStack> {
     protected ItemProductBase(String itemName, int defaultStackSize) {
         super(itemName, defaultStackSize);

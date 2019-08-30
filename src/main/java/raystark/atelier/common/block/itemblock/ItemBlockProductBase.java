@@ -12,7 +12,7 @@ import raystark.atelier.common.block.tile.AbstractTileProduct;
 import raystark.atelier.common.util.AtelierModUtil;
 
 import java.util.List;
-
+//TODO ItemBlockModBaseの継承解除
 public abstract class ItemBlockProductBase extends ItemBlockModBase implements ItemAlchemicalProduct<ItemStack> {
     protected ItemBlockProductBase(Block block) {
         super(block);

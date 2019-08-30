@@ -15,7 +15,7 @@ import raystark.atelier.common.block.itemblock.ItemBlockProductBase;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 
 import java.util.ArrayList;
-
+//TODO BlockModBaseの継承解除
 public abstract class BlockProductBase extends BlockModBase implements ITileEntityProvider, BlockAlchemicalProduct<World> {
 
     private static final ArrayList<ItemStack> EMPTY_DROPS = new ArrayList<>(0);
