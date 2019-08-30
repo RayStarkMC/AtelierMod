@@ -3,6 +3,9 @@ package raystark.atelier.api.alchemy.recipe;
 /**
  * 錬金術レシピの要求物を表すインターフェース。
  *
+ * <p>要求物はレシピの材料を表します。要求物は名前を持ち、入力されたアイテムがレシピの材料として使えるか検証します。
+ *
+ *
  * @param <S> アイテムスタックの型
  *
  * @author RayStark

@@ -7,7 +7,7 @@ package raystark.atelier.api.alchemy.status;
  *
  * @author RayStark
  */
-public interface ElementOwner {
+public interface IElementOwner {
     /**
      * 属性の最小値
      */

@@ -1,7 +1,7 @@
 package raystark.atelier.api.alchemy.recipe;
 
 import raystark.atelier.api.alchemy.effect.IEffect;
-import raystark.atelier.api.alchemy.status.ElementOwner;
+import raystark.atelier.api.alchemy.status.IElementOwner;
 import raystark.atelier.api.alchemy.status.Elements;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public interface IEffectEstimated {
      * @param owner 属性値
      * @return 発動する効果のOptional
      */
-    Optional<IEffect> getEffectFromElement(ElementOwner owner);
+    Optional<IEffect> getEffectFromElement(IElementOwner owner);
 
     /**
      * 属性値と効果の対応の不変リストを返します。

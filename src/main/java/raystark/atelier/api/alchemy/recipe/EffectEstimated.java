@@ -1,7 +1,7 @@
 package raystark.atelier.api.alchemy.recipe;
 
 import raystark.atelier.api.alchemy.effect.IEffect;
-import raystark.atelier.api.alchemy.status.ElementOwner;
+import raystark.atelier.api.alchemy.status.IElementOwner;
 import raystark.atelier.api.alchemy.status.Elements;
 
 import java.util.*;
@@ -30,7 +30,7 @@ public final class EffectEstimated implements IEffectEstimated {
         private final IEffect effect;
 
         private EffectEntry(int minimumRequired, IEffect effect) {
-            if(minimumRequired < ElementOwner.MIN_VALUE || ElementOwner.MAX_VALUE < minimumRequired)
+            if(minimumRequired < IElementOwner.MIN_VALUE || IElementOwner.MAX_VALUE < minimumRequired)
                 throw new IllegalArgumentException("minimumRequired must be during 0-100.");
 
             this.minimumRequired = minimumRequired;
@@ -165,7 +165,7 @@ public final class EffectEstimated implements IEffectEstimated {
     }
 
     @Override
-    public final Optional<IEffect> getEffectFromElement(ElementOwner owner) {
+    public final Optional<IEffect> getEffectFromElement(IElementOwner owner) {
         return entryList.stream()
                 .filter(e -> e.getMinimumRequired() <= owner.getElementValue(elementRequired))
                 .max(Comparator.naturalOrder())

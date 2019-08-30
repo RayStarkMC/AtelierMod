@@ -1,16 +1,17 @@
 package raystark.atelier.api.alchemy.recipe;
 
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
-import raystark.atelier.api.alchemy.potential.IPotentialAbility;
-import raystark.atelier.api.alchemy.status.ElementOwner;
+import raystark.atelier.api.alchemy.status.IMaterialStatus;
 
 import java.util.List;
 
 /**
  * 錬金レシピを表すインターフェース.
  *
- * <p>レシピは材料としてアイテムそのものを指定できるほか、アイテムの属すカテゴリを指定することが出来る。
- * 材料としてカテゴリが指定された場合、そのカテゴリに属す任意のアイテムをレシピの材料として用いることが出来る。
+ * <p>レシピは材料としてアイテムそのものを指定できるほか、アイテムの属すカテゴリを指定することが出来ます。
+ * これにより同じ完成品を違う材料によって作成することが出来ます。
+ *
+ * <p>レシピに使う材料から抽出したステータスを
  *
  * @param <S> アイテムスタックの型
  *
@@ -48,12 +49,12 @@ public interface IAlchemicalRecipe<S> {
     boolean isReady(List<S> inputs);
 
     /**
-     * 属性値と潜在能力から完成品を生成します。
+     * ステータスからこのレシピの完成品のアイテムスタックを生成します。
      *
-     * @param quality アイテムに適用する品質値
-     * @param elements アイテムに適用する属性値
-     * @param abilities アイテムに適用する潜在能力
-     * @return 性能決定後の完成品のアイテムスタック
+     * <p>このメソッドでは引数のステータスを元に品質値、効果、潜在能力を決定して完成品に付与します。
+     *
+     * @param status このレシピに適応する材料のステータス。
+     * @return 完成品のアイテムスタック
      */
-    S createProduct(int quality, ElementOwner elements, List<IPotentialAbility> abilities);
+    S createProduct(IMaterialStatus status);
 }

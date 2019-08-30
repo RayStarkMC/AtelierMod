@@ -16,11 +16,11 @@ import java.util.List;
  *
  * @author RayStark
  */
-public interface IMaterialStatus extends Quality, ElementOwner, PotentialAbilityOwner {
+public interface IMaterialStatus extends Quality, IElementOwner, PotentialAbilityOwner {
     IMaterialStatus DEFAULT_STATUS = new IMaterialStatus() {
         @Override
         public int getElementValue(Elements elementType) {
-            return ElementOwner.MIN_VALUE;
+            return IElementOwner.MIN_VALUE;
         }
 
         @Override

@@ -18,7 +18,7 @@ public class SimpleMaterialStatus implements IMaterialStatus {
      *
      * @author RayStark
      */
-    public static class ElementOwner implements raystark.atelier.api.alchemy.status.ElementOwner {
+    private static class ElementOwner implements IElementOwner {
         private int fire, water, air, earth;
 
         public ElementOwner(int fire, int water, int air, int earth) {
