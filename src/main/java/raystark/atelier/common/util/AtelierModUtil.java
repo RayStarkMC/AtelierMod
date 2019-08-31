@@ -134,4 +134,24 @@ public final class AtelierModUtil {
             return this.tagCompound;
         }
     }
+
+    /**
+     * 引数のメタデータがアイテムのメタデータとして不正な場合、trueを返します。
+     *
+     * @param metadata メタデータ
+     * @return メタデータが不正の場合true
+     */
+    public static boolean isIllegalItemMeta(int metadata) {
+        return metadata < 0;
+    }
+
+    /**
+     * 引数のメタデータがブロックのメタデータとして不正な場合、trueを返します。
+     *
+     * @param metadata メタデータ
+     * @return メタデータが不正の場合true
+     */
+    public static boolean isIllegalBlockMeta(int metadata) {
+        return metadata < 0 || 15 < metadata;
+    }
 }

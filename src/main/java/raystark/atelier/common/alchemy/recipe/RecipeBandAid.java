@@ -14,7 +14,7 @@ import raystark.atelier.common.registry.EffectRegistry;
 
 import java.util.List;
 
-public class RecipeBandAid extends AlchemicalRecipeBase {
+public final class RecipeBandAid extends AlchemicalRecipeBase {
     public RecipeBandAid() {
         super((IAlchemicalProduct) AtelierItems.bandAid);
     }

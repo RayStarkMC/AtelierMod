@@ -11,7 +11,7 @@ import raystark.atelier.common.AtelierMod;
 /**
  * AbstractCategoryRequirementの1.7.10実装
  */
-public class CategoryRequirement extends AbstractCategoryRequirement<ItemStack> {
+public final class CategoryRequirement extends AbstractCategoryRequirement<ItemStack> {
 
     private final ICategoryRegistry<Item, Block, ItemStack> categoryRegistry;
 
