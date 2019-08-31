@@ -20,7 +20,7 @@ import static raystark.atelier.api.util.NBTTagNames.*;
 /**
  * NBTからステータスを読み取る機能が追加されProductStatus
  */
-public class NBTReadableStatus extends SimpleProductStatus {
+public class NBTReadableProductStatus extends SimpleProductStatus {
 
     /**
      * NBTからステータスを読み取ります。

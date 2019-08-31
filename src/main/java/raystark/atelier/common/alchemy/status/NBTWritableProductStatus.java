@@ -8,7 +8,7 @@ import raystark.atelier.api.alchemy.potential.IPotentialAbility;
 
 import static raystark.atelier.api.util.NBTTagNames.*;
 
-public class NBTWritableStatus extends NBTReadableStatus {
+public class NBTWritableProductStatus extends NBTReadableProductStatus {
     public void writeToNBT(NBTTagCompound tagCompound) {
         NBTTagCompound tagAtelier = new NBTTagCompound();
 

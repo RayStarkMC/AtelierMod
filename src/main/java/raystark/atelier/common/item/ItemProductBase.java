@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.status.IProductStatus;
-import raystark.atelier.common.alchemy.status.NBTReadableStatus;
+import raystark.atelier.common.alchemy.status.NBTReadableProductStatus;
 import raystark.atelier.common.util.AtelierModUtil;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public abstract class ItemProductBase extends ItemModBase implements ItemAlchemi
 
     @Override
     public IProductStatus getStatus(ItemStack stack) {
-        NBTReadableStatus status = new NBTReadableStatus();
+        NBTReadableProductStatus status = new NBTReadableProductStatus();
         status.readFromNBT(stack.getTagCompound());
         return status;
     }

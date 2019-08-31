@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.status.IProductStatus;
-import raystark.atelier.common.alchemy.status.NBTReadableStatus;
+import raystark.atelier.common.alchemy.status.NBTReadableProductStatus;
 import raystark.atelier.common.block.tile.AbstractTileProduct;
 import raystark.atelier.common.util.AtelierModUtil;
 
@@ -37,7 +37,7 @@ public abstract class ItemBlockProductBase extends ItemBlockModBase implements I
 
     @Override
     public IProductStatus getStatus(ItemStack stack) {
-        NBTReadableStatus status = new NBTReadableStatus();
+        NBTReadableProductStatus status = new NBTReadableProductStatus();
         status.readFromNBT(stack.getTagCompound());
         return status;
     }

@@ -56,16 +56,12 @@ public class SimpleMaterialStatus implements IMaterialStatus {
 
     private final ElementOwner elements;
 
-    public SimpleMaterialStatus(int quality, List<IPotentialAbility> list, ElementOwner elements) {
+    public SimpleMaterialStatus(int quality, List<IPotentialAbility> list, int fire, int water, int air, int earth) {
         if(quality < Quality.MIN_VALUE) throw new IllegalArgumentException("quality must be positive.");
 
         this.quality = quality;
         this.list = Objects.requireNonNull(list, "list must not be null.");
-        this.elements = Objects.requireNonNull(elements, "elements must not be null");
-    }
-
-    public SimpleMaterialStatus(int quality, List<IPotentialAbility> list, int fire, int water, int air, int earth) {
-        this(quality, list, new ElementOwner(fire, water, air, earth));
+        this.elements = new ElementOwner(fire, water, air, earth);
     }
 
     @Override
