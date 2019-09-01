@@ -22,7 +22,7 @@ public final class Bandage extends ItemProductBase {
     @SuppressWarnings("unchecked")
     @Override
     public void getSubItems(Item item, CreativeTabs p_150895_2_, List p_150895_3_) {
-        ItemStack stack = AtelierMod.getInstance().recipe.createProduct(new SimpleMaterialStatus(0, Collections.EMPTY_LIST, 0, 0, 0, 0));
+        ItemStack stack = AtelierMod.getInstance().recipe.createProduct(new SimpleMaterialStatus(1, Collections.EMPTY_LIST, 0, 0, 0, 0));
         ItemStack stack2 = AtelierMod.getInstance().recipe.createProduct(new SimpleMaterialStatus(50, Collections.emptyList(), 0, 80, 0, 0));
         stack.stackSize = 1;
         stack2.stackSize = 1;

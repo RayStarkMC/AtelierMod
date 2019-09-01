@@ -50,6 +50,7 @@ public class SampleBlock extends BlockProductBase {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float sideX, float sideY, float sideZ) {
         if(!world.isRemote) {
+            if(player.getHeldItem() != null) player.addChatComponentMessage(player.getHeldItem().func_151000_E());
             player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.GOLD + "[Categories]"));
 
             for(IMaterialCategory category : registry.getCategoryRegistry().getCategories(new ItemStack(this, 1, 0)))
