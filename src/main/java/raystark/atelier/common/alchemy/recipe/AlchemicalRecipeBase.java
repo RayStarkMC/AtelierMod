@@ -48,10 +48,4 @@ public abstract class AlchemicalRecipeBase extends AbstractAlchemicalRecipe<Item
 
         return product;
     }
-
-    @Override
-    public boolean isReady(List<ItemStack> inputs) {
-        //TODO isReady実装
-        return false;
-    }
 }

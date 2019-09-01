@@ -41,14 +41,6 @@ public interface IAlchemicalRecipe<S> {
     List<IEffectEstimated> getEffectsEstimated();
 
     /**
-     * 材料のリストを受け取り、レシピが実行できるか調べます。
-     *
-     * @param inputs 材料のリスト
-     * @return リストの材料でこのレシピを実行できる場合true
-     */
-    boolean isReady(List<S> inputs);
-
-    /**
      * ステータスからこのレシピの完成品のアイテムスタックを生成します。
      *
      * <p>このメソッドでは引数のステータスを元に品質値、効果、潜在能力を決定して完成品に付与します。
