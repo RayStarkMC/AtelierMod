@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import raystark.atelier.api.alchemy.effect.IEffectInstantHeal;
-import raystark.atelier.api.alchemy.status.Quality;
 import raystark.atelier.common.AtelierMod;
 import raystark.atelier.api.alchemy.status.SimpleMaterialStatus;
 
@@ -14,10 +13,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public final class BandAid extends ItemProductBase {
+public final class Bandage extends ItemProductBase {
 
-    public BandAid() {
-        super("BandAid", 2);
+    public Bandage() {
+        super("Bandage", 2);
     }
 
     @SuppressWarnings("unchecked")
@@ -34,7 +33,7 @@ public final class BandAid extends ItemProductBase {
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
-        if(itemStack == null || !(itemStack.getItem() instanceof BandAid)) {
+        if(itemStack == null || !(itemStack.getItem() instanceof Bandage)) {
             return itemStack;
         }
 

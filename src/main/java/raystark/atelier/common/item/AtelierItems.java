@@ -4,12 +4,12 @@ import net.minecraft.item.Item;
 
 public final class AtelierItems {
     public static Item samplePickaxe;
-    public static Item bandAid;
+    public static Item bandage;
 
     private AtelierItems() {}
 
     public static void init() {
         samplePickaxe = new SamplePickaxe();
-        bandAid = new BandAid();
+        bandage = new Bandage();
     }
 }

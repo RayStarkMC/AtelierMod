@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import raystark.atelier.api.alchemy.recipe.IAlchemicalRecipe;
 import raystark.atelier.api.registry.IAtelierRegistry;
-import raystark.atelier.common.alchemy.recipe.RecipeBandAid;
+import raystark.atelier.common.alchemy.recipe.RecipeBandage;
 import raystark.atelier.common.block.AtelierBlocks;
 import raystark.atelier.common.block.tile.SampleTileProduct;
 import raystark.atelier.common.item.AtelierItems;
@@ -34,7 +34,7 @@ public class AtelierMod {
     public static final CreativeTabs TAB_ATELIER = new CreativeTabs(MODID) {
         @Override
         public Item getTabIconItem() {
-            return AtelierItems.bandAid;
+            return AtelierItems.bandage;
         }
     };
 
@@ -59,7 +59,7 @@ public class AtelierMod {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         atelierRegistry.init();
-        recipe = new RecipeBandAid();
+        recipe = new RecipeBandage();
     }
 
     @EventHandler

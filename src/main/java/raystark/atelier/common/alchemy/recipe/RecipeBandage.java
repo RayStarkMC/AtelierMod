@@ -2,9 +2,6 @@ package raystark.atelier.common.alchemy.recipe;
 
 import net.minecraft.item.ItemStack;
 import raystark.atelier.api.alchemy.IAlchemicalProduct;
-import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
-import raystark.atelier.api.alchemy.effect.IEffect;
-import raystark.atelier.api.alchemy.effect.IEffectInstantHeal;
 import raystark.atelier.api.alchemy.recipe.EffectEstimated;
 import raystark.atelier.api.alchemy.recipe.IEffectEstimated;
 import raystark.atelier.api.alchemy.recipe.IRequirement;
@@ -14,9 +11,9 @@ import raystark.atelier.common.registry.EffectRegistry;
 
 import java.util.List;
 
-public final class RecipeBandAid extends AlchemicalRecipeBase {
-    public RecipeBandAid() {
-        super((IAlchemicalProduct) AtelierItems.bandAid);
+public final class RecipeBandage extends AlchemicalRecipeBase {
+    public RecipeBandage() {
+        super((IAlchemicalProduct) AtelierItems.bandage);
     }
 
     @Override
