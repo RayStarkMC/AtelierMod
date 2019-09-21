@@ -166,3 +166,4 @@ gradle-app.setting
 eclipse/
 *.iml
 src/main/java/raystark/atelier/DebugMain.java
+/classes/
