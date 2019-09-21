@@ -1,10 +1,9 @@
 package raystark.atelier.api.alchemy.status;
 
 /**
- * 属性値を持つものを表すインターフェース.<p/>
- *
+ * 属性値を持つものを表すインターフェース。
+ * <p>
  * 属性値は0-100までの値で存在し, 錬金術において完成品の能力決定に使われる.
- *
  * @author RayStark
  */
 public interface IElementOwner {

@@ -6,14 +6,17 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.effect.IEffectMiningLevel;
 import raystark.atelier.api.util.ToolClasses;
 import raystark.atelier.common.registry.EffectRegistry;
 import raystark.atelier.common.util.AtelierModUtil;
-import scala.reflect.internal.Trees;
 
 import java.util.List;
 import java.util.Objects;
@@ -78,26 +81,25 @@ public class SamplePickaxe extends ItemProductBase implements ItemAlchemicalProd
     }
 
     @Override
-    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
-        boolean ret = super.onItemUse(p_77648_1_, p_77648_2_, p_77648_3_, p_77648_4_, p_77648_5_, p_77648_6_, p_77648_7_, p_77648_8_, p_77648_9_, p_77648_10_);
-        System.out.println("onItemUse: " + ret);
-        new Throwable().printStackTrace();
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+        if(world.isRemote) return itemStack;
 
-        return false;
+        printMOP(getMovingObjectPositionFromPlayer(world, entityPlayer, false), world);
+        printMOP(getMovingObjectPositionFromPlayer(world, entityPlayer, true), world);
+
+        return itemStack;
     }
 
-    @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-        boolean ret = super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
-        System.out.println("ontItemUseFirst: " + ret);
-        new Throwable().printStackTrace();
-        return true;
-    }
+    private void printMOP(MovingObjectPosition mop, World world) {
+        if(mop == null) {
+            System.out.println("mop is null.");
+            return;
+        }
 
-    @Override
-    public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_) {
-        System.out.println("onItemRightClick");
-        new Throwable().printStackTrace();
-        return super.onItemRightClick(p_77659_1_, p_77659_2_, p_77659_3_);
+        Block block = world.getBlock(mop.blockX, mop.blockY, mop.blockZ);
+        //ForgeDirection face = ForgeDirection.getOrientation(mop.sideHit);
+
+        //System.out.printf("side: %d ForgeDir: %-5s Block: %s mop: %s%n", mop.sideHit, face, block, mop);
+        System.out.println("mopF: Block=" + block + ", " +  mop);
     }
 }

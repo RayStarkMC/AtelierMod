@@ -62,15 +62,20 @@ public abstract class AbstractAlchemicalRecipe<S> implements IAlchemicalRecipe<S
 
     /**
      * レシピの要求物を登録します。
+     * <p>
+     * このメソッドは実装クラスのコンストラクタで1度だけ呼び出されます。引数のリストに要求物を追加してください。
      *
-     * <p>このメソッドは実装クラスのコンストラクタで1度だけ呼び出されます。引数のリストに要求物を追加してください。
+     * @param requirements 要求物
+     * @see IRequirement
      */
     protected abstract void prepareRequirements(List<IRequirement<S>> requirements);
 
     /**
      * レシピの効果予測を登録します。
-     *
-     * <p>このメソッドは実装クラスのコンストラクタで1度だけ呼び出されます。引数のリストに効果予測を追加してください。
+     * <p>
+     * このメソッドは実装クラスのコンストラクタで1度だけ呼び出されます。引数のリストに効果予測を追加してください。
+     * @param effectsEstimated 効果予測
+     * @see IEffectEstimated
      */
     protected abstract void prepareEffectsEstimated(List<IEffectEstimated> effectsEstimated);
 

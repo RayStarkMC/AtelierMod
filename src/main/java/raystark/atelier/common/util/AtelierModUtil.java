@@ -53,9 +53,6 @@ public final class AtelierModUtil {
     /**
      * 引数のタグを編集するAtelierTagBuilderを生成します。
      *
-     * 引数のTagCompoundが既に別のTagを持っていた場合、ビルダーはそれらに対して一切干渉しません。
-     * ただし、
-     *
      * @param tagCompound 編集するNBTTagCompound
      * @return AtelierTagBuilder
      */
@@ -64,16 +61,16 @@ public final class AtelierModUtil {
     }
 
     /**
+     * 新しいNBTタグを編集するAtelierTagBuilderを生成します。
      *
-     *
-     * @return
+     * @return AtelierTagBuilder
      */
     public static AtelierTagBuilder newAtelierTagBuilder() {
         return newAtelierTagBuilder(new NBTTagCompound());
     }
 
     /**
-     *
+     * AtelierModで利用されるNBTTagCompoundのBuilder。
      */
     public static class AtelierTagBuilder {
         private final NBTTagCompound tagCompound;

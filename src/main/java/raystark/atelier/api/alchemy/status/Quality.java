@@ -3,10 +3,10 @@ package raystark.atelier.api.alchemy.status;
 import raystark.atelier.api.alchemy.effect.IEffect;
 
 /**
- * 品質値を持つものを表すインターフェース.<p/>
- *
+ * 品質値を持つものを表すインターフェース.
+ * <p>
  * 品質値は完成品の{@link IEffect 効果}に影響を与える場合がある.
- *
+ * </p>
  * @author RayStark
  */
 public interface Quality {
@@ -16,9 +16,10 @@ public interface Quality {
     int MIN_VALUE = 1;
 
     /**
-     * このアイテムの品質値を返す。<p/>
-     *
+     * このアイテムの品質値を返す。
+     * <p>
      * このアイテムが品質値を持たなかった場合Quality.MIN_VALUEを返す。
+     * </p>
      * @return 品質値
      */
     int getQuality();

@@ -11,7 +11,6 @@ import java.util.Objects;
 
 /**
  * AbstractSpecifiedRequirementの1.7.10実装
- *
  * <p>この実装ではアイテムスタックを要求物に指定します。
  * 要求物の名前にはアイテムスタックの表示名が利用されます。
  */
@@ -47,7 +46,7 @@ public final class SpecifiedRequirement extends AbstractSpecifiedRequirement<Ite
      * <p>この実装ではアイテムクラス、及びダメージ値を比較します。アイテムスタックのNBTの違いは無視されます。
      *
      * @param input アイテムスタック
-     * @return
+     * @return {@inheritDoc}
      */
     @Override
     public boolean isApplicableAsMaterial(ItemStack input) {

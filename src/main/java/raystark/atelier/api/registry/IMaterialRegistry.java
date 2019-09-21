@@ -21,6 +21,7 @@ public interface IMaterialRegistry<I, B> extends Initializable {
      * @param materialItem 材料
      * @param damage ダメージ値
      * @param status デフォルトの能力値
+     * @return 以前に登録されていたステータスのOptional
      */
     Optional<IMaterialStatus> registerDefaultItemStatus(I materialItem, int damage, IMaterialStatus status);
 
@@ -29,6 +30,7 @@ public interface IMaterialRegistry<I, B> extends Initializable {
      *
      * @param materialItem 材料
      * @param status デフォルトの能力値
+     * @return 以前に登録されていたステータスのOptional
      */
     Optional<IMaterialStatus> registerDefaultItemStatus(I materialItem, IMaterialStatus status);
 
@@ -57,6 +59,7 @@ public interface IMaterialRegistry<I, B> extends Initializable {
      * @param materialBlock 材料
      * @param metadata メタデータ
      * @param status ステータス
+     * @return 以前に登録されていたステータスのOptional
      */
     Optional<IMaterialStatus> registerDefaultBlockStatus(B materialBlock, int metadata, IMaterialStatus status);
 
@@ -65,6 +68,7 @@ public interface IMaterialRegistry<I, B> extends Initializable {
      *
      * @param materialBlock 材料
      * @param status ステータス
+     * @return 以前に登録されていたステータスのOptional
      */
     Optional<IMaterialStatus> registerDefaultBlockStatus(B materialBlock, IMaterialStatus status);
 

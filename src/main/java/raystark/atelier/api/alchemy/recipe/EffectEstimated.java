@@ -90,7 +90,7 @@ public final class EffectEstimated implements IEffectEstimated {
             if (entryList.stream()
                     .mapToInt(IEffectEntry::getMinimumRequired)
                     .anyMatch(e -> e == minimumRequired)
-                    //.anyMatch(FunctionUtils.BiIntPredicate.equal(minimumRequired))
+                    //.anyMatch(Functions.BiIntPredicate.equal(minimumRequired))
             ) throw new IllegalArgumentException("minimumRequired: " + minimumRequired + "is already used.");
 
             entryList.add(new EffectEntry(minimumRequired, effect));
