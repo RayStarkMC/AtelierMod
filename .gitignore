@@ -167,3 +167,4 @@ eclipse/
 *.iml
 src/main/java/raystark/atelier/DebugMain.java
 /classes/
+/src/test/java/raystark/atelier/debug/
