@@ -163,7 +163,11 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
+
+# Mod開発環境関連
 eclipse/
 *.iml
 /classes/
+
+# 検証用パッケージ
 /src/test/java/raystark/atelier/debug/
