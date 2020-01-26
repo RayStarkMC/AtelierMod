@@ -1,24 +1,22 @@
 package raystark.atelier.api.alchemy;
 
+import net.minecraft.tileentity.TileEntity;
 import raystark.atelier.api.alchemy.status.IProductStatus;
 
 /**
  * 錬金術によって作られたブロックを表すインターフェース
  *
- * @param <W> ワールドの型
- *
  * @author RayStark
  */
-public interface BlockAlchemicalProduct<W> extends IAlchemicalProduct {
+public interface IBlockAlchemicalProduct extends IAlchemicalProduct<TileEntity> {
     /**
      * この製品のステータスを返します。
      *
      * <p>worldのTileEntityからステータスを取り出します。
-     * @param x x座標
-     * @param y y座標
-     * @param z z座標
-     * @param world ワールド
+     * @param tileEntity タイルエンティティ
      * @return ステータス
+     * @throws NullPointerException tileEntityがnullの場合
+     * @throws IllegalArgumentException tileEntityがステータスを持たない場合
      */
-    IProductStatus getStatus(int x, int y, int z, W world);
+    IProductStatus getStatus(TileEntity tileEntity);
 }

@@ -6,12 +6,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import raystark.atelier.api.alchemy.ItemAlchemicalProduct;
+import raystark.atelier.api.alchemy.IItemAlchemicalProduct;
 import raystark.atelier.api.alchemy.effect.IEffect;
 import raystark.atelier.api.alchemy.effect.IEffectMiningLevel;
 import raystark.atelier.api.util.ToolClasses;
@@ -24,7 +21,7 @@ import java.util.Objects;
 /**
  * 錬金術によって作られたピッケルのサンプル
  */
-public class SamplePickaxe extends ItemProductBase implements ItemAlchemicalProduct<ItemStack> {
+public class SamplePickaxe extends ItemProductBase implements IItemAlchemicalProduct<ItemStack> {
     public SamplePickaxe() {
         super("SamplePickaxe", 1);
     }
