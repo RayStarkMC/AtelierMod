@@ -1,8 +1,7 @@
 package raystark.atelier.api.util;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * AtelierModで使用されるNBTのタグ名の列挙です。
@@ -32,15 +31,7 @@ public enum AtelierTagNames {
      */
     ATELIER_POTENTIAL;
 
-    private static final List<AtelierTagNames> PRODUCT_STATUS_TAG_LIST;
+    private static final Set<AtelierTagNames> PRODUCT_STATUS_TAG_SET = EnumSet.of(ATELIER_QUALITY, ATELIER_EFFECT, ATELIER_POTENTIAL);
 
-    static {
-        List<AtelierTagNames> productStatsList = new ArrayList<>();
-        productStatsList.add(ATELIER_QUALITY);
-        productStatsList.add(ATELIER_EFFECT);
-        productStatsList.add(ATELIER_POTENTIAL);
-        PRODUCT_STATUS_TAG_LIST = Collections.unmodifiableList(productStatsList);
-    }
-
-    public static List<AtelierTagNames> getProductStatusTagList() { return PRODUCT_STATUS_TAG_LIST; }
+    public static Set<AtelierTagNames> getProductStatusTagSet() { return PRODUCT_STATUS_TAG_SET; }
 }
