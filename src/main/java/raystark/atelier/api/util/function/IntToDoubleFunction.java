@@ -1,6 +1,8 @@
 package raystark.atelier.api.util.function;
 
+import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
+import java.util.function.IntConsumer;
 
 import static java.util.Objects.requireNonNull;
 
@@ -33,5 +35,10 @@ public interface IntToDoubleFunction extends java.util.function.IntToDoubleFunct
 
     default DoubleSupplier supply(int t) {
         return () -> applyAsDouble(t);
+    }
+
+    default IntConsumer consume(DoubleConsumer consumer) {
+        requireNonNull(consumer);
+        return t -> consumer.accept(applyAsDouble(t));
     }
 }

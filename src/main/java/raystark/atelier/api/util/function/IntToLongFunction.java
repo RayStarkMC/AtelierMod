@@ -1,5 +1,7 @@
 package raystark.atelier.api.util.function;
 
+import java.util.function.IntConsumer;
+import java.util.function.LongConsumer;
 import java.util.function.LongSupplier;
 
 import static java.util.Objects.requireNonNull;
@@ -33,5 +35,10 @@ public interface IntToLongFunction extends java.util.function.IntToLongFunction 
 
     default LongSupplier supply(int t) {
         return () -> applyAsLong(t);
+    }
+
+    default IntConsumer consume(LongConsumer consumer) {
+        requireNonNull(consumer);
+        return t -> consumer.accept(applyAsLong(t));
     }
 }

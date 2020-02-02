@@ -1,5 +1,6 @@
 package raystark.atelier.api.util.function;
 
+import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
 
 import static java.util.Objects.requireNonNull;
@@ -33,5 +34,10 @@ public interface IntUnaryOperator extends java.util.function.IntUnaryOperator {
 
     default IntSupplier supply(int t) {
         return () -> applyAsInt(t);
+    }
+
+    default IntConsumer consume(IntConsumer consumer) {
+        requireNonNull(consumer);
+        return t -> consumer.accept(applyAsInt(t));
     }
 }

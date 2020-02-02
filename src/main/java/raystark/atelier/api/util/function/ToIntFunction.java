@@ -1,5 +1,7 @@
 package raystark.atelier.api.util.function;
 
+import java.util.function.Consumer;
+import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
 
 import static java.util.Objects.requireNonNull;
@@ -34,5 +36,10 @@ public interface ToIntFunction<T> extends java.util.function.ToIntFunction<T> {
     default IntSupplier supply(T t) {
         requireNonNull(t);
         return () -> applyAsInt(t);
+    }
+
+    default Consumer<T> consume(IntConsumer consumer) {
+        requireNonNull(consumer);
+        return t -> consumer.accept(applyAsInt(t));
     }
 }

@@ -1,5 +1,6 @@
 package raystark.atelier.api.util.function;
 
+import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
 
 import static java.util.Objects.requireNonNull;
@@ -33,5 +34,10 @@ public interface DoubleUnaryOperator extends java.util.function.DoubleUnaryOpera
 
     default DoubleSupplier supply(double t) {
         return () -> applyAsDouble(t);
+    }
+
+    default DoubleConsumer consume(DoubleConsumer consumer) {
+        requireNonNull(consumer);
+        return t -> consumer.accept(applyAsDouble(t));
     }
 }

@@ -1,6 +1,8 @@
 package raystark.atelier.api.util.function;
 
+import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
+import java.util.function.LongConsumer;
 
 import static java.util.Objects.requireNonNull;
 
@@ -33,5 +35,10 @@ public interface LongToDoubleFunction extends java.util.function.LongToDoubleFun
 
     default DoubleSupplier supply(long t) {
         return () -> applyAsDouble(t);
+    }
+
+    default LongConsumer consume(DoubleConsumer consumer) {
+        requireNonNull(consumer);
+        return t -> consumer.accept(applyAsDouble(t));
     }
 }

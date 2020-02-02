@@ -8,4 +8,9 @@ public interface Predicate<T> extends java.util.function.Predicate<T> {
         requireNonNull(t);
         return () -> test(t);
     }
+
+    default UnaryOperator<T> when(java.util.function.UnaryOperator<T> function) {
+        requireNonNull(function);
+        return t -> test(t) ? function.apply(t) : t;
+    }
 }

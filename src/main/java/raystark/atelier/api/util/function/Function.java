@@ -1,5 +1,6 @@
 package raystark.atelier.api.util.function;
 
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static java.util.Objects.requireNonNull;
@@ -31,8 +32,13 @@ public interface Function<T, R> extends java.util.function.Function<T, R> {
         return t -> after.test(apply(t));
     }
 
-    default Supplier suplly(T t) {
+    default Supplier<R> suplly(T t) {
         requireNonNull(t);
         return () -> apply(t);
+    }
+
+    default Consumer<T> consume(Consumer<? super R> consumer) {
+        requireNonNull(consumer);
+        return t -> consumer.accept(apply(t));
     }
 }

@@ -1,6 +1,8 @@
 package raystark.atelier.api.util.function;
 
-import java.util.function.*;
+import java.util.function.Consumer;
+import java.util.function.IntConsumer;
+import java.util.function.Supplier;
 
 import static java.util.Objects.requireNonNull;
 
@@ -33,5 +35,10 @@ public interface IntFunction<R> extends java.util.function.IntFunction<R> {
 
     default Supplier<R> supply(int t) {
         return () -> apply(t);
+    }
+
+    default IntConsumer consume(Consumer<? super R> consumer) {
+        requireNonNull(consumer);
+        return t -> consumer.accept(apply(t));
     }
 }

@@ -1,5 +1,6 @@
 package raystark.atelier.api.util.function;
 
+import java.util.function.LongConsumer;
 import java.util.function.LongSupplier;
 
 import static java.util.Objects.requireNonNull;
@@ -33,5 +34,10 @@ public interface LongUnaryOperator extends java.util.function.LongUnaryOperator 
 
     default LongSupplier supply(long t) {
         return () -> applyAsLong(t);
+    }
+
+    default LongConsumer consume(LongConsumer consumer) {
+        requireNonNull(consumer);
+        return t -> consumer.accept(applyAsLong(t));
     }
 }
