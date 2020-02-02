@@ -1,7 +1,7 @@
 package raystark.atelier.api.util;
 
 /**
- * ツールの種類の文字列表現を表す列挙
+ * ツールの種類の文字列表現を表す列挙です。
  *
  * @author RayStark
  */
@@ -28,7 +28,7 @@ public enum ToolClasses {
     }
 
     /**
-     * このツールの文字列表現を返す。
+     * このツールの文字列表現を返します。
      * @return 文字列表現
      */
     public String value() { return toolClass; }
